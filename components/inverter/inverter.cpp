@@ -9,7 +9,7 @@ namespace inverter {
 void Inverter::setup() {}
 void Inverter::loop() {
      if (this->device_protocol_id_) {
-          char* substr = "PI30";
+          char* substr = ['P','I','3','0'];
           this->device_protocol_id_->publish_state(substr);
      }
 }
