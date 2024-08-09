@@ -7,5 +7,6 @@ namespace inverter {
 void Inverter::setup() {}
 void Inverter::loop() {}
 void Inverter::update() {}
+
 }
 }

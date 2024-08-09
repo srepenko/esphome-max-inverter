@@ -31,7 +31,7 @@ CONF_DAY_PV_GENERATED_ENERGY = "day_output_load_energy"
 # PBMS<CRC><cr>: BMS message 
 
 TYPES = {
-        CONF_DEVICE_PROTOCOL_ID: sensor.sensor_schema(
+    CONF_DEVICE_PROTOCOL_ID: sensor.sensor_schema(
         accuracy_decimals=1,
     ),
     CONF_PV_CHARGING_POWER: sensor.sensor_schema(
