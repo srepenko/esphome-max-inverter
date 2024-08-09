@@ -9,7 +9,7 @@
 #include "esphome/core/component.h"
 
 namespace esphome {
-namespace inverter {
+//namespace inverter {
 
-}
+//}
 }
