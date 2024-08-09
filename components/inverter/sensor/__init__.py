@@ -96,4 +96,4 @@ async def to_code(config):
         if type in config:
             conf = config[type]
             sens = await sensor.new_sensor(conf)
-            #cg.add(getattr(paren, f"set_{type}")(sens)) 
+            cg.add(getattr(paren, f"set_{type}")(sens)) 
