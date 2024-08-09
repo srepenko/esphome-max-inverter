@@ -10,7 +10,23 @@
 
 namespace esphome {
 namespace inverter {
-
+enum ENUMPollingCommand {
+  POLLING_QPIRI = 0,
+  POLLING_QPIGS = 1,
+  POLLING_QMOD = 2,
+  POLLING_QFLAG = 3,
+  POLLING_QPIWS = 4,
+  POLLING_QT = 5,
+  POLLING_QMN = 6,
+  POLLING_QBATCD = 7,
+  POLLING_QPI = 8,
+};
+struct PollingCommand {
+  uint8_t *command;
+  uint8_t length = 0;
+  uint8_t errors;
+  ENUMPollingCommand identifier;
+};
 #define PIPSOLAR_ENTITY_(type, name, polling_command) \
     protected: \
         type *name##_{}; /* NOLINT */ \
