@@ -57,6 +57,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         uint8_t check_incoming_crc_();
         uint8_t check_incoming_length_(uint8_t length);
         uint16_t cal_crc_half_(uint8_t *msg, uint8_t len);
+        uint8_t read_buffer_[PIPSOLAR_READ_BUFFER_LENGTH];
+        size_t read_pos_{0};  
+
         PollingCommand used_polling_commands_[15];
 };
 }
