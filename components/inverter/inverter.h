@@ -11,16 +11,6 @@
 namespace esphome {
 namespace inverter {
 
-#define INVERTER_ENTITY_(type, name, polling_command) \
- protected: \
-  type *name##_{}; /* NOLINT */ \
-\
- public: \
-  void set_##name(type *name) { /* NOLINT */ \
-    this->name##_ = name; \
-    this->add_polling_command_(#polling_command, POLLING_##polling_command); \
-  }
-
 class Inverter : public uart::UARTDevice, public PollingComponent {
   void setup() override;
   void loop() override;
