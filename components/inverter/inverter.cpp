@@ -1,4 +1,4 @@
-#include "pipsolar.h"
+#include "inverter.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
