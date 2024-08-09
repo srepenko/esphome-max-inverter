@@ -34,7 +34,7 @@ struct PollingCommand {
     public: \
         void set_##name(type *name) { /* NOLINT */ \
             this->name##_ = name; \
-            //this->add_polling_command_(#polling_command, POLLING_##polling_command); \
+            this->add_polling_command_(#polling_command, POLLING_##polling_command); \
         }
 
 #define PIPSOLAR_VALUED_ENTITY_(type, name, polling_command, value_type) \
@@ -47,8 +47,13 @@ struct PollingCommand {
 
 class Inverter : public uart::UARTDevice, public PollingComponent {
     // QPI values
-    PIPSOLAR_SENSOR(device_protocol_id, QPI, char*)
-
+    //PIPSOLAR_SENSOR(device_protocol_id, QPI, char*)
+    protected:
+        type *device_protocol_id_{};
+    public:
+        void set_device_protocol_id(type *name) { 
+            this->device_protocol_id_ = name; \
+        }
     void setup() override;
     void loop() override;
     void update() override;
