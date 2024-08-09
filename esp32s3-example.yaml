@@ -1,7 +1,7 @@
 substitutions:
   name: max-inverter
   device_description: "Monitor and control a hybrid inverter via MAX communication protocol"
-  external_components_source: github://txubelaxu/esphome-jk-bms@main
+  external_components_source: github://srepenko/esphome-max-inverter@main
 
 esphome:
   name: esp32s3-template
