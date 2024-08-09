@@ -1,5 +1,5 @@
 {
-    "git.confirmSync": true,
-    "git.confirmEmptyCommits": true,
-    "git.useEditorAsCommitInput": true
+    "git.suggestSmartCommit": false, // prompts to stage all changed files if you accidentally try to commit without staging anything first. bad because it encourages you to not look at what you're committing
+    "git.useEditorAsCommitInput": false, // opens a text file to write your commit message in. even though there is a text box right next to the commit button for that
+    "git.useCommitInputAsStashMessage": true,
 }
