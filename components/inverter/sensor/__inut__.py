@@ -87,3 +87,17 @@ TYPES = {
         device_class= 'energy',
     ),
 }
+
+CONFIG_SCHEMA = PIPSOLAR_COMPONENT_SCHEMA.extend(
+    {cv.Optional(type): schema for type, schema in TYPES.items()}
+)
+
+
+async def to_code(config):
+    paren = await cg.get_variable(config[CONF_PIPSOLAR_ID])
+
+    for type, _ in TYPES.items():
+        if type in config:
+            conf = config[type]
+            sens = await sensor.new_sensor(conf)
+            cg.add(getattr(paren, f"set_{type}")(sens)) 
