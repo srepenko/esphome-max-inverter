@@ -11,6 +11,5 @@
 namespace esphome {
 //namespace inverter {
 
-
 //}
 }
