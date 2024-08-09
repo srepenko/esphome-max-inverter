@@ -27,7 +27,7 @@ struct PollingCommand {
   uint8_t errors;
   ENUMPollingCommand identifier;
 };
-#define PIPSOLAR_ENTITY_(type, name, polling_command) \
+#define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
         type *name##_{}; /* NOLINT */ \
 \
@@ -37,25 +37,17 @@ struct PollingCommand {
             this->add_polling_command_(#polling_command, POLLING_##polling_command); \
         }
 
-#define PIPSOLAR_VALUED_ENTITY_(type, name, polling_command, value_type) \
+#define INVERTER_VALUED_ENTITY_(type, name, polling_command, value_type) \
     protected: \
         value_type value_##name##_; \
-        PIPSOLAR_ENTITY_(type, name, polling_command)
+        INVERTER_ENTITY_(type, name, polling_command)
 
-#define PIPSOLAR_SENSOR(name, polling_command, value_type) \
-    PIPSOLAR_VALUED_ENTITY_(sensor::Sensor, name, polling_command, value_type)
+#define INVERTER_SENSOR(name, polling_command, value_type) \
+    INVERTER_VALUED_ENTITY_(sensor::Sensor, name, polling_command, value_type)
 
 class Inverter : public uart::UARTDevice, public PollingComponent {
     // QPI values
-    //PIPSOLAR_SENSOR(device_protocol_id, QPI, char*)
-    protected:
-        char* value_device_protocol_id_; 
-        sensor::Sensor *device_protocol_id_{};
-    public:
-        void set_device_protocol_id(sensor::Sensor *device_protocol_id) { 
-            this->device_protocol_id_ = device_protocol_id; 
-            //this->add_polling_command_(#polling_command, POLLING_##polling_command);
-        }
+    INVERTER_SENSOR(device_protocol_id, QPI, int)
     void setup() override;
     void loop() override;
     void update() override;
