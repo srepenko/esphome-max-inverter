@@ -52,6 +52,11 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     void loop() override;
     void update() override;
     void dump_config() override;
+    protected:
+        void add_polling_command_(const char *command, ENUMPollingCommand polling_command);
+        uint8_t check_incoming_crc_();
+        uint8_t check_incoming_length_(uint8_t length);
+        uint16_t cal_crc_half_(uint8_t *msg, uint8_t len);
 };
 }
 }
