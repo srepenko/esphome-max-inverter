@@ -9,11 +9,12 @@
 #include "esphome/core/component.h"
 
 namespace esphome {
-//namespace inverter {
+namespace inverter {
 
+class Inverter : public uart::UARTDevice, public PollingComponent {
   void setup() override;
   void loop() override;
   void update() override;
-
-//}
+}
+}
 }
