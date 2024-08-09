@@ -11,5 +11,9 @@
 namespace esphome {
 //namespace inverter {
 
+  void setup() override;
+  void loop() override;
+  void update() override;
+
 //}
 }
