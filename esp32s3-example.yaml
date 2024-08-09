@@ -1,0 +1,82 @@
+substitutions:
+  name: max-inverter
+  device_description: "Monitor and control a hybrid inverter via MAX communication protocol"
+  external_components_source: github://txubelaxu/esphome-jk-bms@main
+
+esphome:
+  name: esp32s3-template
+  platformio_options:
+    board_build.flash_mode: dio
+  on_boot:
+    - light.turn_on:
+        id: my_light
+        effect: addressable_random_twinkle
+
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  framework:
+    type: esp-idf
+    version: recommended
+    sdkconfig_options:
+      CONFIG_ESP32_S3_BOX_BOARD: "y"
+     
+psram:
+  mode: octal
+  speed: 80MHz
+
+#ota:
+#  - platform: esphome
+#    password: "e72603f06381a45911d8386b7c5e08b8"
+#  on_begin:
+#    then:
+#      - switch.turn_off: ble_client_switch0
+#      - logger.log: "BLE connection suspended for OTA update"
+
+logger:
+  level: DEBUG
+
+wifi:
+  ssid: "KTM"#!secret wifi_ssid
+  password: "qawsedrf"#!secret wifi_password
+  
+api:
+
+web_server:
+
+light:
+  - platform: esp32_rmt_led_strip
+    id: my_light  
+    rgb_order: RGB
+    pin: GPIO48
+    num_leds: 1
+    rmt_channel: 0
+    chipset: ws2812
+    name: "My Light"
+    effects:
+      - pulse:
+          transition_length: 550ms
+          update_interval: 550ms
+      - random:
+          name: Random Effect With Custom Values
+          transition_length: 5s
+          update_interval: 7s
+      - addressable_random_twinkle:
+          name: Random Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 32ms
+      - addressable_fireworks:
+          name: Fireworks Effect With Custom Values
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: false
+          fade_out_rate: 120
+      - addressable_twinkle:
+          name: Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 4ms
+      - addressable_scan:
+          name: Scan Effect With Custom Values
+          move_interval: 100ms
+          scan_width: 1
