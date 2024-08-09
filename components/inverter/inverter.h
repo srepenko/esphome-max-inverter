@@ -54,6 +54,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     public:
         void set_device_protocol_id(sensor::Sensor *device_protocol_id) { 
             this->device_protocol_id_ = device_protocol_id; 
+            //this->add_polling_command_(#polling_command, POLLING_##polling_command);
         }
     void setup() override;
     void loop() override;
