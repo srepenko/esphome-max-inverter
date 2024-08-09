@@ -11,7 +11,7 @@ MULTI_CONF = True
 CONF_INVERTER_ID = "inverter_id"
 
 inverter_ns = cg.esphome_ns.namespace("inverter")
-InverterComponent = pipsolar_ns.class_("Inverter", cg.Component)
+InverterComponent = inverter_ns.class_("Inverter", cg.Component)
 
 INVERTER_COMPONENT_SCHEMA = cv.Schema(
     {
