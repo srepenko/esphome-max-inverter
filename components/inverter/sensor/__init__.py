@@ -34,11 +34,6 @@ TYPES = {
     CONF_DEVICE_PROTOCOL_ID: sensor.sensor_schema(
         accuracy_decimals=1,
     ),
-    CONF_PV_CHARGING_POWER: sensor.sensor_schema(
-        unit_of_measurement=UNIT_WATT,
-        accuracy_decimals=1,
-        device_class=DEVICE_CLASS_POWER,
-    ),
     CONF_TOTAL_PV_GENERATED_ENERGY: sensor.sensor_schema(
         unit_of_measurement=UNIT_WATT,
         accuracy_decimals=1,
