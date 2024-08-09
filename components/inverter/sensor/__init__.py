@@ -35,7 +35,7 @@ TYPES = {
         accuracy_decimals=1,
     ),
     CONF_TOTAL_PV_GENERATED_ENERGY: sensor.sensor_schema(
-        unit_of_measurement=UNIT_WATT,
+        unit_of_measurement='kWh',
         accuracy_decimals=1,
         device_class=DEVICE_CLASS_POWER,
     ),
