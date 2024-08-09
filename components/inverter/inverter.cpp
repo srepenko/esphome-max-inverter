@@ -9,7 +9,7 @@ namespace inverter {
 void Inverter::setup() {}
 void Inverter::loop() {
      if (this->device_protocol_id_) {
-          this->device_protocol_id_->publish_state("PI30");
+          this->device_protocol_id_->publish_state(30);
      }
 }
 void Inverter::update() {}
