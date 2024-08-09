@@ -8,7 +8,7 @@ CODEOWNERS = ["@srepenko"]
 AUTO_LOAD = ["binary_sensor", "text_sensor", "sensor", "switch", "output", "select"]
 MULTI_CONF = True
 
-CONF_INVERTER_ID = "pipsolar_id"
+CONF_INVERTER_ID = "inverter_id"
 
 inverter_ns = cg.esphome_ns.namespace("inverter")
 InverterComponent = pipsolar_ns.class_("Inverter", cg.Component)
