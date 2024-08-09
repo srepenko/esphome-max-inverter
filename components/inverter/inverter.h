@@ -50,9 +50,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     //PIPSOLAR_SENSOR(device_protocol_id, QPI, char*)
     protected:
         char* value_device_protocol_id_; 
-        sensor::Sensor device_protocol_id_{};
+        sensor::Sensor *device_protocol_id_{};
     public:
-        void set_device_protocol_id(char* device_protocol_id) { 
+        void set_device_protocol_id(sensor::Sensor *device_protocol_id) { 
             //this->device_protocol_id_ = device_protocol_id; 
         }
     void setup() override;
