@@ -88,13 +88,13 @@ TYPES = {
     ),
 }
 
-CONFIG_SCHEMA = PIPSOLAR_COMPONENT_SCHEMA.extend(
+CONFIG_SCHEMA = INVERTER_COMPONENT_SCHEMA.extend(
     {cv.Optional(type): schema for type, schema in TYPES.items()}
 )
 
 
 async def to_code(config):
-    paren = await cg.get_variable(config[CONF_PIPSOLAR_ID])
+    paren = await cg.get_variable(config[CONF_INVERTER_ID])
 
     for type, _ in TYPES.items():
         if type in config:
