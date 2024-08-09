@@ -4,8 +4,8 @@
 namespace esphome {
 namespace inverter {
 
-void Inverter::setup() {};
-void Inverter::loop() {};
-void Inverter::update() {};
+void Inverter::setup() {}
+void Inverter::loop() {}
+void Inverter::update() {}
 }
 }

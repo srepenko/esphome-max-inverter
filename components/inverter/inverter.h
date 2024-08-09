@@ -15,6 +15,6 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
   void setup() override;
   void loop() override;
   void update() override;
-}
+};
 }
 }
