@@ -18,38 +18,38 @@ void Inverter::dump_config() {
 }
 
 void Inverter::add_polling_command_(const char *command, ENUMPollingCommand polling_command) {
-  for (auto &used_polling_command : this->used_polling_commands_) {
-    if (used_polling_command.length == strlen(command)) {
-      uint8_t len = strlen(command);
-      if (memcmp(used_polling_command.command, command, len) == 0) {
-        return;
-      }
-    }
-    if (used_polling_command.length == 0) {
-      size_t length = strlen(command) + 1;
-      const char *beg = command;
-      const char *end = command + length;
-      used_polling_command.command = new uint8_t[length];  // NOLINT(cppcoreguidelines-owning-memory)
-      size_t i = 0;
-      for (; beg != end; ++beg, ++i) {
-        used_polling_command.command[i] = (uint8_t)(*beg);
-      }
-      used_polling_command.errors = 0;
-      used_polling_command.identifier = polling_command;
-      used_polling_command.length = length - 1;
-      return;
-    }
-  }
+     for (auto &used_polling_command : this->used_polling_commands_) {
+          if (used_polling_command.length == strlen(command)) {
+               uint8_t len = strlen(command);
+               if (memcmp(used_polling_command.command, command, len) == 0) {
+                    return;
+               }
+          }
+          if (used_polling_command.length == 0) {
+               size_t length = strlen(command) + 1;
+               const char *beg = command;
+               const char *end = command + length;
+               used_polling_command.command = new uint8_t[length];  // NOLINT(cppcoreguidelines-owning-memory)
+               size_t i = 0;
+               for (; beg != end; ++beg, ++i) {
+                    used_polling_command.command[i] = (uint8_t)(*beg);
+               }
+               used_polling_command.errors = 0;
+               used_polling_command.identifier = polling_command;
+               used_polling_command.length = length - 1;
+               return;
+          }
+     }
 }
 
-uint8_t Pipsolar::check_incoming_length_(uint8_t length) {
+uint8_t Inverter::check_incoming_length_(uint8_t length) {
   if (this->read_pos_ - 3 == length) {
     return 1;
   }
   return 0;
 }
 
-uint8_t Pipsolar::check_incoming_crc_() {
+uint8_t Inverter::check_incoming_crc_() {
   uint16_t crc16;
   crc16 = cal_crc_half_(read_buffer_, read_pos_ - 3);
   ESP_LOGD(TAG, "checking crc on incoming message");
