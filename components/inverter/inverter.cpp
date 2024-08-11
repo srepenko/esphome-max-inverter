@@ -8,7 +8,11 @@ namespace inverter {
 
 void Inverter::setup() {}
 void Inverter::loop() {
-     
+    String line = readString();
+    int i = parseInt();
+    while (available()) {
+      char c = read();
+    }
 }
 void Inverter::update() {
      if (this->device_protocol_id_) {
