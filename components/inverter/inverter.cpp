@@ -23,6 +23,9 @@ void Inverter::loop() {
      uint8_t byte;
      while (this->available()) {
           this->read_byte(&byte);
+               if (this->device_protocol_id_) {
+          this->device_protocol_id_->publish_state(byte);
+     }
           this->write_byte(byte);
      }
 }
