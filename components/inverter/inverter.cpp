@@ -11,24 +11,23 @@ namespace inverter {
 void Inverter::setup() {}
 
 void Inverter::loop() {
-//    String line = this->readString();
-//    int i = parseInt();
-//    while (this->available()) {
-//      char c = this->read();
-//    }
-     //char* test_str = "This is a test string.\n";
-//     (this->uart_write_bytes((this->uart_num, "AT\n", 3);
-     //crc16 = cal_crc_half_(byte_command, length);
-     //this->write_str("QPIGS\x0D");
-     uint8_t byte;
-     while (this->available()) {
-          ESP_LOGD(TAG, "available");
-          byte = this->read();
+     int len;
+     while ((len = this->available()) > 0) {
+          char buf[128];
+          size_t read = this->readBytes(buf, min(len, 128));
           if (this->device_protocol_id_) {
-               this->device_protocol_id_->publish_state(byte);
+               this->device_protocol_id_->publish_state(len);
           }
-          this->write_byte(byte);
      }
+//     uint8_t byte;
+//     while (this->available()) {
+//          ESP_LOGD(TAG, "available");
+//          byte = this->read();
+//          if (this->device_protocol_id_) {
+//               this->device_protocol_id_->publish_state(byte);
+//          }
+//          this->write_byte(byte);
+//     }
 }
 
 void Inverter::update() {
