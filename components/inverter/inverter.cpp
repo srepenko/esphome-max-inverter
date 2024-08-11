@@ -35,7 +35,7 @@ int Inverter::readline(int readch, char *buffer, int len)
   }
 
 void Inverter::loop() {
-     const int max_line_length = 80;
+     const int max_line_length = 500;
      static char buffer[max_line_length];
      while (available()) {
           if(readline(read(), buffer, max_line_length) > 0) {
@@ -58,6 +58,7 @@ void Inverter::update() {
      if (this->device_protocol_id_) {
           this->device_protocol_id_->publish_state(30);
      }
+     ESP_LOGI("main", "Value of my datetime: %04d-%02d-%02d", id(my_date).year, id(my_date).month, id(my_date).day);
 }
 
 void Inverter::dump_config() {
