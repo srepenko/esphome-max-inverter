@@ -10,7 +10,7 @@ void Inverter::setup() {}
 void Inverter::loop() {
      
 }
-void Inverter::update() 
+void Inverter::update() {
      if (this->device_protocol_id_) {
           this->device_protocol_id_->publish_state(30);
      }
