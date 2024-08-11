@@ -11,7 +11,7 @@ namespace inverter {
 void Inverter::setup() {}
 
 void Inverter::loop() {
-    String line = this->readString();
+    char line[] = this->readString();
     int i = parseInt();
     while (this->available()) {
       char c = this->read();
