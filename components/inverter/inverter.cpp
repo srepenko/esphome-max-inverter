@@ -7,11 +7,12 @@ namespace esphome {
 namespace inverter {
 
 void Inverter::setup() {}
+
 void Inverter::loop() {
-    String line = readString();
-    int i = parseInt();
-    while (available()) {
-      char c = read();
+    String line = this->readString();
+    int i = this->parseInt();
+    while (this->available()) {
+      char c = this->read();
     }
 }
 void Inverter::update() {
