@@ -35,22 +35,22 @@ int Inverter::readline(int readch, char *buffer, int len)
   }
 
 void Inverter::loop() {
-//     const int max_line_length = 80;
-//     static char buffer[max_line_length];
-//     while (available()) {
-//          if(readline(read(), buffer, max_line_length) > 0) {
-//               ESP_LOGD(TAG, buffer);
-//          }
-//     }
-     uint8_t byte;
-     while (this->available()) {
-          ESP_LOGD(TAG, "available");
-          byte = this->read();
-          if (this->device_protocol_id_) {
-               this->device_protocol_id_->publish_state(byte);
+     const int max_line_length = 80;
+     static char buffer[max_line_length];
+     while (available()) {
+          if(readline(read(), buffer, max_line_length) > 0) {
+               ESP_LOGD(TAG, buffer);
           }
-          this->write_byte(byte);
      }
+//     uint8_t byte;
+//     while (this->available()) {
+//          ESP_LOGD(TAG, "available");
+//          byte = this->read();
+//          if (this->device_protocol_id_) {
+//               this->device_protocol_id_->publish_state(byte);
+//          }
+//          this->write_byte(byte);
+//     }
 }
 
 void Inverter::update() {
