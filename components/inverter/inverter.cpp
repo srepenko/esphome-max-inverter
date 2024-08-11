@@ -18,11 +18,18 @@ void Inverter::loop() {
 //    }
      //char* test_str = "This is a test string.\n";
 //     (this->uart_write_bytes((this->uart_num, "AT\n", 3);
+     const int max_line_length = 80;
+     static char buffer[max_line_length];
+     while (available()) {
+          if(readline(read(), buffer, max_line_length) > 0) {
+               this->device_protocol_id_->publish_state(buffer);
+          }
+     }
 }
 void Inverter::update() {
-     if (this->device_protocol_id_) {
-          this->device_protocol_id_->publish_state(30);
-     }
+     //if (this->device_protocol_id_) {
+     //     this->device_protocol_id_->publish_state(30);
+     //}
 }
 
 void Inverter::dump_config() {
