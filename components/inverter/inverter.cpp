@@ -14,7 +14,7 @@ void Inverter::loop() {
      int len;
      while ((len = this->available()) > 0) {
           char buf[128];
-          size_t read = this->readBytes(buf, min(len, 128));
+          size_t read = this->read_array(buf, min(len, 128));
           if (this->device_protocol_id_) {
                this->device_protocol_id_->publish_state(len);
           }
