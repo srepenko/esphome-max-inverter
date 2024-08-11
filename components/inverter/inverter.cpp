@@ -23,7 +23,7 @@ void Inverter::loop() {
      uint8_t byte;
      while (this->available()) {
           this->read_byte(&byte);
-          this->write_byte(&byte);
+          this->write_byte(byte);
      }
 }
 
