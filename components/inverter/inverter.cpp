@@ -21,13 +21,13 @@ void Inverter::loop() {
      //crc16 = cal_crc_half_(byte_command, length);
      //this->write_str("QPIGS\x0D");
      uint8_t byte;
-     //while (this->available()) {
+     while (this->available()) {
           this->read_byte(&byte);
           if (this->device_protocol_id_) {
                this->device_protocol_id_->publish_state(byte);
           }
           this->write_byte(byte);
-     //}
+     }
 }
 
 void Inverter::update() {
