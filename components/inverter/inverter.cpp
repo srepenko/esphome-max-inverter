@@ -42,6 +42,7 @@ void Inverter::loop() {
                ESP_LOGD(TAG, buffer);
           }
      }
+     this->write_str("QPIGS\r");
 //     uint8_t byte;
 //     while (this->available()) {
 //          ESP_LOGD(TAG, "available");
@@ -57,7 +58,6 @@ void Inverter::update() {
      if (this->device_protocol_id_) {
           this->device_protocol_id_->publish_state(30);
      }
-     this->write_str("QPIGS\r");
 }
 
 void Inverter::dump_config() {
