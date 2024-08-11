@@ -16,7 +16,7 @@ void Inverter::loop() {
 //    while (this->available()) {
 //      char c = this->read();
 //    }
-     char* test_str = "This is a test string.\n";
+     char* test_str = 'This is a test string.\n';
      (this->uart_write_bytes((this->uart_num, (const char*)test_str, strlen(test_str));
 }
 void Inverter::update() {
