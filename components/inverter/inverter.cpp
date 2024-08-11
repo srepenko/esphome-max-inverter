@@ -31,9 +31,9 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-//     if (this->device_protocol_id_) {
-//          this->device_protocol_id_->publish_state(30);
-//     }
+     if (this->device_protocol_id_) {
+          this->device_protocol_id_->publish_state(30);
+     }
 }
 
 void Inverter::dump_config() {
