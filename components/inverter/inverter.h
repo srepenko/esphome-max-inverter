@@ -7,6 +7,8 @@
 #include "esphome/components/uart/uart.h"
 #include "esphome/core/automation.h"
 #include "esphome/core/component.h"
+#include "esphome/core/time.h"
+
 
 namespace esphome {
 namespace inverter {
