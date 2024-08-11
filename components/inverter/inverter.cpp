@@ -10,7 +10,7 @@ namespace inverter {
 void Inverter::setup() {}
 
 void Inverter::loop() {
-    char line[] = this->readString();
+    uint8_t line[] = this->read_array();
     int i = parseInt();
     while (this->available()) {
       char c = this->read();
