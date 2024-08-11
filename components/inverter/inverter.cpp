@@ -58,7 +58,7 @@ void Inverter::update() {
           this->device_protocol_id_->publish_state(30);
      }
      //this->write_str("QPIGS\r");
-     this->write_str("Q");
+     this->write_str("QP");
 }
 
 void Inverter::dump_config() {
