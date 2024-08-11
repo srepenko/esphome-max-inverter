@@ -20,8 +20,8 @@ void Inverter::loop() {
 //     (this->uart_write_bytes((this->uart_num, "AT\n", 3);
      const int max_line_length = 80;
      static char buffer[max_line_length];
-     while (available()) {
-          if(readline(read(), buffer, max_line_length) > 0) {
+     while (this->available()) {
+          if(this->readline(read(), buffer, max_line_length) > 0) {
                this->device_protocol_id_->publish_state(buffer);
           }
      }
