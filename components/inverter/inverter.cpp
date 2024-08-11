@@ -18,7 +18,7 @@ void Inverter::loop() {
 //    }
      //char* test_str = "This is a test string.\n";
 //     (this->uart_write_bytes((this->uart_num, "AT\n", 3);
-     (this->write_str("QT\r");
+     this->write_str("QT\r");
 }
 
 void Inverter::update() {
