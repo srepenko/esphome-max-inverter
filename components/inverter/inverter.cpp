@@ -42,7 +42,7 @@ void Inverter::loop() {
                ESP_LOGD(TAG, buffer);
           }
      }
-     this->write_str("QPIGS\r");
+     //this->write_str("QPIGS\r");
 //     uint8_t byte;
 //     while (this->available()) {
 //          ESP_LOGD(TAG, "available");
