@@ -39,7 +39,7 @@ void Inverter::loop() {
      static char buffer[max_line_length];
      while (available()) {
           if(readline(read(), buffer, max_line_length) > 0) {
-               publish_state(buffer);
+               ESP_LOGD(TAG, buffer);
           }
      }
 //     uint8_t byte;
