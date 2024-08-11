@@ -53,6 +53,8 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     void loop() override;
     void update() override;
     void dump_config() override;
+    int readline(int readch, char *buffer, int len);
+
     protected:
         static const size_t PIPSOLAR_READ_BUFFER_LENGTH = 130;  // maximum supported answer length
         static const size_t COMMAND_QUEUE_LENGTH = 10;
