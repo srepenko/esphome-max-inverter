@@ -1,5 +1,6 @@
 #include "inverter.h"
 #include "esphome/core/log.h"
+using namespace std;
 
 static const char *TAG = "inverter";
 
@@ -10,7 +11,7 @@ void Inverter::setup() {}
 
 void Inverter::loop() {
     String line = this->readString();
-    int i = this->parseInt();
+    int i = parseInt();
     while (this->available()) {
       char c = this->read();
     }
