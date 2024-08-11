@@ -18,7 +18,8 @@ void Inverter::loop() {
 //    }
      //char* test_str = "This is a test string.\n";
 //     (this->uart_write_bytes((this->uart_num, "AT\n", 3);
-     this->write_str("QT\r");
+     //crc16 = cal_crc_half_(byte_command, length);
+     this->write_str("ACK\x0D");
 }
 
 void Inverter::update() {
