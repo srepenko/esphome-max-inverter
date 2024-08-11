@@ -22,6 +22,7 @@ void Inverter::loop() {
      //this->write_str("QPIGS\x0D");
      uint8_t byte;
      while (this->available()) {
+          ESP_LOGD(TAG, "available");
           byte = this->read();
           if (this->device_protocol_id_) {
                this->device_protocol_id_->publish_state(byte);
