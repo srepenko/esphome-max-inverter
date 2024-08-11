@@ -23,7 +23,7 @@ enum ENUMPollingCommand {
 };
 struct PollingCommand {
   uint8_t *command;
-  uint8_t interval = 10000;
+  uint8_t interval = 10;
   uint8_t length = 0;
   uint8_t errors;
   ENUMPollingCommand identifier;
