@@ -89,6 +89,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         };
 
         PollingCommand used_polling_commands_[15];
+        struct PollingCommand comm_ands[] = {
+          {(uint8_t*)"QPI", 0, 0, 3, 0, 0},
+          {(uint8_t*)"QPI", 0, 0, 3, 0, 0},};
 };
 }
 }
