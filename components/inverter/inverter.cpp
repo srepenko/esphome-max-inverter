@@ -78,8 +78,8 @@ void Inverter::update() {
      //}
      ESP_LOGI(TAG, "STATE: %d", this->state_);
      if (this->state_ == STATE_IDLE) {
-          this->state_ = STATE_COMMAND;
           this->write_str("QP"); //IGS\r
+          this->state_ = STATE_COMMAND;
      }
 }
 
