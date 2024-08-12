@@ -92,7 +92,7 @@ void Inverter::loop() {
      if (this->state_ == STATE_COMMAND) {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
-               const char *command = this->command_queue_[this->command_queue_position_].c_str();
+               const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
                this->command_start_millis_ = millis();
                ESP_LOGD(TAG, "timeout command from queue: %s", command);
                this->command_queue_[this->command_queue_position_] = std::string("");
