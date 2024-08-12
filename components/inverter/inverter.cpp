@@ -38,6 +38,11 @@ void Inverter::loop() {
 //        break;
 //    }
      }
+     if (this->state_ == STATE_COMMAND_COMPLETE) {
+          ESP_LOGI(TAG, "STATE: %d", this->state_);
+          ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
+          this->state_ == STATE_IDLE;
+     }
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
                uint8_t byte;
@@ -62,11 +67,6 @@ void Inverter::loop() {
                     }
                }
           }  // available
-     }
-     if (this->state_ == STATE_COMMAND_COMPLETE) {
-          ESP_LOGI(TAG, "STATE: %d", this->state_);
-          ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
-          this->state_ == STATE_IDLE;
      }
 
 }
