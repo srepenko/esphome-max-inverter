@@ -30,7 +30,7 @@ void Inverter::loop() {
        // Read message
      if (this->state_ == STATE_IDLE) {
           switch (this->send_next_command_()) {
-/*               case 0:
+               case 0:
                     // no command send (empty queue) time to poll
                     if (millis() - this->last_poll_ > this->update_interval_) {
                          this->send_next_poll_();
@@ -38,7 +38,7 @@ void Inverter::loop() {
                     }
                     return;
                     break;
-*/               case 1:
+               case 1:
                     // command send
                     return;
                     break;
