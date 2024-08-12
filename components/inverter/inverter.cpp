@@ -112,7 +112,7 @@ void Inverter::loop() {
           if ((const char *)cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
-          } else if (cmd == (uint8_t *)"QPI") {
+          } else if ((const char *)cmd == "QPI") {
                ESP_LOGD(TAG, "Decode QPI");
                this->state_ = STATE_POLL_DECODED;
           } else {
