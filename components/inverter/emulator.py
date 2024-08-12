@@ -14,4 +14,5 @@ ser.dsrdtr = False       #disable hardware (DSR/DTR) flow control
 ser.writeTimeout = 0.2     #timeout for write
 ser.close() # закрываем порт
 
+
 print("lsxdfvjsdk")
