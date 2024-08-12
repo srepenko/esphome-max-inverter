@@ -14,9 +14,8 @@ void Inverter::setup() {
           {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI},
           {"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS},
      };*/
-     struct Student students[] = { { "John", 1, 85.5 }, 
-                                  { "Emma", 2, 90.6 }, 
-                                  { "Harry", 3, 92.7 } }; 
+     struct Student students[] = { { "QPIRI", 1, 85.5 }, 
+                                  { "QPIGS", 3, 92.7 } }; 
 }
 
 void Inverter::empty_uart_buffer_() {

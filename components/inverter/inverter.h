@@ -33,7 +33,7 @@ struct PollingCommand {
 };
 
 struct Student { 
-    char name[50]; 
+    uint8_t *command;
     int roll; 
     float marks; 
 }; 
