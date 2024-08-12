@@ -107,12 +107,12 @@ void Inverter::loop() {
           std::string fc;
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);
-          const uint8_t* cmd = this->used_polling_commands_[this->last_polling_command_].command;
+          uint8_t* cmd = this->used_polling_commands_[this->last_polling_command_].command;
           ESP_LOGD(TAG, "Decode %s : %s", cmd, (const uint8_t *)"QPI");
-          if (cmd == (const uint8_t *)"QPIRI") {
+          if (cmd == (uint8_t *)"QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
-          } else if (cmd == (const uint8_t *)"QPI") {
+          } else if (cmd == (uint8_t *)"QPI") {
                ESP_LOGD(TAG, "Decode QPI");
                this->state_ = STATE_POLL_DECODED;
           } else {
