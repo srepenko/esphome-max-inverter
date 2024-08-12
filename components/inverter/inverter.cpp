@@ -89,7 +89,7 @@ void Inverter::loop() {
           }
      }
      if (this->state_ == STATE_POLL) {
-          if (millis() - this->command_start_millis_ > esphome::pipsolar::Pipsolar::COMMAND_TIMEOUT) {
+          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
                ESP_LOGD(TAG, "timeout command to poll: %s", this->used_polling_commands_[this->last_polling_command_].command);
                this->state_ = STATE_IDLE;
