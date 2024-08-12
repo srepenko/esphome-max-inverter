@@ -22,23 +22,20 @@ void Inverter::empty_uart_buffer_() {
 void Inverter::loop() {
        // Read message
      if (this->state_ == STATE_IDLE) {
-          this->empty_uart_buffer_();
-          this->write_str("QP"); //IGS\r
-          this->state_ = STATE_COMMAND;
-//    switch (this->send_next_command_()) {
-//      case 0:
-//        // no command send (empty queue) time to poll
-//        if (millis() - this->last_poll_ > this->update_interval_) {
-//          this->send_next_poll_();
-//          this->last_poll_ = millis();
-//        }
-//        return;
-//        break;
-//      case 1:
-//        // command send
-//        return;
-//        break;
-//    }
+          switch (this->send_next_command_()) {
+               case 0:
+                    // no command send (empty queue) time to poll
+                    if (millis() - this->last_poll_ > this->update_interval_) {
+                         this->send_next_poll_();
+                         this->last_poll_ = millis();
+                    }
+                    return;
+                    break;
+               case 1:
+                    // command send
+                    return;
+                    break;
+          }
      }
      if (this->state_ == STATE_COMMAND_COMPLETE) {
           ESP_LOGD(TAG, "command successful");
@@ -87,6 +84,32 @@ void Inverter::update() {
 
 void Inverter::dump_config() {
      ESP_LOGCONFIG(TAG, "Inverter component");
+}
+
+uint8_t Inverter::send_next_command_() {
+  uint16_t crc16;
+//  if (this->command_queue_[this->command_queue_position_].length() != 0) {
+//    const char *command = this->command_queue_[this->command_queue_position_].c_str();
+    uint8_t byte_command[] = "QP";
+    uint8_t length = this->command_queue_[this->command_queue_position_].length();
+    for (uint8_t i = 0; i < length; i++) {
+      byte_command[i] = (uint8_t) this->command_queue_[this->command_queue_position_].at(i);
+    }
+    this->state_ = STATE_COMMAND;
+    this->command_start_millis_ = millis();
+    this->empty_uart_buffer_();
+    this->read_pos_ = 0;
+    crc16 = cal_crc_half_(byte_command, length);
+    this->write_str(command);
+    // checksum
+    this->write(((uint8_t)((crc16) >> 8)));   // highbyte
+    this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
+    // end Byte
+    this->write(0x0D);
+    ESP_LOGD(TAG, "Sending command from queue: %s with length %d", command, length);
+    return 1;
+//  }
+  return 0;
 }
 
 void Inverter::add_polling_command_(const char *command, ENUMPollingCommand polling_command) {
