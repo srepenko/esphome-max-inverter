@@ -59,7 +59,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     protected:
         static const size_t READ_BUFFER_LENGTH = 200;  // maximum supported answer length
         static const size_t COMMAND_QUEUE_LENGTH = 10;
-        static const size_t COMMAND_TIMEOUT = 2000;
+        static const size_t COMMAND_TIMEOUT = 500;
         void add_polling_command_(const char *command, ENUMPollingCommand polling_command);
         void empty_uart_buffer_();
         uint8_t check_incoming_crc_();
@@ -71,6 +71,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         uint8_t command_queue_position_ = 0;
         uint8_t read_buffer_[READ_BUFFER_LENGTH];
         size_t read_pos_{0};  
+        uint32_t command_start_millis_ = 0;
         uint8_t state_;
         enum State {
             STATE_IDLE = 0,
