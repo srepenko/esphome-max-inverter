@@ -46,8 +46,9 @@ void Inverter::setup() {
           {(uint8_t*)"QLED", 0, 0, 4, 0, 32},              // LED status parameters
 
      };
-     for (int i = 0; i < 2; i++) { 
-          if (commands_[i].interval > 0) {
+     
+     for (auto &used_polling_command : this->commands_) { 
+          if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", commands_[i].command);
           }
      } 
