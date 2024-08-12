@@ -74,7 +74,7 @@ void Inverter::update() {
      }
      //ESP_LOGI("main", "Value of my datetime: %04d-%02d-%02d", id(my_date).year, id(my_date).month, id(my_date).day);
      this->write_str("QP"); //IGS\r
-     this->state_ == STATE_COMMAND
+     this->state_ == STATE_COMMAND;
 }
 
 void Inverter::dump_config() {
