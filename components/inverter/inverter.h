@@ -25,17 +25,13 @@ enum ENUMPollingCommand {
 };
 struct PollingCommand {
   uint8_t *command;
-  uint16_t interval = 0;
-  uint16_t last_run = 0;
-  uint8_t length = 0;
+  uint16_t interval;
+  uint16_t last_run;
+  uint8_t length;
   uint8_t errors;
   ENUMPollingCommand identifier;
 };
 
-struct Polling_Command {
-  uint8_t *command;
-  uint16_t interval=0;
-};
 
 
 #define INVERTER_ENTITY_(type, name, polling_command) \
