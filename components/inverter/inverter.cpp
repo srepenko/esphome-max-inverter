@@ -72,7 +72,7 @@ void Inverter::update() {
      if (this->device_protocol_id_) {
           this->device_protocol_id_->publish_state(30);
      }
-     ESP_LOGI("STATE: %d", this->state_);
+     ESP_LOGI("STATE: %c", this->state_);
      this->write_str("QP"); //IGS\r
      this->state_ == STATE_COMMAND;
 }
