@@ -32,6 +32,12 @@ struct PollingCommand {
   ENUMPollingCommand identifier;
 };
 
+struct Student { 
+    char name[50]; 
+    int roll; 
+    float marks; 
+}; 
+
 #define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
         type *name##_{}; /* NOLINT */ \

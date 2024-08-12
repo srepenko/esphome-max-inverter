@@ -10,10 +10,13 @@ namespace inverter {
 
 void Inverter::setup() {
      this->state_ = STATE_IDLE;
-     struct PollingCommand commands_[] = {
+     /*struct PollingCommand commands_[] = {
           {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI},
           {"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS},
-     };
+     };*/
+     struct Student students[] = { { "John", 1, 85.5 }, 
+                                  { "Emma", 2, 90.6 }, 
+                                  { "Harry", 3, 92.7 } }; 
 }
 
 void Inverter::empty_uart_buffer_() {
