@@ -34,10 +34,7 @@ struct PollingCommand {
 
 struct Polling_Command {
   uint8_t *command;
-  uint16_t interval = 0;
-  uint16_t last_run = 0;
-  uint8_t length = 0;
-  uint8_t errors;
+  uint16_t interval;
 };
 
 
