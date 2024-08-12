@@ -10,7 +10,7 @@ namespace inverter {
 
 void Inverter::setup() {
      this->state_ = STATE_IDLE;
-     struct PollingCommand Inverter::commands_[] = {
+     struct PollingCommand Inverter::commands_[33] = {
           {(uint8_t*)"QPI", 0, 0, 3, 0, 0},               // Device Protocol ID
           {(uint8_t*)"QID", 0, 0, 3, 0, 1},               // The device serial number
           {(uint8_t*)"QSID", 0, 0, 4, 0, 2},              // The device serial number (the length is more than 14)
