@@ -91,6 +91,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
 
 
         PollingCommand used_polling_commands_[15];
+             struct Student students[] = { { "John", 1, 85.5 }, 
+                                  { "Emma", 2, 90.6 }, 
+                                  { "Harry", 3, 92.7 } }; 
         //PollingCommand commands_[2];
          //PollingCommand commands_[1] = {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI};
             //{"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS}};
