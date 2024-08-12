@@ -31,11 +31,7 @@ struct PollingCommand {
   uint8_t errors;
   ENUMPollingCommand identifier;
 };
-struct Student { 
-    char name[50]; 
-    int roll; 
-    float marks; 
-}; 
+
 #define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
         type *name##_{}; /* NOLINT */ \
@@ -88,7 +84,6 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
             STATE_POLL_CHECKED = 5,
             STATE_POLL_DECODED = 6,
         };
-
 
         PollingCommand used_polling_commands_[15];
 };
