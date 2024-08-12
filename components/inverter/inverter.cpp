@@ -98,7 +98,7 @@ uint8_t Inverter::send_next_command_() {
     } */
     uint8_t length = 2;
     for (uint8_t i = 0; i < length; i++) {
-          byte_command[i] = command[i]
+          byte_command[i] = command[i];
     }
     this->state_ = STATE_COMMAND;
 //    this->command_start_millis_ = millis();
