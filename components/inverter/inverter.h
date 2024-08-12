@@ -32,6 +32,15 @@ struct PollingCommand {
   ENUMPollingCommand identifier;
 };
 
+struct Polling_Command {
+  uint8_t *command;
+  uint16_t interval = 0;
+  uint16_t last_run = 0;
+  uint8_t length = 0;
+  uint8_t errors;
+};
+
+
 #define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
         type *name##_{}; /* NOLINT */ \

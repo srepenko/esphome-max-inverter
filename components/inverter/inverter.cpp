@@ -10,9 +10,9 @@ namespace inverter {
 
 void Inverter::setup() {
      this->state_ = STATE_IDLE;
-     struct PollingCommand commands_[] = {
-          {(uint8_t*)"QPIRI", 0, 0, 4, 0, 0},
-          {(uint8_t*)"QPIGS", 1000, 0, 5, 0, 1},
+     struct Polling_Command commands_[] = {
+          {(uint8_t*)"QPIRI", 0, 0, 4, 0},
+          {(uint8_t*)"QPIGS", 1000, 0, 5, 0},
      };
 }
 
