@@ -111,7 +111,7 @@ uint8_t Inverter::send_next_command_() {
     for (uint8_t i = 0; i < length; i++) {
       byte_command[i] = (uint8_t) this->command_queue_[this->command_queue_position_].at(i);
     } */
-    uint8_t length = 2;
+    uint8_t length = 5;
     for (uint8_t i = 0; i < length; i++) {
           byte_command[i] = command[i];
     }
