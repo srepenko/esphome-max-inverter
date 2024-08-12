@@ -153,7 +153,7 @@ void Inverter::add_polling_command_(const char *command, ENUMPollingCommand poll
                     used_polling_command.command[i] = (uint8_t)(*beg);
                }
                used_polling_command.errors = 0;
-               used_polling_command.identifier = polling_command;
+               //used_polling_command.identifier = polling_command;
                used_polling_command.length = length - 1;
                return;
           }
