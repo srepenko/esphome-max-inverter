@@ -41,7 +41,7 @@ void Inverter::loop() {
                ESP_LOGD(TAG, buffer);
           }
      }
-     //this->write_str("QPIGS\r");
+     
 //     uint8_t byte;
 //     while (this->available()) {
 //          ESP_LOGD(TAG, "available");
@@ -58,6 +58,7 @@ void Inverter::update() {
           this->device_protocol_id_->publish_state(30);
      }
      ESP_LOGI("main", "Value of my datetime: %04d-%02d-%02d", id(my_date).year, id(my_date).month, id(my_date).day);
+     this->write_str("QPIGS\r");
 }
 
 void Inverter::dump_config() {
