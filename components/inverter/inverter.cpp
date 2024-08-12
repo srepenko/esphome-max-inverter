@@ -49,7 +49,7 @@ void Inverter::setup() {
      
      for (auto &used_polling_command : this->commands_) { 
           if (used_polling_command.interval >0) {
-               ESP_LOGD(TAG, "Commands: %s", commands_[i].command);
+               ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
           }
      } 
 }
