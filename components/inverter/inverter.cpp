@@ -21,8 +21,10 @@ void Inverter::empty_uart_buffer_() {
 
 void Inverter::loop() {
        // Read message
-  if (this->state_ == STATE_IDLE) {
-    this->empty_uart_buffer_();
+     if (this->state_ == STATE_IDLE) {
+          this->empty_uart_buffer_();
+          this->write_str("QP"); //IGS\r
+          this->state_ = STATE_COMMAND;
 //    switch (this->send_next_command_()) {
 //      case 0:
 //        // no command send (empty queue) time to poll
