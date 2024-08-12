@@ -29,7 +29,8 @@ struct PollingCommand {
   uint32_t last_run;
   uint8_t length;
   uint8_t errors;
-  ENUMPollingCommand identifier;
+  uint8_t identifier;
+  //ENUMPollingCommand identifier;
 };
 
 
