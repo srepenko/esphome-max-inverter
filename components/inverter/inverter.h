@@ -65,12 +65,14 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         static const size_t READ_BUFFER_LENGTH = 200;  // maximum supported answer length
         static const size_t COMMAND_QUEUE_LENGTH = 10;
         static const size_t COMMAND_TIMEOUT = 1000;
+        uint32_t last_poll_ = 0;
         void add_polling_command_(const char *command, ENUMPollingCommand polling_command);
         void empty_uart_buffer_();
         uint8_t check_incoming_crc_();
         uint8_t check_incoming_length_(uint8_t length);
         uint16_t cal_crc_half_(uint8_t *msg, uint8_t len);
         uint8_t send_next_command_();
+        void send_next_poll_();
         void queue_command_(const char *command, uint8_t length);
         std::string command_queue_[COMMAND_QUEUE_LENGTH];
         uint8_t command_queue_position_ = 0;
@@ -88,6 +90,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
             STATE_POLL_DECODED = 6,
         };
 
+        uint8_t last_polling_command_ = 0;
         PollingCommand used_polling_commands_[15];
         struct PollingCommand MAX_commands[33] = {
           {(uint8_t*)"QPI", 0, 0, 3, 0},                 // Device Protocol ID

@@ -129,6 +129,35 @@ uint8_t Inverter::send_next_command_() {
   return 0;
 }
 
+void Inverter::send_next_poll_() {
+  uint16_t crc16;
+  this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
+  if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
+    this->last_polling_command_ = 0;
+  }
+  if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
+    // no command specified
+    return;
+  }
+  this->state_ = STATE_POLL;
+  this->command_start_millis_ = millis();
+  this->empty_uart_buffer_();
+  this->read_pos_ = 0;
+  crc16 = cal_crc_half_(this->used_polling_commands_[this->last_polling_command_].command,
+                        this->used_polling_commands_[this->last_polling_command_].length);
+  this->write_array(this->used_polling_commands_[this->last_polling_command_].command,
+                    this->used_polling_commands_[this->last_polling_command_].length);
+  // checksum
+  this->write(((uint8_t)((crc16) >> 8)));   // highbyte
+  this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
+  // end Byte
+  this->write(0x0D);
+  ESP_LOGD(TAG, "Sending polling command : %s with length %d",
+           this->used_polling_commands_[this->last_polling_command_].command,
+           this->used_polling_commands_[this->last_polling_command_].length);
+}
+
+
 void Inverter::add_polling_command_(const char *command, ENUMPollingCommand polling_command) {
      for (auto &used_polling_command : this->used_polling_commands_) {
           if (used_polling_command.length == strlen(command)) {
