@@ -58,7 +58,7 @@ void Inverter::update() {
           this->device_protocol_id_->publish_state(30);
      }
      //ESP_LOGI("main", "Value of my datetime: %04d-%02d-%02d", id(my_date).year, id(my_date).month, id(my_date).day);
-     this->write_str("QPIGS\r");
+     this->write_str("QP"); //IGS\r
 }
 
 void Inverter::dump_config() {
