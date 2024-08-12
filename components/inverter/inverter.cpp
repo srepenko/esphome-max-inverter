@@ -75,11 +75,12 @@ void Inverter::update() {
      //if (this->device_protocol_id_) {
      //     this->device_protocol_id_->publish_state(30);
      //}
-     ESP_LOGI(TAG, "STATE: %d", this->state_);
+/*     ESP_LOGI(TAG, "STATE: %d", this->state_);
      if (this->state_ == STATE_IDLE) {
           this->write_str("QP"); //IGS\r
           this->state_ = STATE_COMMAND;
      }
+*/
 }
 
 void Inverter::dump_config() {
