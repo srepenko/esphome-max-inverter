@@ -8,7 +8,9 @@ static const char *TAG = "inverter";
 namespace esphome {
 namespace inverter {
 
-void Inverter::setup() {}
+void Inverter::setup() {
+     this->state_ = STATE_IDLE;
+}
 
 void Inverter::empty_uart_buffer_() {
   uint8_t byte;
@@ -37,7 +39,6 @@ void Inverter::loop() {
 //    }
      }
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
-          ESP_LOGI(TAG, "STATE: %d", this->state_);
           while (this->available()) {
                uint8_t byte;
                this->read_byte(&byte);
