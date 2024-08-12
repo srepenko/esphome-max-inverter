@@ -14,6 +14,9 @@ void Inverter::setup() {
           {(uint8_t*)"QPIRI", 0, 0, 4, 0, POLLING_QPIRI},
           {(uint8_t*)"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS},
      };
+     for (int i = 0; i < 2; i++) { 
+          ESP_LOGD(TAG, "Commands: %s", commands_[i].command);
+     } 
 }
 
 void Inverter::empty_uart_buffer_() {
