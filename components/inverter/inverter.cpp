@@ -33,7 +33,7 @@ int Inverter::readline(int readch, char *buffer, int len) {
 }
 
 void Inverter::loop() {
-     age = datetime.datetime.now()
+     //age = datetime.datetime.now()
      const int max_line_length = 500;
      static char buffer[max_line_length];
      while (available()) {
