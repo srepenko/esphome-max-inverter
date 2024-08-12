@@ -38,7 +38,7 @@ void Inverter::loop() {
      int buf_len = 0;
      while (available()) {
           if((buf_len = readline(read(), buffer, max_line_length)) > 0) {
-               ESP_LOGI(TAG, "%d : %s"buffer, buf_len);
+               ESP_LOGI(TAG, "%d : %s", buffer, buf_len);
           }
      }
 }
