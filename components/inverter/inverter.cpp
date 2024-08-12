@@ -50,6 +50,20 @@ void Inverter::loop() {
           ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
           this->state_ = STATE_IDLE;
      }
+     if (this->state_ == STATE_POLL_COMPLETE) {
+          if (this->check_incoming_crc_()) {
+               if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
+               this->read_buffer_[3] == 'K') {
+                    this->state_ = STATE_IDLE;
+                    return;
+               }
+               // crc ok
+               this->state_ = STATE_POLL_CHECKED;
+               return;
+          } else {
+               this->state_ = STATE_IDLE;
+          }
+     }
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
                uint8_t byte;
