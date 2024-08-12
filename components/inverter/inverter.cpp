@@ -62,7 +62,7 @@ void Inverter::loop() {
           }  // available
      }
      if (this->state_ == STATE_COMMAND_COMPLETE) {
-          ESP_LOGI(TAG, "%d : %s", buf_len, buffer);
+          ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
           this->state_ == STATE_IDLE
      }
 
