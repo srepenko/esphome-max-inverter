@@ -25,8 +25,8 @@ enum ENUMPollingCommand {
 };
 struct PollingCommand {
   uint8_t *command;
-  uint16_t interval;
-  uint16_t last_run;
+  uint32_t interval;
+  uint32_t last_run;
   uint8_t length;
   uint8_t errors;
   ENUMPollingCommand identifier;
