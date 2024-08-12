@@ -91,8 +91,8 @@ uint8_t Inverter::send_next_command_() {
 //  if (this->command_queue_[this->command_queue_position_].length() != 0) {
 //    const char *command = this->command_queue_[this->command_queue_position_].c_str();
     const char *command = "QP";
-/*    uint8_t byte_command[16];
-    uint8_t length = this->command_queue_[this->command_queue_position_].length();
+    uint8_t byte_command[16];
+/*    uint8_t length = this->command_queue_[this->command_queue_position_].length();
     for (uint8_t i = 0; i < length; i++) {
       byte_command[i] = (uint8_t) this->command_queue_[this->command_queue_position_].at(i);
     } */
