@@ -108,7 +108,7 @@ void Inverter::loop() {
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);
           switch (this->used_polling_commands_[this->last_polling_command_].command) {
-               case "QPIRI":
+               case 'QPIRI':
                     ESP_LOGD(TAG, "Decode QPIRI");
                     this->state_ = STATE_POLL_DECODED;
                     break;
