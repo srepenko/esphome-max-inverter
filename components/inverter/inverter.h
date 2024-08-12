@@ -26,6 +26,7 @@ enum ENUMPollingCommand {
 struct PollingCommand {
   uint8_t *command;
   uint16_t interval = 1000;
+  uint16_t last_run = 1000;
   uint8_t length = 0;
   uint8_t errors;
   ENUMPollingCommand identifier;
@@ -84,6 +85,10 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         };
 
         PollingCommand used_polling_commands_[15];
+        PollingCommand commands_[0] = {"QPIRI", 1000, 0, 4, 0, POLLING_QPIRI};
+        PollingCommand commands_[1] = {"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS};
+
+        ;
 };
 }
 }
