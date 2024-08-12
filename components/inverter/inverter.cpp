@@ -63,7 +63,7 @@ void Inverter::loop() {
      }
      if (this->state_ == STATE_COMMAND_COMPLETE) {
           ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
-          this->state_ == STATE_IDLE
+          this->state_ == STATE_IDLE;
      }
 
 }
