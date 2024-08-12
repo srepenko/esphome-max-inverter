@@ -39,9 +39,10 @@ void Inverter::loop() {
 //    }
      }
      if (this->state_ == STATE_COMMAND_COMPLETE) {
+          ESP_LOGD(TAG, "command successful");
           ESP_LOGI(TAG, "STATE: %d", this->state_);
           ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
-          this->state_ == STATE_IDLE;
+          this->state_ = STATE_IDLE;
      }
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
@@ -80,9 +81,6 @@ void Inverter::update() {
           this->state_ = STATE_COMMAND;
           this->write_str("QP"); //IGS\r
      }
-
-
-     
 }
 
 void Inverter::dump_config() {
