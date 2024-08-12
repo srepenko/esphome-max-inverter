@@ -34,7 +34,7 @@ struct PollingCommand {
 
 struct Polling_Command {
   uint8_t *command;
-  uint16_t interval;
+  uint16_t interval=0;
 };
 
 
