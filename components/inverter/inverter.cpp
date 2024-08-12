@@ -94,10 +94,9 @@ void Inverter::loop() {
 
 void Inverter::update() {
      for (auto &used_polling_command : this->used_polling_commands_) { 
-          
-          ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-       //ESP_LOGD(TAG, "Commands: ");
-          
+          if (used_polling_command.length != 0) {
+               ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+          }
      } 
 }
 
