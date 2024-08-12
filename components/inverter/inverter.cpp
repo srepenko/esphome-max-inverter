@@ -38,7 +38,7 @@ void Inverter::loop() {
 //        break;
 //    }
      }
-/*     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
+     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
                uint8_t byte;
                this->read_byte(&byte);
@@ -68,7 +68,7 @@ void Inverter::loop() {
           ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
           this->state_ == STATE_IDLE;
      }
-*/
+
 }
 
 void Inverter::update() {
@@ -76,10 +76,9 @@ void Inverter::update() {
           this->device_protocol_id_->publish_state(30);
      }
      ESP_LOGI(TAG, "STATE: %d", this->state_);
-     this->state_ == STATE_COMMAND;
-     ESP_LOGI(TAG, "STATE: %d", this->state_);
+     this->state_ = STATE_COMMAND;
      this->write_str("QP"); //IGS\r
-     ESP_LOGI(TAG, "STATE: %d", this->state_);
+
      
 }
 
