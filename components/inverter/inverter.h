@@ -85,8 +85,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         };
 
         PollingCommand used_polling_commands_[15];
-        PollingCommand commands_[2] = {{"QPIRI", 0, 0, 4, 0, POLLING_QPIRI},
-            {"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS}};
+        PollingCommand commands_[1];
+         PollingCommand commands_[0] = {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI};
+            //{"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS}};
 };
 }
 }
