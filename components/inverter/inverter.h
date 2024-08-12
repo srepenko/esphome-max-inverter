@@ -83,10 +83,17 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
             STATE_POLL_CHECKED = 5,
             STATE_POLL_DECODED = 6,
         };
-
+struct Student { 
+    char name[50]; 
+    int roll; 
+    float marks; 
+}; 
+struct Student students[] = { { "John", 1, 85.5 }, 
+                                  { "Emma", 2, 90.6 }, 
+                                  { "Harry", 3, 92.7 } }; 
         PollingCommand used_polling_commands_[15];
         //PollingCommand commands_[2];
-         PollingCommand commands_[1] = {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI};
+         //PollingCommand commands_[1] = {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI};
             //{"QPIGS", 1000, 0, 5, 0, POLLING_QPIGS}};
 };
 }
