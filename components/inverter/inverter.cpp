@@ -12,7 +12,7 @@ void Inverter::setup() {
      this->state_ = STATE_IDLE;
      
      
-     for (auto &used_polling_command : this->commands_) { 
+     for (auto &used_polling_command : this->MAX_commands) { 
           if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
           }
@@ -93,6 +93,11 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
+     for (auto &used_polling_command : this->used_polling_commands_) { 
+          
+          ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+          
+     } 
 }
 
 void Inverter::dump_config() {
