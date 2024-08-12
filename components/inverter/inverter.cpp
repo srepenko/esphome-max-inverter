@@ -10,6 +10,9 @@ namespace inverter {
 
 void Inverter::setup() {
      this->state_ = STATE_IDLE;
+     struct Student students[] = { { "John", 1, 85.5 }, 
+                                  { "Emma", 2, 90.6 }, 
+                                  { "Harry", 3, 92.7 } }; 
 }
 
 void Inverter::empty_uart_buffer_() {

@@ -88,9 +88,7 @@ struct Student {
     int roll; 
     float marks; 
 }; 
-struct Student students[] = { { "John", 1, 85.5 }, 
-                                  { "Emma", 2, 90.6 }, 
-                                  { "Harry", 3, 92.7 } }; 
+
         PollingCommand used_polling_commands_[15];
         //PollingCommand commands_[2];
          //PollingCommand commands_[1] = {"QPIRI", 0, 0, 4, 0, POLLING_QPIRI};
