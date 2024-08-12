@@ -10,37 +10,62 @@ namespace inverter {
 
 void Inverter::setup() {}
 
-int Inverter::readline(int readch, char *buffer, int len) {
-     static int pos = 0;
-     int rpos;
-     if (readch > 0) {
-          switch (readch) {
-               case '\n': // Ignore new-lines
-                    break;
-               case '\r': // Return on CR
-                    rpos = pos;
-                    pos = 0;  // Reset position index ready for next time
-                    return rpos;
-               default:
-                    if (pos < len-1) {
-                         buffer[pos++] = readch;
-                         buffer[pos] = 0;
-                    }
-          }
-     }
-     // No end of line has been found, so return -1.
-     return -1;
+void Inverter::empty_uart_buffer_() {
+  uint8_t byte;
+  while (this->available()) {
+    this->read_byte(&byte);
+  }
 }
 
 void Inverter::loop() {
-     const int max_line_length = 500;
-     static char buffer[max_line_length];
-     int buf_len = 0;
-     while (available()) {
-          if((buf_len = readline(read(), buffer, max_line_length)) > 0) {
-               ESP_LOGI(TAG, "%d : %s", buf_len, buffer);
-          }
+       // Read message
+  if (this->state_ == STATE_IDLE) {
+    this->empty_uart_buffer_();
+//    switch (this->send_next_command_()) {
+//      case 0:
+//        // no command send (empty queue) time to poll
+//        if (millis() - this->last_poll_ > this->update_interval_) {
+//          this->send_next_poll_();
+//          this->last_poll_ = millis();
+//        }
+//        return;
+//        break;
+//      case 1:
+//        // command send
+//        return;
+//        break;
+//    }
      }
+     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
+          while (this->available()) {
+               uint8_t byte;
+               this->read_byte(&byte);
+
+               if (this->read_pos_ == READ_BUFFER_LENGTH) {
+                    this->read_pos_ = 0;
+                    this->empty_uart_buffer_();
+               }
+               this->read_buffer_[this->read_pos_] = byte;
+               this->read_pos_++;
+
+               // end of answer
+               if (byte == 0x0D) {
+                    this->read_buffer_[this->read_pos_] = 0;
+                    this->empty_uart_buffer_();
+                    if (this->state_ == STATE_POLL) {
+                         this->state_ = STATE_POLL_COMPLETE;
+                    }
+                    if (this->state_ == STATE_COMMAND) {
+                         this->state_ = STATE_COMMAND_COMPLETE;
+                    }
+               }
+          }  // available
+     }
+     if (this->state_ == STATE_COMMAND_COMPLETE) {
+          ESP_LOGI(TAG, "%d : %s", buf_len, buffer);
+          this->state_ == STATE_IDLE
+     }
+
 }
 
 void Inverter::update() {
@@ -49,6 +74,7 @@ void Inverter::update() {
      }
      //ESP_LOGI("main", "Value of my datetime: %04d-%02d-%02d", id(my_date).year, id(my_date).month, id(my_date).day);
      this->write_str("QP"); //IGS\r
+     this->state_ == STATE_COMMAND
 }
 
 void Inverter::dump_config() {

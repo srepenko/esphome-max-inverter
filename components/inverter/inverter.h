@@ -55,18 +55,28 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     void loop() override;
     void update() override;
     void dump_config() override;
-    int readline(int readch, char *buffer, int len);
 
     protected:
-        static const size_t PIPSOLAR_READ_BUFFER_LENGTH = 130;  // maximum supported answer length
+        static const size_t READ_BUFFER_LENGTH = 130;  // maximum supported answer length
         static const size_t COMMAND_QUEUE_LENGTH = 10;
         static const size_t COMMAND_TIMEOUT = 2000;
         void add_polling_command_(const char *command, ENUMPollingCommand polling_command);
+        void empty_uart_buffer_();
         uint8_t check_incoming_crc_();
         uint8_t check_incoming_length_(uint8_t length);
         uint16_t cal_crc_half_(uint8_t *msg, uint8_t len);
-        uint8_t read_buffer_[PIPSOLAR_READ_BUFFER_LENGTH];
+        uint8_t read_buffer_[READ_BUFFER_LENGTH];
         size_t read_pos_{0};  
+        uint8_t state_;
+        enum State {
+            STATE_IDLE = 0,
+            STATE_POLL = 1,
+            STATE_COMMAND = 2,
+            STATE_POLL_COMPLETE = 3,
+            STATE_COMMAND_COMPLETE = 4,
+            STATE_POLL_CHECKED = 5,
+            STATE_POLL_DECODED = 6,
+        };
 
         PollingCommand used_polling_commands_[15];
 };
