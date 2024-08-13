@@ -35,7 +35,7 @@ void Inverter::loop() {
                     // no command send (empty queue) time to poll
                     if (millis() - this->last_poll_ > this->update_interval_) {
                          this->send_next_poll_();
-                         ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
+                         ESP_LOGD(TAG, "Pool time %d update int %d", millis() - this->last_poll_, this->update_interval_);
                     }
                     return;
                     break;
