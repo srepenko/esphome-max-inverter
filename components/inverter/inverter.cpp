@@ -33,7 +33,7 @@ void Inverter::loop() {
           switch (this->send_next_command_()) {
                case 0:
                     // no command send (empty queue) time to poll
-                    if (millis() - this->last_poll_ > this->update_interval_) {
+                    if (millis() - this->last_poll_ > this->update_interval_/2) {
                          this->send_next_poll_();
                          this->last_poll_ = millis();
                     }
