@@ -144,6 +144,7 @@ void Inverter::loop() {
                this->empty_uart_buffer_();
                ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
                ESP_LOGD(TAG, "End: %d", millis());
+               this->read_pos_ = 0;
           }
      } 
 }
@@ -152,7 +153,6 @@ void Inverter::update() {
      int s = millis();
      ESP_LOGD(TAG, "Start: %d", s);
      this->empty_uart_buffer_();
-     this->read_pos_ = 0;
      this->write_str("QPI00\r"); 
      ESP_LOGD(TAG, "Middle: %d", millis());
      /*
