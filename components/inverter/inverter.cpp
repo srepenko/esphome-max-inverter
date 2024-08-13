@@ -161,6 +161,7 @@ void Inverter::loop() {
 
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
+               ESP_LOGI(TAG, "%d ms", this->read_pos_, millis()-this->command_start_millis_);
                uint8_t byte;
                this->read_byte(&byte);
                if (byte != 0x0D) {
