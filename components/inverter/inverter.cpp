@@ -52,7 +52,11 @@ void Inverter::loop() {
           this->state_ = STATE_IDLE;
      }
      if (this->state_ == STATE_POLL_COMPLETE) {
+<<<<<<< HEAD
+          ESP_LOGD(TAG, "Recive: %s", cmd);
+=======
           ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
+>>>>>>> 6ebcfdd7499da939dfcf6caa253f755be0a083a1
           if (this->check_incoming_crc_()) {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
@@ -109,7 +113,7 @@ void Inverter::loop() {
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);
           const char *cmd = (const char *)this->used_polling_commands_[this->last_polling_command_].command;
-          ESP_LOGD(TAG, "Decode %s - mils: %d", cmd, millis()-this->command_start_millis_);
+          ESP_LOGD(TAG, "Decode %s - mils: %d", cmd);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
