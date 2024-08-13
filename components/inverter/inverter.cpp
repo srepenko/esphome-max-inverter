@@ -179,7 +179,6 @@ void Inverter::send_next_poll_() {
     return;
   }
   this->state_ = STATE_POLL;
-  this->command_start_millis_ = millis();
   this->empty_uart_buffer_();
   this->read_pos_ = 0;
   crc16 = cal_crc_half_(this->used_polling_commands_[this->last_polling_command_].command,
