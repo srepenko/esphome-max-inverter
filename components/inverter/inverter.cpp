@@ -20,10 +20,10 @@ void Inverter::setup() {
 }
 
 void Inverter::empty_uart_buffer_() {
-  //uint8_t byte;
+  uint8_t byte;
   while (this->available()) {
-  //  this->read_byte(&byte);
-     this->flush();
+    this->read_byte(&byte);
+     //this->flush();
   }
 }
 
