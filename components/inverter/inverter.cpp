@@ -152,11 +152,9 @@ void Inverter::update() {
      int s = millis();
      ESP_LOGD(TAG, "Start: %d", s);
      this->empty_uart_buffer_();
+     this->read_pos_ = 0;
      this->write_str("QPI00\r"); 
      ESP_LOGD(TAG, "Middle: %d", millis());
-          
-     
-     
      /*
      for (auto &used_polling_command : this->used_polling_commands_) { 
           if (used_polling_command.length != 0) {
