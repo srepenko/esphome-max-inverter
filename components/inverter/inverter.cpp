@@ -159,7 +159,7 @@ void Inverter::loop() {
           }
      }
 */
-     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
+     //if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
                //if (this->read_pos_>0) {
                //     ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
@@ -187,7 +187,7 @@ void Inverter::loop() {
                     this->state_ = STATE_IDLE;
                }
           } 
-     }
+     //}
      
 }
 
