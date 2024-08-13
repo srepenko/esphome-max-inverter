@@ -108,7 +108,7 @@ void Inverter::loop() {
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);
           const char *cmd = (const char *)this->used_polling_commands_[this->last_polling_command_].command;
-          ESP_LOGD(TAG, "Decode %s", cmd);
+          ESP_LOGD(TAG, "Decode %s - mils: %d", cmd, millis());
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
@@ -123,7 +123,7 @@ void Inverter::loop() {
      if (this->state_ == STATE_POLL) {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
-               ESP_LOGD(TAG, "timeout command to poll: %s", this->used_polling_commands_[this->last_polling_command_].command);
+               ESP_LOGD(TAG, "timeout command to poll: %s - mils: %d", this->used_polling_commands_[this->last_polling_command_].command, millis());
                this->state_ = STATE_IDLE;
           } else {
           }
