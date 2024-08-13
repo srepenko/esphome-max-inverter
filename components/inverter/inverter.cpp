@@ -238,8 +238,8 @@ uint8_t Inverter::check_incoming_crc_() {
     read_buffer_[read_pos_ - 3] = 0;
     return 1;
   }
-  ESP_LOGD(TAG, "CRC NOK expected: %X %X but got: %X %X %x", ((uint8_t)((crc16) >> 8)), ((uint8_t)((crc16) &0xff)),
-           read_buffer_[read_pos_ - 3], read_buffer_[read_pos_ - 2], read_buffer_[read_pos_ - 1]);
+  ESP_LOGD(TAG, "CRC NOK expected: %X %X but got: %X %X", ((uint8_t)((crc16) >> 8)), ((uint8_t)((crc16) &0xff)),
+           read_buffer_[read_pos_ - 3], read_buffer_[read_pos_ - 2]);
   return 0;
 }
 
