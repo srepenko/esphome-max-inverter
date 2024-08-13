@@ -192,6 +192,19 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
+     //if (this->state_ == STATE_IDLE) {
+          this->command_start_millis_ = millis();
+          this->state_ = STATE_COMMAND;
+          this->empty_uart_buffer_();
+          this->read_pos_ = 0;
+          this->write_str("QPI00\r"); 
+          /*
+          for (auto &used_polling_command : this->used_polling_commands_) { 
+               if (used_polling_command.length != 0) {
+                    ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+               }
+          } */
+     //} 
 }
 
 void Inverter::dump_config() {
