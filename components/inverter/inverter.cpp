@@ -182,7 +182,6 @@ void Inverter::loop() {
                     //     this->state_ = STATE_COMMAND_COMPLETE;
                     //}
                     this->state_ = STATE_IDLE;
-
                }
                if (this->read_pos_>0) {ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);}
           } 
