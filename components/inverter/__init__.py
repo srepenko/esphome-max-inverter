@@ -21,7 +21,7 @@ INVERTER_COMPONENT_SCHEMA = cv.Schema(
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema({cv.GenerateID(): cv.declare_id(InverterComponent)})
-    .extend(cv.polling_component_schema("1s"))
+    .extend(cv.polling_component_schema("500ms"))
     .extend(uart.UART_DEVICE_SCHEMA)
 )
 
