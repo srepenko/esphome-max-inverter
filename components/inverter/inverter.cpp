@@ -150,6 +150,7 @@ void Inverter::loop() {
                     if (this->state_ == STATE_COMMAND) {
                          this->state_ = STATE_COMMAND_COMPLETE;
                     }
+                    this->state_ = STATE_IDLE;
 
                }
           } 
