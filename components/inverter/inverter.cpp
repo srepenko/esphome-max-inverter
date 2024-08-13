@@ -174,7 +174,7 @@ void Inverter::loop() {
                } else {
                     this->read_buffer_[this->read_pos_] = 0;
                     this->empty_uart_buffer_();
-                    //ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
+                    ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
                     //if (this->state_ == STATE_POLL) {
                     //     this->state_ = STATE_POLL_COMPLETE;
                     //}
@@ -184,6 +184,7 @@ void Inverter::loop() {
                     this->state_ = STATE_IDLE;
 
                }
+               if (this->read_pos_>0) {ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);}
           } 
      }
      
