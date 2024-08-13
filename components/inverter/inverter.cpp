@@ -52,7 +52,7 @@ void Inverter::loop() {
           this->state_ = STATE_IDLE;
      }
      if (this->state_ == STATE_POLL_COMPLETE) {
-          ESP_LOGI(TAG, "Recive %d byte: %s", this->read_pos_, this->read_buffer_);
+          //ESP_LOGI(TAG, "Recive %d byte: %s", this->read_pos_, this->read_buffer_);
           if (this->check_incoming_crc_()) {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
