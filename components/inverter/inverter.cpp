@@ -20,10 +20,12 @@ void Inverter::setup() {
 }
 
 void Inverter::empty_uart_buffer_() {
-  uint8_t byte;
-  while (this->available()) {
-    this->read_byte(&byte);
-  }
+     this->flush();
+//  uint8_t byte;
+//  while (this->available()) {
+//    this->read_byte(&byte);
+//  }
+
 }
 
 void Inverter::loop() {
@@ -132,7 +134,7 @@ void Inverter::loop() {
      if (this->state_ == STATE_IDLE) {
           this->command_start_millis_ = millis();
           this->state_ = STATE_COMMAND;
-          //this->empty_uart_buffer_();
+          this->empty_uart_buffer_();
           this->read_pos_ = 0;
           this->write_str("QPI00\r"); 
           /*
