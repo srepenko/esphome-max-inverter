@@ -103,10 +103,10 @@ ser.flushInput()
 
         
 while True:
-    response = ser.readline()
+    response = ser.read_until(b'\x0D')
     response = response[:-3]
     resp = response.decode('utf-8')
-    if resp : print("RX <-- "+resp)
+    if resp : print("RX <-- ",resp)
     if resp == "QPI" :
         print("TX> "+Scommand("PI30"))
     if resp == "QPIRI" :
