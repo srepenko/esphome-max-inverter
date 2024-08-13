@@ -129,16 +129,7 @@ void Inverter::loop() {
           }
      }
 */
-}
-
-void Inverter::update() {
-     int s = millis();
-     ESP_LOGD(TAG, "Start: %d", s);
-     this->empty_uart_buffer_();
-     this->write_str("QPI00\r"); 
-     ESP_LOGD(TAG, "Middle: %d", millis());
-     usleep(50);
-          while (this->available()) {
+while (this->available()) {
                uint8_t byte;
                this->read_byte(&byte);
 
@@ -153,6 +144,8 @@ void Inverter::update() {
                if (byte == 0x0D) {
                     this->read_buffer_[this->read_pos_] = 0;
                     this->empty_uart_buffer_();
+                    ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
+                    ESP_LOGD(TAG, "End: %d", millis());
                     if (this->state_ == STATE_POLL) {
                          this->state_ = STATE_POLL_COMPLETE;
                     }
@@ -161,9 +154,17 @@ void Inverter::update() {
                     }
                }
           }  // available
+}
+
+void Inverter::update() {
+     int s = millis();
+     ESP_LOGD(TAG, "Start: %d", s);
+     this->empty_uart_buffer_();
+     this->write_str("QPI00\r"); 
+     ESP_LOGD(TAG, "Middle: %d", millis());
+          
      
-     ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
-     ESP_LOGD(TAG, "End: %d", millis()-s);
+     
      /*
      for (auto &used_polling_command : this->used_polling_commands_) { 
           if (used_polling_command.length != 0) {
