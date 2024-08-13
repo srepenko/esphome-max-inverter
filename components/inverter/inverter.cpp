@@ -187,6 +187,7 @@ void Inverter::send_next_poll_() {
   this->write(((uint8_t)((crc16) >> 8)));   // highbyte
   this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
   // end Byte
+  this->command_start_millis_ = millis();
   this->write(0x0D);
   ESP_LOGD(TAG, "Sending polling command : %s with length %d",
            this->used_polling_commands_[this->last_polling_command_].command,
