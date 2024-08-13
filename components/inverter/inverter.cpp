@@ -129,36 +129,49 @@ void Inverter::loop() {
           }
      }
 */
-     while (this->available()) {
-          uint8_t byte;
-          this->read_byte(&byte);
-          if (byte != 0x0D) {
-               if (this->read_pos_ == READ_BUFFER_LENGTH) {
-                    this->read_pos_ = 0;
+     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
+          while (this->available()) {
+               uint8_t byte;
+               this->read_byte(&byte);
+               if (byte != 0x0D) {
+                    if (this->read_pos_ == READ_BUFFER_LENGTH) {
+                         this->read_pos_ = 0;
+                         this->empty_uart_buffer_();
+                    }
+                    this->read_buffer_[this->read_pos_] = byte;
+                    this->read_pos_++;
+               } else {
+                    this->read_buffer_[this->read_pos_] = 0;
                     this->empty_uart_buffer_();
+                    ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
+                    if (this->state_ == STATE_POLL) {
+                         this->state_ = STATE_POLL_COMPLETE;
+                    }
+                    if (this->state_ == STATE_COMMAND) {
+                         this->state_ = STATE_COMMAND_COMPLETE;
+                    }
+
                }
-               this->read_buffer_[this->read_pos_] = byte;
-               this->read_pos_++;
-          } else {
-               this->read_buffer_[this->read_pos_] = 0;
-               this->empty_uart_buffer_();
-               ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
-          }
-     } 
+          } 
+     }
 }
 
 void Inverter::update() {
-     this->command_start_millis_ = millis();
-     this->empty_uart_buffer_();
-     this->read_pos_ = 0;
-     this->write_str("QPI00\r"); 
-     /*
-     for (auto &used_polling_command : this->used_polling_commands_) { 
-          if (used_polling_command.length != 0) {
-               ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-          }
-     } */
-
+     if (this->state_ == STATE_IDLE) {
+          this->command_start_millis_ = millis();
+          this->state_ = STATE_COMMAND
+          this->empty_uart_buffer_();
+          this->read_pos_ = 0;
+          this->write_str("QPI00\r"); 
+          /*
+          for (auto &used_polling_command : this->used_polling_commands_) { 
+               if (used_polling_command.length != 0) {
+                    ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+               }
+          } */
+     } else if (this->state_ == STATE_COMMAND_COMPLETE){
+          this->state_ = STATE_IDLE;
+     }
 }
 
 void Inverter::dump_config() {
