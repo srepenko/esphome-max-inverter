@@ -132,7 +132,8 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-     ESP_LOGD(TAG, "mils: %d", millis());
+     int s = millis();
+     ESP_LOGD(TAG, "Start: %d", s);
      this->empty_uart_buffer_();
      this->write_str("QPI00\r"); 
           while (this->available()) {
@@ -158,7 +159,7 @@ void Inverter::update() {
                     }
                }
           }  // available
-     ESP_LOGD(TAG, "mils: %d", millis());
+     ESP_LOGD(TAG, "End: %d", millis()-s);
      /*
      for (auto &used_polling_command : this->used_polling_commands_) { 
           if (used_polling_command.length != 0) {
