@@ -155,7 +155,7 @@ void Inverter::loop() {
           } 
      }
      if (this->state_ == STATE_COMMAND) {
-          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
+          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT*2) {
                // command timeout
                const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
                this->command_start_millis_ = millis();
@@ -166,7 +166,7 @@ void Inverter::loop() {
                return;
           } else {
           }
-     }
+     }1
 }
 
 void Inverter::update() {
