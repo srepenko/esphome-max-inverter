@@ -170,10 +170,11 @@ void Inverter::loop() {
                     }
                     this->read_buffer_[this->read_pos_] = byte;
                     this->read_pos_++;
+                    
                } else {
                     this->read_buffer_[this->read_pos_] = 0;
-                    //this->empty_uart_buffer_();
-                    ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
+                    this->empty_uart_buffer_();
+                    //ESP_LOGI(TAG, "Read %d %d ms byte: %s", this->read_pos_, millis()-this->command_start_millis_, this->read_buffer_);
                     //if (this->state_ == STATE_POLL) {
                     //     this->state_ = STATE_POLL_COMPLETE;
                     //}
