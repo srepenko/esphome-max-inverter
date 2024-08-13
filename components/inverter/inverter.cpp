@@ -129,31 +129,30 @@ void Inverter::loop() {
           }
      }
 */
-while (this->available()) {
-               uint8_t byte;
-               this->read_byte(&byte);
+     while (this->available()) {
+          uint8_t byte;
+          this->read_byte(&byte);
+          if (this->read_pos_ == READ_BUFFER_LENGTH) {
+               this->read_pos_ = 0;
+               this->empty_uart_buffer_();
+          }
+          this->read_buffer_[this->read_pos_] = byte;
+          this->read_pos_++;
 
-               if (this->read_pos_ == READ_BUFFER_LENGTH) {
-                    this->read_pos_ = 0;
-                    this->empty_uart_buffer_();
+          // end of answer
+          if (byte == 0x0D) {
+               this->read_buffer_[this->read_pos_] = 0;
+               this->empty_uart_buffer_();
+               ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
+               ESP_LOGD(TAG, "End: %d", millis());
+               if (this->state_ == STATE_POLL) {
+                    this->state_ = STATE_POLL_COMPLETE;
                }
-               this->read_buffer_[this->read_pos_] = byte;
-               this->read_pos_++;
-
-               // end of answer
-               if (byte == 0x0D) {
-                    this->read_buffer_[this->read_pos_] = 0;
-                    this->empty_uart_buffer_();
-                    ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
-                    ESP_LOGD(TAG, "End: %d", millis());
-                    if (this->state_ == STATE_POLL) {
-                         this->state_ = STATE_POLL_COMPLETE;
-                    }
-                    if (this->state_ == STATE_COMMAND) {
-                         this->state_ = STATE_COMMAND_COMPLETE;
-                    }
+               if (this->state_ == STATE_COMMAND) {
+                    this->state_ = STATE_COMMAND_COMPLETE;
                }
-          }  // available
+          }
+     } 
 }
 
 void Inverter::update() {
