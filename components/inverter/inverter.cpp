@@ -159,6 +159,7 @@ void Inverter::update() {
                     }
                }
           }  // available
+     ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
      ESP_LOGD(TAG, "End: %d", millis()-s);
      /*
      for (auto &used_polling_command : this->used_polling_commands_) { 
