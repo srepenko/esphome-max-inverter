@@ -20,7 +20,6 @@ void Inverter::setup() {
 }
 
 void Inverter::empty_uart_buffer_() {
-  
   //uint8_t byte;
   while (this->available()) {
   //  this->read_byte(&byte);
@@ -78,7 +77,7 @@ void Inverter::loop() {
                     this->read_buffer_[this->read_pos_] = byte;
                     this->read_pos_++;
                // end of answer
-               } esle {
+               } else {
                     this->read_buffer_[this->read_pos_] = 0;
                     this->empty_uart_buffer_();
                     if (this->state_ == STATE_POLL) {
