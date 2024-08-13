@@ -139,7 +139,7 @@ void Inverter::loop() {
                }
                this->read_buffer_[this->read_pos_] = byte;
                this->read_pos_++;
-          } else (byte == 0x0D) {
+          } else {
                this->read_buffer_[this->read_pos_] = 0;
                this->empty_uart_buffer_();
                ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
