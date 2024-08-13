@@ -168,6 +168,7 @@ void Inverter::send_next_poll_() {
   uint16_t crc16;
   if (this->last_polling_command_ == 0) {
      this->last_poll_ = millis();
+     ESP_LOGD(TAG, "Next pool started %d", milles())
   }
   this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
   if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
@@ -231,10 +232,10 @@ uint8_t Inverter::check_incoming_length_(uint8_t length) {
 uint8_t Inverter::check_incoming_crc_() {
   uint16_t crc16;
   crc16 = cal_crc_half_(read_buffer_, read_pos_ - 3);
-  ESP_LOGD(TAG, "checking crc on incoming message");
+  //ESP_LOGD(TAG, "checking crc on incoming message");
   if (((uint8_t)((crc16) >> 8)) == read_buffer_[read_pos_ - 3] &&
       ((uint8_t)((crc16) &0xff)) == read_buffer_[read_pos_ - 2]) {
-    ESP_LOGD(TAG, "CRC OK");
+    //ESP_LOGD(TAG, "CRC OK");
     read_buffer_[read_pos_ - 1] = 0;
     read_buffer_[read_pos_ - 2] = 0;
     read_buffer_[read_pos_ - 3] = 0;
