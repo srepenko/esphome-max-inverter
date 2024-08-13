@@ -143,7 +143,7 @@ void Inverter::loop() {
                }
           } */
      } 
-/*     if (this->state_ == STATE_COMMAND_COMPLETE){
+     if (this->state_ == STATE_COMMAND_COMPLETE){
           this->state_ = STATE_IDLE;
      }
      if (this->state_ == STATE_COMMAND) {
@@ -159,7 +159,7 @@ void Inverter::loop() {
           } else {
           }
      }
-*/
+
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
                //if (this->read_pos_>0) {
