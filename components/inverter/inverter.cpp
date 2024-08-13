@@ -27,7 +27,7 @@ void Inverter::empty_uart_buffer_() {
 }
 
 void Inverter::loop() {
-       // Read message
+/*       // Read message
      if (this->state_ == STATE_IDLE) {
           switch (this->send_next_command_()) {
                case 0:
@@ -128,16 +128,44 @@ void Inverter::loop() {
           } else {
           }
      }
-
+*/
 }
 
 void Inverter::update() {
+     ESP_LOGD(TAG, "mils: %d", millis());
+     this->empty_uart_buffer_();
+     this->write_str("QPI00\r"); 
+          while (this->available()) {
+               uint8_t byte;
+               this->read_byte(&byte);
+
+               if (this->read_pos_ == READ_BUFFER_LENGTH) {
+                    this->read_pos_ = 0;
+                    this->empty_uart_buffer_();
+               }
+               this->read_buffer_[this->read_pos_] = byte;
+               this->read_pos_++;
+
+               // end of answer
+               if (byte == 0x0D) {
+                    this->read_buffer_[this->read_pos_] = 0;
+                    this->empty_uart_buffer_();
+                    if (this->state_ == STATE_POLL) {
+                         this->state_ = STATE_POLL_COMPLETE;
+                    }
+                    if (this->state_ == STATE_COMMAND) {
+                         this->state_ = STATE_COMMAND_COMPLETE;
+                    }
+               }
+          }  // available
+     ESP_LOGD(TAG, "mils: %d", millis());
      /*
      for (auto &used_polling_command : this->used_polling_commands_) { 
           if (used_polling_command.length != 0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
           }
      } */
+
 }
 
 void Inverter::dump_config() {
