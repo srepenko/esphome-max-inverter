@@ -55,6 +55,13 @@ struct PollingCommand {
 class Inverter : public uart::UARTDevice, public PollingComponent {
     // QPI values
     INVERTER_SENSOR(device_protocol_id, QPI, int)
+    // QPIRI values
+    INVERTER_SENSOR(grid_rating_voltage, QPIRI, int)
+    INVERTER_SENSOR(grid_rating_current, QPIRI, int)
+    // QPIGS values
+    INVERTER_SENSOR(grid_voltage, QPIGS, int)
+    INVERTER_SENSOR(grid_frequency, QPIGS, int)
+
     void setup() override;
     void loop() override;
     void update() override;
