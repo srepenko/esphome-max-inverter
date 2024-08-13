@@ -33,10 +33,9 @@ void Inverter::loop() {
           switch (this->send_next_command_()) {
                case 0:
                     // no command send (empty queue) time to poll
-                    //if (millis() - this->last_poll_ > this->update_interval_) {
+                    if (millis() - this->last_poll_ > this->update_interval_) {
                          this->send_next_poll_();
-                         this->last_poll_ = millis();
-                    //}
+                    }
                     return;
                     break;
                case 1:
@@ -167,6 +166,9 @@ uint8_t Inverter::send_next_command_() {
 
 void Inverter::send_next_poll_() {
   uint16_t crc16;
+  if (this->last_polling_command_ == 0) {
+     this->last_poll_ = millis();
+  }
   this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
   if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
     this->last_polling_command_ = 0;
