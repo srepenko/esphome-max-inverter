@@ -159,7 +159,7 @@ void Inverter::loop() {
 void Inverter::update() {
      if (this->state_ == STATE_IDLE) {
           this->command_start_millis_ = millis();
-          this->state_ = STATE_COMMAND
+          this->state_ = STATE_COMMAND;
           this->empty_uart_buffer_();
           this->read_pos_ = 0;
           this->write_str("QPI00\r"); 
