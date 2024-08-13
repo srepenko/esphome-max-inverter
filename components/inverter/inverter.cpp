@@ -166,7 +166,7 @@ void Inverter::loop() {
                return;
           } else {
           }
-     }1
+     }
 }
 
 void Inverter::update() {
