@@ -154,6 +154,19 @@ void Inverter::loop() {
                }
           } 
      }
+     if (this->state_ == STATE_COMMAND) {
+          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
+               // command timeout
+               const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
+               this->command_start_millis_ = millis();
+               ESP_LOGD(TAG, "timeout command from queue: %s", command);
+               this->command_queue_[this->command_queue_position_] = std::string("");
+               this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
+               this->state_ = STATE_IDLE;
+               return;
+          } else {
+          }
+     }
 }
 
 void Inverter::update() {
