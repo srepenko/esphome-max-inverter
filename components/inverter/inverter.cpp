@@ -70,15 +70,15 @@ void Inverter::loop() {
           while (this->available()) {
                uint8_t byte;
                this->read_byte(&byte);
-               if (byte != 0x0D) {
-                    if (this->read_pos_ == READ_BUFFER_LENGTH) {
+               if (this->read_pos_ == READ_BUFFER_LENGTH) {
                          this->read_pos_ = 0;
                          this->empty_uart_buffer_();
                     }
                     this->read_buffer_[this->read_pos_] = byte;
                     this->read_pos_++;
+               }
+               if (byte == 0x0D) {
                // end of answer
-               } else {
                     this->read_buffer_[this->read_pos_] = 0;
                     this->empty_uart_buffer_();
                     if (this->state_ == STATE_POLL) {
