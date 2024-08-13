@@ -137,7 +137,7 @@ void Inverter::update() {
      this->empty_uart_buffer_();
      this->write_str("QPI00\r"); 
      ESP_LOGD(TAG, "Middle: %d", millis());
-     usleep(10);
+     usleep(50);
           while (this->available()) {
                uint8_t byte;
                this->read_byte(&byte);
