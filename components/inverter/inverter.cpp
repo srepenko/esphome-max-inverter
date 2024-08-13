@@ -108,7 +108,7 @@ void Inverter::loop() {
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);
           const char *cmd = (const char *)this->used_polling_commands_[this->last_polling_command_].command;
-          ESP_LOGD(TAG, "Decode %s - mils: %d", cmd, millis()-this->command_start_millis_);
+          ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
@@ -187,7 +187,6 @@ void Inverter::send_next_poll_() {
   this->write(((uint8_t)((crc16) >> 8)));   // highbyte
   this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
   // end Byte
-  this->command_start_millis_ = millis();
   this->write(0x0D);
   ESP_LOGD(TAG, "Sending polling command : %s with length %d",
            this->used_polling_commands_[this->last_polling_command_].command,
