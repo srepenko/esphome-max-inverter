@@ -129,6 +129,36 @@ void Inverter::loop() {
           }
      }
 */
+     if (this->state_ == STATE_IDLE) {
+          this->command_start_millis_ = millis();
+          this->state_ = STATE_COMMAND;
+          this->empty_uart_buffer_();
+          this->read_pos_ = 0;
+          this->write_str("QPI00\r"); 
+          /*
+          for (auto &used_polling_command : this->used_polling_commands_) { 
+               if (used_polling_command.length != 0) {
+                    ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+               }
+          } */
+     } 
+     if (this->state_ == STATE_COMMAND_COMPLETE){
+          this->state_ = STATE_IDLE;
+     }
+     if (this->state_ == STATE_COMMAND) {
+          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
+               // command timeout
+               const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
+               this->command_start_millis_ = millis();
+               ESP_LOGD(TAG, "timeout command from queue: %s", command);
+               this->command_queue_[this->command_queue_position_] = std::string("");
+               this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
+               this->state_ = STATE_IDLE;
+               return;
+          } else {
+          }
+     }
+
      if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
           while (this->available()) {
                uint8_t byte;
@@ -159,35 +189,6 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-     if (this->state_ == STATE_IDLE) {
-          this->command_start_millis_ = millis();
-          this->state_ = STATE_COMMAND;
-          this->empty_uart_buffer_();
-          this->read_pos_ = 0;
-          this->write_str("QPI00\r"); 
-          /*
-          for (auto &used_polling_command : this->used_polling_commands_) { 
-               if (used_polling_command.length != 0) {
-                    ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-               }
-          } */
-     } 
-     if (this->state_ == STATE_COMMAND_COMPLETE){
-          this->state_ = STATE_IDLE;
-     }
-     if (this->state_ == STATE_COMMAND) {
-          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
-               // command timeout
-               const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
-               this->command_start_millis_ = millis();
-               ESP_LOGD(TAG, "timeout command from queue: %s", command);
-               this->command_queue_[this->command_queue_position_] = std::string("");
-               this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
-               this->state_ = STATE_IDLE;
-               return;
-          } else {
-          }
-     }
 }
 
 void Inverter::dump_config() {
