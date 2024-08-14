@@ -193,7 +193,11 @@ void Inverter::send_next_poll_() {
      ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
      this->last_poll_ = millis();
   }
-  this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
+
+  //this->MAX_commands
+
+  //this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
+  this->last_polling_command_ = this->last_polling_command_ + 1;
   if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
     this->last_polling_command_ = 0;
   }
