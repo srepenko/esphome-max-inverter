@@ -230,7 +230,7 @@ void Inverter::send_next_poll_() {
 //  ESP_LOGD(TAG, "Sending polling command : %s with length %d",
 //           this->used_polling_commands_[this->last_polling_command_].command,
 //           this->used_polling_commands_[this->last_polling_command_].length);
-this->last_polling_command_ = this->last_polling_command_ + 1;
+     this->last_polling_command_ = this->last_polling_command_ + 1;
 }
 
 
