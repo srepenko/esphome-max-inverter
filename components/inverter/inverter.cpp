@@ -188,7 +188,7 @@ void Inverter::send_next_poll_() {
   uint16_t crc16;
   if (this->last_polling_command_ == 0) {
      if (this->last_poll_ != 0) {
-          ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_)
+          ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
           if (millis() - this->last_poll_ < this->update_interval_) { 
                return;
           };
@@ -198,7 +198,7 @@ void Inverter::send_next_poll_() {
   
 //this->MAX_commands
 //this->MAX_commands[this->last_polling_command_].length == 0
-     if (last_polling_command_ == sizeof(MAX_commands)-1) {
+     if (this->last_polling_command_ == sizeof(MAX_commands)-1) {
           this->last_polling_command_ = 0;
      }
      if (this->MAX_commands[this->last_polling_command_].interval == 0){
