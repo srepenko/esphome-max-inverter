@@ -142,11 +142,8 @@ void Inverter::update() {
      uint8_t *byte_command;
      for (auto &used_polling_command : this->MAX_commands) { 
           if (used_polling_command.interval >0) {
-               uint8_t length = used_polling_command.length;
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-               byte_command = used_polling_command.command;
-               int lenght = sizeof(byte_command);
-               this->write_array(byte_command, length); 
+               this->write_array(byte_command, used_polling_command.length+3); 
           }
      } 
 
