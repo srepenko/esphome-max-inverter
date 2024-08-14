@@ -133,9 +133,8 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-     const char *command = "QPI\0xbe\0xac\r";
-     //uint8_t data[len()] = "QPI\0xbe\0xac\r";
-     this->write_str(command); 
+     uint8_t byte_command[] = "QPI\0xbe\0xac\r";
+     this->write_array(byte_command, len(byte_command)); 
 }
 
 void Inverter::dump_config() {
