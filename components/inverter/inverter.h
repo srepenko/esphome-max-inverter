@@ -99,7 +99,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         uint8_t last_polling_command_ = 0;
         PollingCommand used_polling_commands_[15];
         struct PollingCommand MAX_commands[33] = {
-          {(uint8_t*)"QPI  \r", 0, 0, 3, 0},                 // Device Protocol ID
+          {(uint8_t*)"QPI---", 0, 0, 3, 0},                 // Device Protocol ID
           {(uint8_t*)"QID   ", 0, 0, 3, 0},                 // The device serial number
           {(uint8_t*)"QSID   ", 0, 0, 4, 0},                // The device serial number (the length is more than 14)
           {(uint8_t*)"QVFW   ", 0, 0, 4, 0},                // Main CPU Firmware version
