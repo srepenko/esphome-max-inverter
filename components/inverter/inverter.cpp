@@ -109,10 +109,8 @@ void Inverter::loop() {
           bool enabled = true;
           std::string fc;
           char tmp[READ_BUFFER_LENGTH];
-          sprintf(tmp, "%s", this->read_buffer_);
-          //const char *cmd = (const char *)this->used_polling_commands_[this->last_polling_command_].command;
-          std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
-          str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
+          sprintf(tmp, "%s", this->read_buffer_);          
+          std::string str((const char *)this->MAX_commands[this->last_polling_command_].command).substr(0, MAX_commands[this->last_polling_command_].length); 
           const char *cmd = str.c_str();
           ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
@@ -240,8 +238,8 @@ void Inverter::send_next_poll_() {
   // end Byte
 //  this->write(0x0D);
      this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length+3); 
-     ESP_LOGD(TAG, "Sending polling command : %s run interval %d",
-          this->MAX_commands[this->last_polling_command_].command,
+     std::string str((const char *)this->MAX_commands[this->last_polling_command_].command).substr(0, MAX_commands[this->last_polling_command_].length); 
+     ESP_LOGD(TAG, "Sending polling command : %s run interval %d", str.c_str(),
           this->MAX_commands[this->last_polling_command_].interval);
 //  ESP_LOGD(TAG, "Sending polling command : %s with length %d",
 //           this->used_polling_commands_[this->last_polling_command_].command,
