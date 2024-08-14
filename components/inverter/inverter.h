@@ -99,19 +99,19 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         uint8_t last_polling_command_ = 0;
         PollingCommand used_polling_commands_[15];
         struct PollingCommand MAX_commands[33] = {
-          {(uint8_t*)"QPI", 0, 0, 3, 0},                 // Device Protocol ID
-          {(uint8_t*)"QID", 0, 0, 3, 0},                 // The device serial number
-          {(uint8_t*)"QSID", 0, 0, 4, 0},                // The device serial number (the length is more than 14)
-          {(uint8_t*)"QVFW", 0, 0, 4, 0},                // Main CPU Firmware version
-          {(uint8_t*)"QVFW3", 0, 0, 5, 0},               // Another CPU (remote panel) Firmware version
-          {(uint8_t*)"VERFW", 0, 0, 4, 0},               // Bluetooth version
-          {(uint8_t*)"QPIRI", 0, 0, 5, 0},               // Device Rating Information
-          {(uint8_t*)"QFLAG", 0, 0, 5, 0},               // Device flag status
-          {(uint8_t*)"QPIGS", 1, 0, 5, 0},               // Device general status parameters
-          {(uint8_t*)"QPIGS2", 0, 0, 6, 0},              // Device general status parameters inquiry (Only 48V model)
-          {(uint8_t*)"QPGSn", 0, 0, 5, 0},               // Parallel Information inquiry (Only 48V model)
-          {(uint8_t*)"QMOD", 5, 0, 4, 0},                // Device Mode
-          {(uint8_t*)"QPIWS", 0, 0, 5, 0},              // Device Warning Status
+          {(uint8_t*)"QPI  \r", 0, 0, 3, 0},                 // Device Protocol ID
+          {(uint8_t*)"QID   ", 0, 0, 3, 0},                 // The device serial number
+          {(uint8_t*)"QSID   ", 0, 0, 4, 0},                // The device serial number (the length is more than 14)
+          {(uint8_t*)"QVFW   ", 0, 0, 4, 0},                // Main CPU Firmware version
+          {(uint8_t*)"QVFW3   ", 0, 0, 5, 0},               // Another CPU (remote panel) Firmware version
+          {(uint8_t*)"VERFW   ", 0, 0, 4, 0},               // Bluetooth version
+          {(uint8_t*)"QPIRI   ", 0, 0, 5, 0},               // Device Rating Information
+          {(uint8_t*)"QFLAG   ", 0, 0, 5, 0},               // Device flag status
+          {(uint8_t*)"QPIGS   ", 1, 0, 5, 0},               // Device general status parameters
+          {(uint8_t*)"QPIGS2   ", 0, 0, 6, 0},              // Device general status parameters inquiry (Only 48V model)
+          {(uint8_t*)"QPGSn   ", 0, 0, 5, 0},               // Parallel Information inquiry (Only 48V model)
+          {(uint8_t*)"QMOD   ", 5, 0, 4, 0},                // Device Mode
+          {(uint8_t*)"QPIWS   ", 0, 0, 5, 0},              // Device Warning Status
           {(uint8_t*)"QDI", 0, 0, 3, 0},                // The default setting value
           {(uint8_t*)"QMCHGCR", 0, 0, 7, 0},            // Enquiry selectable value about max charging current
           {(uint8_t*)"QMUCHGCR", 0, 0, 8, 0},           // Enquiry selectable value about max utility charging current
