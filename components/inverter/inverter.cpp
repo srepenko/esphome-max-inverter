@@ -190,7 +190,9 @@ void Inverter::send_next_poll_() {
      if (millis() - this->last_poll_ < this->update_interval_) { 
           return;
      }
-     ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
+     if (this->last_poll_ != 0) {
+          ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_)
+     };
      this->last_poll_ = millis();
   }
   
