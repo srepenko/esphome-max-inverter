@@ -41,7 +41,6 @@ void Inverter::loop() {
                     // no command send (empty queue) time to poll
                     if (millis() - this->last_poll_ > this->update_interval_) {
                          this->send_next_poll_();
-                         ESP_LOGD(TAG, "Pool time %d update int %d", millis() - this->last_poll_, this->update_interval_);
                     }
                     return;
                     break;
@@ -191,6 +190,7 @@ void Inverter::send_next_poll_() {
   uint16_t crc16;
   //ESP_LOGD(TAG, "Last pool command %d", this->last_polling_command_);
   if (this->last_polling_command_ == 0) {
+     ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
      this->last_poll_ = millis();
   }
   this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
