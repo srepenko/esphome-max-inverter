@@ -129,34 +129,16 @@ void Inverter::loop() {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
                this->MAX_commands[this->last_polling_command_].last_run = 0;
-               //ESP_LOGD(TAG, "timeout command to poll: %s", this->used_polling_commands_[this->last_polling_command_].command);
-               ESP_LOGD(TAG, "timeout command to poll: %s", this->MAX_commands[this->last_polling_command_].command);
+               std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
+               str = str.substr(0, this->MAX_commands[this->last_polling_command_].length); 
+               ESP_LOGD(TAG, "timeout command to poll: %s, last_run: %d", str.c_str(), this->MAX_commands[this->last_polling_command_].last_run);
                this->state_ = STATE_IDLE;
           } else {
           }
      }
-
-
 }
 
 void Inverter::update() {
-/*     
-     for (auto &used_polling_command : this->MAX_commands) { 
-          if (used_polling_command.interval >0) {
-               ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-               this->empty_uart_buffer_();
-               this->command_start_millis_ = millis();
-               this->write_array(used_polling_command.command, used_polling_command.length+3); 
-               while (!this->available()) {
-                    if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
-                         ESP_LOGD(TAG, "timeout command to poll: %s", this->used_polling_commands_[this->last_polling_command_].command);
-                         this->state_ = STATE_IDLE;
-                    }
-               }
-          }
-     } 
-*/     
-//     ESP_LOGD(TAG, "Size: %d", (sizeof(MAX_commands)/sizeof(MAX_commands[0])));
 }
 
 void Inverter::dump_config() {
