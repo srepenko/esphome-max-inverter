@@ -51,7 +51,6 @@ void Inverter::loop() {
                     break;
           }
      }
-     /*
      if (this->state_ == STATE_COMMAND_COMPLETE) {
           ESP_LOGD(TAG, "command successful");
           //ESP_LOGI(TAG, "STATE: %d", this->state_);
@@ -127,7 +126,6 @@ void Inverter::loop() {
           }
           return;
      }
-*/
      if (this->state_ == STATE_POLL) {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
