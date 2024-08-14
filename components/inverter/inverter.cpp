@@ -154,7 +154,7 @@ void Inverter::update() {
           }
      } 
 */     
-     ESP_LOGD(TAG, "Size: %d", sizeof(MAX_commands));
+     ESP_LOGD(TAG, "Size: %d", std::size(MAX_commands));
 }
 
 void Inverter::dump_config() {
