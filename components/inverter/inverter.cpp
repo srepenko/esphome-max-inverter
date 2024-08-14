@@ -167,7 +167,7 @@ uint8_t Inverter::send_next_command_() {
 
 void Inverter::send_next_poll_() {
   uint16_t crc16;
-  ESP_LOGD(TAG, "Last pool command %d", this->last_polling_command_);
+  //ESP_LOGD(TAG, "Last pool command %d", this->last_polling_command_);
   if (this->last_polling_command_ == 0) {
      this->last_poll_ = millis();
   }
