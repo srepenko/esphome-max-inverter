@@ -11,10 +11,18 @@ namespace inverter {
 void Inverter::setup() {
      this->state_ = STATE_IDLE;
      for (auto &used_polling_command : this->MAX_commands) { 
-          if (used_polling_command.interval >0) {
+          //if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-          }
+               uint16_t crc16 = cal_crc_half_(byte_command, used_polling_command.length);
+               used_polling_command.command[lenght] = ((uint8_t)((crc16) >> 8));
+               used_polling_command.command[lenght+1] = ((uint8_t)((crc16) &0xff));
+               ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+          //}
      } 
+
+//     uint16_t crc16 = cal_crc_half_(byte_command, length-3);
+//     byte_command[lenght-3] = ((uint8_t)((crc16) >> 8));
+//     byte_command[lenght-2] = ((uint8_t)((crc16) &0xff));
 }
 
 void Inverter::empty_uart_buffer_() {
@@ -134,17 +142,18 @@ void Inverter::update() {
      uint8_t *byte_command;
      for (auto &used_polling_command : this->MAX_commands) { 
           if (used_polling_command.interval >0) {
+               uint8_t length = used_polling_command.length;
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
                byte_command = used_polling_command.command;
                int lenght = sizeof(byte_command);
-               this->write_array(byte_command, lenght); 
+               this->write_array(byte_command, length); 
           }
      } 
 
 
 //     uint8_t byte_command[] = {'Q','P','I',0,0,0x0D};
-//     int lenght = sizeof(byte_command);
-//     uint16_t crc16 = cal_crc_half_(byte_command, lenght-3);
+//     int llength = sizeof(byte_command);
+//     uint16_t crc16 = cal_crc_half_(byte_command, length-3);
 //     byte_command[lenght-3] = ((uint8_t)((crc16) >> 8));
 //     byte_command[lenght-2] = ((uint8_t)((crc16) &0xff));
 //     this->write_array(byte_command, lenght); 
