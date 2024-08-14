@@ -204,8 +204,8 @@ void Inverter::send_next_poll_() {
      if (this->last_polling_command_ == (sizeof(MAX_commands)/sizeof(MAX_commands[0]))) {
           this->last_polling_command_ = 0;
      }
-     ESP_LOGD(TAG, "Interval %d", this->MAX_commands[this->last_polling_command_].interval);
      if (this->MAX_commands[this->last_polling_command_].interval == 0){
+          this->last_polling_command_ = this->last_polling_command_ + 1;
           return;
      }
   //this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
