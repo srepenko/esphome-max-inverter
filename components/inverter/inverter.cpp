@@ -210,7 +210,7 @@ void Inverter::send_next_poll_() {
      }
      if (this->MAX_commands[this->last_polling_command_].last_run != 0 
           && millis() - this->MAX_commands[this->last_polling_command_].last_run 
-               < this->MAX_commands[this->last_polling_command_].interval) {
+               < this->MAX_commands[this->last_polling_command_].interval*1000) {
           this->last_polling_command_ = this->last_polling_command_ + 1;
           return;
      }
