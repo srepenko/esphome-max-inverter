@@ -143,6 +143,7 @@ void Inverter::update() {
      for (auto &used_polling_command : this->MAX_commands) { 
           if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
+               this->flush();
                this->write_array(used_polling_command.command, used_polling_command.length+3); 
           }
      } 
