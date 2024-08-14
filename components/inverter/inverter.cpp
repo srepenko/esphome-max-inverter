@@ -224,7 +224,7 @@ void Inverter::send_next_poll_() {
 //  this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
   // end Byte
 //  this->write(0x0D);
-     this->write_array(this->MAX_commands.command, this->MAX_commands.length+3); 
+     this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length+3); 
      ESP_LOGD(TAG, "Sending polling command : %s run interval %d",
           this->MAX_commands[this->last_polling_command_].command,
           this->MAX_commands[this->last_polling_command_].linterval);
