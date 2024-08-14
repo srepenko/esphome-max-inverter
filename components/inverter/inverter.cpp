@@ -34,8 +34,7 @@ void Inverter::empty_uart_buffer_() {
 }
 
 void Inverter::loop() {
-     /*
-       // Read message
+     // Read message
      if (this->state_ == STATE_IDLE) {
           switch (this->send_next_command_()) {
                case 0:
@@ -52,6 +51,7 @@ void Inverter::loop() {
                     break;
           }
      }
+     /*
      if (this->state_ == STATE_COMMAND_COMPLETE) {
           ESP_LOGD(TAG, "command successful");
           //ESP_LOGI(TAG, "STATE: %d", this->state_);
@@ -127,6 +127,7 @@ void Inverter::loop() {
           }
           return;
      }
+*/
      if (this->state_ == STATE_POLL) {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
@@ -135,27 +136,27 @@ void Inverter::loop() {
           } else {
           }
      }
-*/
+
+
 }
 
 void Inverter::update() {
-     
+/*     
      for (auto &used_polling_command : this->MAX_commands) { 
           if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
                this->empty_uart_buffer_();
+               this->command_start_millis_ = millis();
                this->write_array(used_polling_command.command, used_polling_command.length+3); 
+               while (!this->available()) {
+                    if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
+                         ESP_LOGD(TAG, "timeout command to poll: %s", this->used_polling_commands_[this->last_polling_command_].command);
+                         this->state_ = STATE_IDLE;
+                    }
+               }
           }
      } 
-     
-
-
-//     uint8_t byte_command[] = {'Q','P','I',0,0,0x0D};
-//     int llength = sizeof(byte_command);
-//     uint16_t crc16 = cal_crc_half_(byte_command, length-3);
-//     byte_command[lenght-3] = ((uint8_t)((crc16) >> 8));
-//     byte_command[lenght-2] = ((uint8_t)((crc16) &0xff));
-//     this->write_array(byte_command, lenght); 
+*/     
 }
 
 void Inverter::dump_config() {
