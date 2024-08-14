@@ -133,7 +133,10 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-    this->write_str("QPI\0x90\0x92\r"); 
+     this->write_str("QPI"); 
+     this->write(0x90);
+     this->write(0x92);
+     this->write(0x0D);
 }
 
 void Inverter::dump_config() {
