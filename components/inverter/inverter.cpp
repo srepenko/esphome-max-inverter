@@ -211,10 +211,10 @@ void Inverter::send_next_poll_() {
     // no command specified
 //    return;
 //  }
-  this->state_ = STATE_POLL;
-  this->command_start_millis_ = millis();
-  this->empty_uart_buffer_();
-  this->read_pos_ = 0;
+     this->state_ = STATE_POLL;
+     this->command_start_millis_ = millis();
+     this->empty_uart_buffer_();
+     this->read_pos_ = 0;
 //  crc16 = cal_crc_half_(this->used_polling_commands_[this->last_polling_command_].command,
 //                        this->used_polling_commands_[this->last_polling_command_].length);
 //  this->write_array(this->used_polling_commands_[this->last_polling_command_].command,
@@ -224,11 +224,13 @@ void Inverter::send_next_poll_() {
 //  this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
   // end Byte
 //  this->write(0x0D);
-     this->write_array(used_polling_command.command, used_polling_command.length+3); 
-
-  ESP_LOGD(TAG, "Sending polling command : %s with length %d",
-           this->used_polling_commands_[this->last_polling_command_].command,
-           this->used_polling_commands_[this->last_polling_command_].length);
+     this->write_array(this->MAX_commands.command, this->MAX_commands.length+3); 
+     ESP_LOGD(TAG, "Sending polling command : %s with length %d",
+          this->MAX_commands[this->last_polling_command_].command,
+          this->MAX_commands[this->last_polling_command_].length);
+//  ESP_LOGD(TAG, "Sending polling command : %s with length %d",
+//           this->used_polling_commands_[this->last_polling_command_].command,
+//           this->used_polling_commands_[this->last_polling_command_].length);
 }
 
 
