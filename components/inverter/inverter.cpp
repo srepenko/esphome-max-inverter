@@ -133,7 +133,7 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-     uint8_t byte_command[] = ("QPI",0xBE,0xAC,0x0D);
+     uint8_t byte_command[] = {"QPI",0xBE,0xAC,0x0D};
      this->write_array(byte_command, sizeof(byte_command)); 
 }
 
