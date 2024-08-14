@@ -182,6 +182,7 @@ void Inverter::send_next_poll_() {
           }
           this->last_poll_ = millis();
      }
+     this->last_polling_command_ = this->last_polling_command_ + 1;
      if (this->last_polling_command_ == (sizeof(MAX_commands)/sizeof(MAX_commands[0]))) {
           this->last_polling_command_ = 0;
      }
@@ -205,7 +206,6 @@ void Inverter::send_next_poll_() {
      str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
      ESP_LOGD(TAG, "Sending polling command : %s run interval %d", str.c_str(),
           this->MAX_commands[this->last_polling_command_].interval);
-     this->last_polling_command_ = this->last_polling_command_ + 1;
 }
 
 
