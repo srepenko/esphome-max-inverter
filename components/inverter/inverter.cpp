@@ -133,7 +133,7 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-    this->write("QPI\0xbe\0xac\r"); 
+    this->write((uint8_t*)"QPI\0xbe\0xac\r"); 
 }
 
 void Inverter::dump_config() {
