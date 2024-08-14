@@ -187,12 +187,12 @@ uint8_t Inverter::send_next_command_() {
 void Inverter::send_next_poll_() {
   uint16_t crc16;
   if (this->last_polling_command_ == 0) {
-     if (millis() - this->last_poll_ < this->update_interval_) { 
-          return;
-     }
      if (this->last_poll_ != 0) {
           ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_)
-     };
+          if (millis() - this->last_poll_ < this->update_interval_) { 
+               return;
+          };
+     }
      this->last_poll_ = millis();
   }
   
