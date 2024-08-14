@@ -208,6 +208,12 @@ void Inverter::send_next_poll_() {
           this->last_polling_command_ = this->last_polling_command_ + 1;
           return;
      }
+     if (this->MAX_commands[this->last_polling_command_].last_run != 0 
+          && millis() - this->MAX_commands[this->last_polling_command_].last_run 
+               < this->MAX_commands[this->last_polling_command_].interval) {
+          this->last_polling_command_ = this->last_polling_command_ + 1;
+          return;
+     }
   //this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
   //if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
   //  this->last_polling_command_ = 0;
@@ -218,6 +224,7 @@ void Inverter::send_next_poll_() {
 //  }
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
+     this->MAX_commands[this->last_polling_command_].last_run = this->command_start_millis_;
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
 //  crc16 = cal_crc_half_(this->used_polling_commands_[this->last_polling_command_].command,
