@@ -139,15 +139,15 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-     if (!this->available()) {
+     
      for (auto &used_polling_command : this->MAX_commands) { 
           if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-               this->flush();
+               this->empty_uart_buffer_();
                this->write_array(used_polling_command.command, used_polling_command.length+3); 
           }
      } 
-     }
+     
 
 
 //     uint8_t byte_command[] = {'Q','P','I',0,0,0x0D};
