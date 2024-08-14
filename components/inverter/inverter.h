@@ -23,13 +23,14 @@ enum ENUMPollingCommand {
   POLLING_QPI = 8,
 };
 struct PollingCommand {
-  uint8_t *command;
-  uint32_t interval;
-  uint32_t last_run;
-  uint8_t length;
-  uint8_t errors;
-//  uint8_t identifier;
-//  ENUMPollingCommand identifier;
+    uint8_t *command;
+    uint32_t interval;
+    uint32_t last_run;
+    uint8_t length;   
+    uint8_t errors;
+    uint8_t identifier;
+    bool status;
+//    ENUMPollingCommand identifier;
 };
 
 
@@ -99,39 +100,40 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         uint8_t last_polling_command_ = 0;
         PollingCommand used_polling_commands_[15];
         struct PollingCommand MAX_commands[33] = {
-          {(uint8_t*)"QPI00\r",     10, 0, 3, 0},                 // Device Protocol ID
-          {(uint8_t*)"QID00\r",     0, 0, 3, 0},                 // The device serial number
-          {(uint8_t*)"QSID00\r",    0, 0, 4, 0},                // The device serial number (the length is more than 14)
-          {(uint8_t*)"QVFW00\r",    0, 0, 4, 0},                // Main CPU Firmware version
-          {(uint8_t*)"QVFW300\r",   0, 0, 5, 0},               // Another CPU (remote panel) Firmware version
-          {(uint8_t*)"VERFW00\r",   0, 0, 4, 0},               // Bluetooth version
-          {(uint8_t*)"QPIRI00\r",   0, 0, 5, 0},               // Device Rating Information
-          {(uint8_t*)"QFLAG00\r",   0, 0, 5, 0},               // Device flag status
-          {(uint8_t*)"QPIGS00\r",   1, 0, 5, 0},               // Device general status parameters
-          {(uint8_t*)"QPIGS200\r",  0, 0, 6, 0},              // Device general status parameters inquiry (Only 48V model)
-          {(uint8_t*)"QPGSn00\r",   0, 0, 5, 0},               // Parallel Information inquiry (Only 48V model)
-          {(uint8_t*)"QMOD00\r",    0, 0, 4, 0},                // Device Mode
-          {(uint8_t*)"QPIWS00\r",   0, 0, 5, 0},              // Device Warning Status
-          {(uint8_t*)"QDI00\r",     0, 0, 3, 0},                // The default setting value
-          {(uint8_t*)"QMCHGCR00\r", 0, 0, 7, 0},            // Enquiry selectable value about max charging current
-          {(uint8_t*)"QMUCHGCR00\r", 0, 0, 8, 0},           // Enquiry selectable value about max utility charging current
-          {(uint8_t*)"QOPPT00\r",   0, 0, 5, 0},              // The device output source priority time order
-          {(uint8_t*)"QCHPT00\r",   0, 0, 5, 0},              // The device charger source priority time order
-          {(uint8_t*)"QT00\r",      0, 0, 2, 0},              // Time
-          {(uint8_t*)"QBEQI00\r",   0, 0, 5, 0},              // Battery equalization status parameters
-          {(uint8_t*)"QMN00\r",     0, 0, 3, 0},                // Query model name
-          {(uint8_t*)"QGMN00\r",    0, 0, 4, 0},               // Query general model name
-          {(uint8_t*)"QET00\r",     0, 0, 3, 0},                // Query total PV generated energy
-          {(uint8_t*)"QEYyyyy00\r", 0, 0, 7, 0},            // Query PV generated energy of year
-          {(uint8_t*)"QEMyyyymm00\r", 0, 0, 9, 0},          // Query PV generated energy of month
-          {(uint8_t*)"QEDyyyymmdd00\r", 0, 0, 11, 0},    // Query PV generated energy of day
-          {(uint8_t*)"QLT00\r",     0, 0, 3, 0},                // Query total output load energy
-          {(uint8_t*)"QLYyyyy00\r", 0, 0, 7, 0},            // Query output load energy of year
-          {(uint8_t*)"QLMyyyymm00\r", 0, 0, 9, 0},          // Query output load energy of month
-          {(uint8_t*)"QLDyyyymmdd00\r", 0, 0, 11, 0},    // Query output load energy of day
-          {(uint8_t*)"QBMS00\r",    0, 0, 4, 0},               // BMS message
-          {(uint8_t*)"PBMS00\r",    0, 0, 4, 0},               // BMS message
-          {(uint8_t*)"QLED00\r",    0, 0, 4, 0},               // LED status parameters
+        //                          interval last_run   length  errors  identifier  status
+          {(uint8_t*)"QPI__\r",     86400,   0,         3,      0,      0,          1},     // Device Protocol ID
+          {(uint8_t*)"QID__\r",     0,       0,         3,      0,      1,          0},     // The device serial number
+          {(uint8_t*)"QSID__\r",    0,       0,         4,      0,      2,          0},     // The device serial number (the length is more than 14)
+          {(uint8_t*)"QVFW__\r",    0,       0,         4,      0,      3,          0},     // Main CPU Firmware version
+          {(uint8_t*)"QVFW3__\r",   0,       0,         5,      0,      4,          0},     // Another CPU (remote panel) Firmware version
+          {(uint8_t*)"VERFW__\r",   0,       0,         4,      0,      5,          0},     // Bluetooth version
+          {(uint8_t*)"QPIRI__\r",   10,      0,         5,      0,      6,          1},     // Device Rating Information
+          {(uint8_t*)"QFLAG__\r",   0,       0,         5,      0,      7,          0},     // Device flag status
+          {(uint8_t*)"QPIGS__\r",   1,       0,         5,      0,      8,          1},     // Device general status parameters
+          {(uint8_t*)"QPIGS2__\r",  0,       0,         6,      0,      9,          0},     // Device general status parameters inquiry (Only 48V model)
+          {(uint8_t*)"QPGSn__\r",   0,       0,         5,      0,     10,          0},     // Parallel Information inquiry (Only 48V model)
+          {(uint8_t*)"QMOD__\r",    0,       0,         4,      0,     11,          0},     // Device Mode
+          {(uint8_t*)"QPIWS__\r",   0,       0,         5,      0,     12,          0},     // Device Warning Status
+          {(uint8_t*)"QDI__\r",     0,       0,         3,      0,     13,          0},     // The default setting value
+          {(uint8_t*)"QMCHGCR__\r", 0,       0,         7,      0,     14,          0},     // Enquiry selectable value about max charging current
+          {(uint8_t*)"QMUCHGCR__\r", 0,      0,         8,      0,     15,          0},     // Enquiry selectable value about max utility charging current
+          {(uint8_t*)"QOPPT__\r",   0,       0,         5,      0,     16,          0},     // The device output source priority time order
+          {(uint8_t*)"QCHPT__\r",   0,       0,         5,      0,     17,          0},     // The device charger source priority time order
+          {(uint8_t*)"QT__\r",      3600,    0,         2,      0,     18,          1},     // Time
+          {(uint8_t*)"QBEQI__\r",   0,       0,         5,      0,     19,          0},     // Battery equalization status parameters
+          {(uint8_t*)"QMN__\r",     0,       0,         3,      0,     20,          0},     // Query model name
+          {(uint8_t*)"QGMN__\r",    0,       0,         4,      0,     21,          0},     // Query general model name
+          {(uint8_t*)"QET__\r",     0,       0,         3,      0,     22,          0},     // Query total PV generated energy
+          {(uint8_t*)"QEYyyyy__\r", 0,       0,         7,      0,     23,          0},     // Query PV generated energy of year
+          {(uint8_t*)"QEMyyyymm__\r", 0,     0,         9,      0,     24,          0},     // Query PV generated energy of month
+          {(uint8_t*)"QEDyyyymmdd__\r", 0,   0,         11,     0,     25,          0},     // Query PV generated energy of day
+          {(uint8_t*)"QLT__\r",     0,       0,         3,      0,     26,          0},     // Query total output load energy
+          {(uint8_t*)"QLYyyyy__\r", 0,       0,         7,      0,     27,          0},     // Query output load energy of year
+          {(uint8_t*)"QLMyyyymm__\r", 0,     0,         9,      0,     28,          0},     // Query output load energy of month
+          {(uint8_t*)"QLDyyyymmdd__\r", 0,  0,          11,     0,     29,          0},     // Query output load energy of day
+          {(uint8_t*)"QBMS__\r",    0,      0,          4,      0,     30,          0},     // BMS message
+          {(uint8_t*)"PBMS__\r",    0,      0,          4,      0,     31,          0},     // BMS message
+          {(uint8_t*)"QLED__\r",    0,      0,          4,      0,     32,          0},     // LED status parameters
      };
 };
 }
