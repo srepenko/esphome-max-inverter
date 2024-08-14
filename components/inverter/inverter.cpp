@@ -204,7 +204,7 @@ void Inverter::send_next_poll_() {
      if (this->last_polling_command_ == (sizeof(MAX_commands)/sizeof(MAX_commands[0]))) {
           this->last_polling_command_ = 0;
      }
-     if (this->MAX_commands[this->last_polling_command_].interval == 0){
+     if (this->MAX_commands[this->last_polling_command_].status == 0){
           this->last_polling_command_ = this->last_polling_command_ + 1;
           return;
      }
