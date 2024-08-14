@@ -13,7 +13,7 @@ void Inverter::setup() {
      for (auto &used_polling_command : this->MAX_commands) { 
           //if (used_polling_command.interval >0) {
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
-               uint16_t crc16 = cal_crc_half_(byte_command, used_polling_command.length);
+               uint16_t crc16 = cal_crc_half_(used_polling_command.command, used_polling_command.length);
                used_polling_command.command[lenght] = ((uint8_t)((crc16) >> 8));
                used_polling_command.command[lenght+1] = ((uint8_t)((crc16) &0xff));
                ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
