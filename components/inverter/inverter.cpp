@@ -133,8 +133,12 @@ void Inverter::loop() {
 }
 
 void Inverter::update() {
-     uint8_t byte_command[] = {'Q','P','I',0xBE,0xAC,0x0D};
-     this->write_array(byte_command, sizeof(byte_command)); 
+     uint8_t byte_command[] = {'Q','P','I',0,0,0x0D};
+     int lenght = sizeof(byte_command);
+     crc16 = cal_crc_half_(byte_command, lenght-3);
+     byte_command[lenght-2] = ((uint8_t)((crc16) >> 8))
+     byte_command[lenght-1] = ((uint8_t)((crc16) &0xff))
+     this->write_array(byte_command, lenght); 
 }
 
 void Inverter::dump_config() {
