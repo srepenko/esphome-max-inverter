@@ -28,6 +28,7 @@ void Inverter::empty_uart_buffer_() {
 }
 
 void Inverter::loop() {
+     /*
        // Read message
      if (this->state_ == STATE_IDLE) {
           switch (this->send_next_command_()) {
@@ -128,11 +129,11 @@ void Inverter::loop() {
           } else {
           }
      }
-
+*/
 }
 
 void Inverter::update() {
-     
+    this->write_str("QPI\0x90\0x92\r"); 
 }
 
 void Inverter::dump_config() {
