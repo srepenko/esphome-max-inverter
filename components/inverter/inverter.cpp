@@ -156,7 +156,7 @@ void Inverter::update() {
           }
      } 
 */     
-     ESP_LOGD(TAG, "Size: %d", (sizeof(MAX_commands)/sizeof(MAX_commands[0])));
+//     ESP_LOGD(TAG, "Size: %d", (sizeof(MAX_commands)/sizeof(MAX_commands[0])));
 }
 
 void Inverter::dump_config() {
@@ -190,19 +190,16 @@ uint8_t Inverter::send_next_command_() {
 }
 
 void Inverter::send_next_poll_() {
-  uint16_t crc16;
-  if (this->last_polling_command_ == 0) {
-     if (this->last_poll_ != 0) {
-          ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
-          if (millis() - this->last_poll_ < this->update_interval_) { 
-               return;
-          };
+     uint16_t crc16;
+     if (this->last_polling_command_ == 0) {
+          if (this->last_poll_ != 0) {
+               ESP_LOGD(TAG, "Pool time %d", millis() - this->last_poll_);
+               if (millis() - this->last_poll_ < this->update_interval_) { 
+                    return;
+               };
+          }
+          this->last_poll_ = millis();
      }
-     this->last_poll_ = millis();
-  }
-  
-//this->MAX_commands
-//this->MAX_commands[this->last_polling_command_].length == 0
      if (this->last_polling_command_ == (sizeof(MAX_commands)/sizeof(MAX_commands[0]))) {
           this->last_polling_command_ = 0;
      }
@@ -216,36 +213,16 @@ void Inverter::send_next_poll_() {
           this->last_polling_command_ = this->last_polling_command_ + 1;
           return;
      }
-  //this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
-  //if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
-  //  this->last_polling_command_ = 0;
- // }
-  //if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
-    // no command specified
-//    return;
-//  }
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = this->command_start_millis_;
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
-//  crc16 = cal_crc_half_(this->used_polling_commands_[this->last_polling_command_].command,
-//                        this->used_polling_commands_[this->last_polling_command_].length);
-//  this->write_array(this->used_polling_commands_[this->last_polling_command_].command,
-//                    this->used_polling_commands_[this->last_polling_command_].length);
-  // checksum
-//  this->write(((uint8_t)((crc16) >> 8)));   // highbyte
-//  this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
-  // end Byte
-//  this->write(0x0D);
      this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length+3); 
      std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
      str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
      ESP_LOGD(TAG, "Sending polling command : %s run interval %d", str.c_str(),
           this->MAX_commands[this->last_polling_command_].interval);
-//  ESP_LOGD(TAG, "Sending polling command : %s with length %d",
-//           this->used_polling_commands_[this->last_polling_command_].command,
-//           this->used_polling_commands_[this->last_polling_command_].length);
      this->last_polling_command_ = this->last_polling_command_ + 1;
 }
 
