@@ -173,6 +173,7 @@ void Inverter::send_next_poll_() {
   this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
   if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
     this->last_polling_command_ = 0;
+    return;
   }
   if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
     // no command specified
