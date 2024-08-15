@@ -40,7 +40,7 @@ struct PollingCommand {
     INVERTER_VALUED_ENTITY_(sensor::Sensor, name, polling_command, value_type)
 #define INVERTER_BINARY_SENSOR(name, polling_command, value_type) \
     INVERTER_VALUED_ENTITY_(binary_sensor::BinarySensor, name, polling_command, value_type)
-    
+
 class Inverter : public uart::UARTDevice, public PollingComponent {
     // QPIGS values
     INVERTER_SENSOR(grid_voltage, QPIGS, float)
@@ -103,6 +103,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SENSOR(battery_redischarge_voltage, QPIRI, float)
     INVERTER_SENSOR(pv_ok_condition_for_parallel, QPIRI, int)
     INVERTER_SENSOR(pv_power_balance, QPIRI, int)
+
+    //QET
+    INVERTER_SENSOR(total_pv_generated_energy, QET, float)
 /*
     // QMOD values
     INVERTER_VALUED_TEXT_SENSOR(device_mode, QMOD, char)
