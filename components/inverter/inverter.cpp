@@ -1,4 +1,4 @@
-#include "esphome/components/inverter/inverter.h"
+#include "../inverter.h"
 #include "esphome/core/log.h"
 #include <string>
 using namespace std;
