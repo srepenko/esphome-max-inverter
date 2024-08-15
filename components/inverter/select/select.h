@@ -1,8 +1,6 @@
 #pragma once
-
 #include <utility>
 #include <map>
-
 #include "esphome/components/inverter/inverter.h"
 #include "esphome/components/select/select.h"
 #include "esphome/core/component.h"
