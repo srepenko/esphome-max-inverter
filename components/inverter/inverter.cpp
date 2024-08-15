@@ -176,7 +176,7 @@ void Inverter::send_next_poll_() {
      if (this->last_polling_command_ == 0) {
           if (this->last_poll_ != 0) {
                if (millis() - this->last_poll_ < this->update_interval_) { 
-                    return;
+                    //return;
                };
           }
           this->last_poll_ = millis();
