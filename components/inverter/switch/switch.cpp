@@ -1,4 +1,4 @@
-#include "switch.h"
+#include "esphome/components/switch/"
 #include "esphome/core/log.h"
 #include "esphome/core/application.h"
 
