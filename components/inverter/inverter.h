@@ -29,7 +29,7 @@ struct PollingCommand {
     uint8_t length;   
     uint8_t errors;
     uint8_t identifier;
-    bool status;
+    bool state;
 //    ENUMPollingCommand identifier;
 };
 
@@ -42,7 +42,7 @@ struct PollingCommand {
     public: \
         void set_##name(type *name) { /* NOLINT */ \
             this->name##_ = name; \
-            this->add_polling_command_(#polling_command, POLLING_##polling_command); \
+            this->add_polling_command_(#polling_command); \
         }
 
 #define INVERTER_VALUED_ENTITY_(type, name, polling_command, value_type) \
