@@ -54,6 +54,10 @@ void Inverter::loop() {
           ESP_LOGI(TAG, "Read %d byte: %s", this->read_pos_, this->read_buffer_);
           this->state_ = STATE_IDLE;
      }
+     if (this->state_ == STATE_POLL_DECODED) {
+          std::string mode;
+          this->state_ = STATE_IDLE;
+     }
      if (this->state_ == STATE_POLL_COMPLETE) {
           //ESP_LOGI(TAG, "Recive %d byte: %s", this->read_pos_, this->read_buffer_);
           if (this->check_incoming_crc_()) {
