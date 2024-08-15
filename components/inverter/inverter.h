@@ -11,6 +11,7 @@
 
 namespace esphome {
 namespace inverter {
+class InverterSelect;
 struct PollingCommand {
     uint8_t *command;
     uint32_t interval;
