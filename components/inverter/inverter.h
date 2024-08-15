@@ -38,7 +38,9 @@ struct PollingCommand {
 
 #define INVERTER_SENSOR(name, polling_command, value_type) \
     INVERTER_VALUED_ENTITY_(sensor::Sensor, name, polling_command, value_type)
-
+#define INVERTER_BINARY_SENSOR(name, polling_command, value_type) \
+    INVERTER_VALUED_ENTITY_(binary_sensor::BinarySensor, name, polling_command, value_type)
+    
 class Inverter : public uart::UARTDevice, public PollingComponent {
     // QPIGS values
     INVERTER_SENSOR(grid_voltage, QPIGS, float)
