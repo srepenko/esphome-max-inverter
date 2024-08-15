@@ -24,12 +24,12 @@ TYPES = {
 
 InverterSwitch = inverter_ns.class_("InverterSwitch", switch.Switch, cg.Component)
 
-INVERVER_SWITCH_SCHEMA = switch.switch_schema(
+SWITCH_SCHEMA = switch.switch_schema(
     InverterSwitch, icon=ICON_POWER, block_inverted=True
 ).extend(cv.COMPONENT_SCHEMA)
 
 CONFIG_SCHEMA = INVERTER_COMPONENT_SCHEMA.extend(
-    {cv.Optional(type): INVERTER_SCHEMA for type in TYPES}
+    {cv.Optional(type): SWITCH_SCHEMA for type in TYPES}
 )
 
 
