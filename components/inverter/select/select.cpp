@@ -1,4 +1,4 @@
-#include "inverter_select.h"
+#include "select.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
