@@ -57,6 +57,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SENSOR(pv_input_voltage, QPIGS, float)
     INVERTER_SENSOR(battery_voltage_scc, QPIGS, float)
     INVERTER_SENSOR(battery_discharge_current, QPIGS, int)
+/*
     INVERTER_BINARY_SENSOR(add_sbu_priority_version, QPIGS, int)
     INVERTER_BINARY_SENSOR(configuration_status, QPIGS, int)
     INVERTER_BINARY_SENSOR(scc_firmware_version, QPIGS, int)
@@ -65,13 +66,15 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_BINARY_SENSOR(charging_status, QPIGS, int)
     INVERTER_BINARY_SENSOR(scc_charging_status, QPIGS, int)
     INVERTER_BINARY_SENSOR(ac_charging_status, QPIGS, int)
+*/
     INVERTER_SENSOR(battery_voltage_offset_for_fans_on, QPIGS, int)  //.1 scale
     INVERTER_SENSOR(eeprom_version, QPIGS, int)
     INVERTER_SENSOR(pv_charging_power, QPIGS, int)
+/*
     INVERTER_BINARY_SENSOR(charging_to_floating_mode, QPIGS, int)
     INVERTER_BINARY_SENSOR(switch_on, QPIGS, int)
     INVERTER_BINARY_SENSOR(dustproof_installed, QPIGS, int)
-
+*/
     // QPIRI values
     INVERTER_SENSOR(grid_rating_voltage, QPIRI, float)
     INVERTER_SENSOR(grid_rating_current, QPIRI, float)
@@ -98,7 +101,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SENSOR(battery_redischarge_voltage, QPIRI, float)
     INVERTER_SENSOR(pv_ok_condition_for_parallel, QPIRI, int)
     INVERTER_SENSOR(pv_power_balance, QPIRI, int)
-
+/*
     // QMOD values
     INVERTER_VALUED_TEXT_SENSOR(device_mode, QMOD, char)
 
@@ -181,6 +184,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
 
     INVERTER_SELECT(output_source_priority_select, QPIRI)
     INVERTER_VALUED_SELECT(charging_discharging_control_select, QBATCD, std::string)
+*/
 
     void setup() override;
     void loop() override;
