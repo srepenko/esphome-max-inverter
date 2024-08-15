@@ -208,7 +208,7 @@ void Inverter::send_next_poll_() {
 void Inverter::add_polling_command_(const char *command) {
      std::string cmd(command);
      for (auto &used_polling_command : this->MAX_commands) { 
-          std::string str(used_polling_command.command);
+          std::string str((const char *)used_polling_command.command);
           str = str.substr(0, used_polling_command.length); 
           if (str == cmd) {
                used_polling_command.state = 1;
