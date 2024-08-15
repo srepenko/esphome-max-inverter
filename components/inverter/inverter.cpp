@@ -129,9 +129,11 @@ void Inverter::loop() {
                          &value_machine_type_, &value_topology_, &value_output_mode_,                                 // NOLINT
                          &value_battery_redischarge_voltage_, &value_pv_ok_condition_for_parallel_,                   // NOLINT
                          &value_pv_power_balance_);                                                                   // NOLINT
+               /*
                if (this->last_qpiri_) {
                     this->last_qpiri_->publish_state(tmp);
                }
+               */
                if (this->grid_rating_voltage_) {
                     this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_);
                }
