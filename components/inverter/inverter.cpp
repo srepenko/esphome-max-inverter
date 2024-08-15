@@ -201,7 +201,7 @@ void Inverter::loop() {
                }
                if (this->output_source_priority_solar_switch_) {
                     this->output_source_priority_solar_switch_->publish_state(value_output_source_priority_ == 1);
-               }*/
+               }
                if (this->output_source_priority_battery_switch_) {
                     this->output_source_priority_battery_switch_->publish_state(value_output_source_priority_ == 2);
                }
@@ -213,7 +213,7 @@ void Inverter::loop() {
                }
                if (this->machine_type_) {
                     this->machine_type_->publish_state(value_machine_type_);
-               }
+               }*/
                if (this->topology_) {
                     this->topology_->publish_state(value_topology_);
                }
