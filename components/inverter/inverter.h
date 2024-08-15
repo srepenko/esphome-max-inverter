@@ -112,6 +112,15 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SENSOR(month_pv_generated_energy, QEMyyyymm__, float)
     //QED
     INVERTER_SENSOR(day_pv_generated_energy, QEDyyyymmdd__, float)
+    //QLT
+    INVERTER_SENSOR(total_output_load_energy, QLT, float)
+    //QLY
+    INVERTER_SENSOR(year_output_load_energy, QLYyyyy__, float)
+    //QLM
+    INVERTER_SENSOR(month_output_load_energy, QLMyyyymm__, float)
+    //QLD
+    INVERTER_SENSOR(day_output_load_energy, QLDyyyymmdd__, float)
+/*
 /*
     // QMOD values
     INVERTER_VALUED_TEXT_SENSOR(device_mode, QMOD, char)
