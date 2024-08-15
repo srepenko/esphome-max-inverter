@@ -12,7 +12,7 @@
 namespace esphome {
 namespace inverter {
 
-class InverterSelect;
+
 
 struct PollingCommand {
     uint8_t *command;
@@ -23,6 +23,7 @@ struct PollingCommand {
     bool state;
 };
 
+class InverterSelect;
 
 #define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
