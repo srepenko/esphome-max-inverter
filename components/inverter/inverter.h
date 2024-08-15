@@ -38,6 +38,7 @@ struct PollingCommand {
 
 #define INVERTER_SENSOR(name, polling_command, value_type) \
     INVERTER_VALUED_ENTITY_(sensor::Sensor, name, polling_command, value_type)
+#define INVERTER_SWITCH(name, polling_command) INVERTER_ENTITY_(switch_::Switch, name, polling_command)
 #define INVERTER_BINARY_SENSOR(name, polling_command, value_type) \
     INVERTER_VALUED_ENTITY_(binary_sensor::BinarySensor, name, polling_command, value_type)
 
