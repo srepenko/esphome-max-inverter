@@ -12,8 +12,6 @@
 namespace esphome {
 namespace inverter {
 
-
-
 struct PollingCommand {
     uint8_t *command;
     uint32_t interval;
@@ -45,7 +43,7 @@ class InverterSelect;
 #define INVERTER_SWITCH(name, polling_command) INVERTER_ENTITY_(switch_::Switch, name, polling_command)
 #define INVERTER_SELECT(name, polling_command) INVERTER_ENTITY_(inverter::InverterSelect, name, polling_command)
 #define INVERTER_VALUED_SELECT(name, polling_command, value_type) \
-  INVERTER_VALUED_ENTITY_(pipsolar::InverterSelect, name, polling_command, value_type)
+  INVERTER_VALUED_ENTITY_(inverter::InverterSelect, name, polling_command, value_type)
 #define INVERTER_BINARY_SENSOR(name, polling_command, value_type) \
     INVERTER_VALUED_ENTITY_(binary_sensor::BinarySensor, name, polling_command, value_type)
 
