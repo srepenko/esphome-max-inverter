@@ -177,7 +177,7 @@ void Inverter::send_next_poll_() {
      if (this->last_polling_command_ == (sizeof(MAX_commands)/sizeof(MAX_commands[0]))) {
           this->last_polling_command_ = 0;
      }
-     if (this->MAX_commands[this->last_polling_command_].status == 0){
+     if (this->MAX_commands[this->last_polling_command_].state == 0){
           return;
      }    
      if (this->MAX_commands[this->last_polling_command_].last_run != 0 
@@ -205,30 +205,19 @@ void Inverter::send_next_poll_() {
           this->MAX_commands[this->last_polling_command_].interval);
 }
 
-
-void Inverter::add_polling_command_(const char *command, ENUMPollingCommand polling_command) {
-     for (auto &used_polling_command : this->used_polling_commands_) {
-          if (used_polling_command.length == strlen(command)) {
-               uint8_t len = strlen(command);
-               if (memcmp(used_polling_command.command, command, len) == 0) {
-                    return;
-               }
-          }
-          if (used_polling_command.length == 0) {
-               size_t length = strlen(command) + 1;
-               const char *beg = command;
-               const char *end = command + length;
-               used_polling_command.command = new uint8_t[length];  // NOLINT(cppcoreguidelines-owning-memory)
-               size_t i = 0;
-               for (; beg != end; ++beg, ++i) {
-                    used_polling_command.command[i] = (uint8_t)(*beg);
-               }
-               used_polling_command.errors = 0;
-               //used_polling_command.identifier = polling_command;
-               used_polling_command.length = length - 1;
+void Inverter::add_polling_command_(const char *command) {
+     std::string cmd(command);
+     std::string str;
+     for (auto &used_polling_command : this->MAX_commands) { 
+          str = used_polling_command.command;
+          str = str.substr(0, used_polling_command.length); 
+          if (str == cmd) {
+               used_polling_command.state = 1;
                return;
           }
      }
+
+
 }
 
 uint8_t Inverter::check_incoming_length_(uint8_t length) {
