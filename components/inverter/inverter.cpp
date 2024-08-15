@@ -193,6 +193,9 @@ void Inverter::loop() {
                     &value_switch_on_,                                                                //          29     // NOLINT
                     &value_dustproof_installed_                                                       //          30     // NOLINT
                );
+               if (this->last_qpigs_) {
+                    this->last_qpigs_->publish_state(tmp);
+               }
                this->state_ = STATE_POLL_DECODED;
           } else if (cmd == "QPI") {
                ESP_LOGD(TAG, "Decode QPI");
