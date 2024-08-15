@@ -20,5 +20,5 @@ void InverterSwitch::write_state(bool state) {
   }
 }
 
-}  // namespace pipsolar
-}  // namespace esphome
+}
+}
