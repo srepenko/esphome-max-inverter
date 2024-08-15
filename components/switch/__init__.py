@@ -2,7 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import switch
 from esphome.const import ICON_POWER
-from .. import INVERTER_COMPONENT_SCHEMA, inverter_ns
+from .. import CONF_INVERTER_ID, INVERTER_COMPONENT_SCHEMA, inverter_ns
 
 
 DEPENDENCIES = ["uart"]
