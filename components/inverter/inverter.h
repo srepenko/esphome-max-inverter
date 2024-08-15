@@ -199,7 +199,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SWITCH(output_source_priority_utility_switch, QPIRI)
     INVERTER_SWITCH(output_source_priority_solar_switch, QPIRI)
     INVERTER_SWITCH(output_source_priority_battery_switch, QPIRI)
+*/
     INVERTER_SWITCH(input_voltage_range_switch, QPIRI)
+/*
     INVERTER_SWITCH(pv_ok_condition_for_parallel_switch, QPIRI)
     INVERTER_SWITCH(pv_power_balance_switch, QPIRI)
 
