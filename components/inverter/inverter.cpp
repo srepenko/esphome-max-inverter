@@ -110,10 +110,9 @@ void Inverter::loop() {
           std::string fc;
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);          
-          std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
-          str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
-          const char *cmd = str.c_str();
-          ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
+          std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
+          str = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
+          //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
