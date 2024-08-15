@@ -108,7 +108,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
           {(uint8_t*)"QVFW3__\r",   0,       0,         5,      0,      4,          0},     // Another CPU (remote panel) Firmware version
           {(uint8_t*)"VERFW__\r",   0,       0,         4,      0,      5,          0},     // Bluetooth version
           {(uint8_t*)"QPIRI__\r",   10,      0,         5,      0,      6,          1},     // Device Rating Information
-          {(uint8_t*)"QFLAG__\r",   0,       0,         5,      0,      7,          0},     // Device flag status
+          {(uint8_t*)"QFLAG__\r",   5,       0,         5,      0,      7,          1},     // Device flag status
           {(uint8_t*)"QPIGS__\r",   1,       0,         5,      0,      8,          1},     // Device general status parameters
           {(uint8_t*)"QPIGS2__\r",  0,       0,         6,      0,      9,          0},     // Device general status parameters inquiry (Only 48V model)
           {(uint8_t*)"QPGSn__\r",   0,       0,         5,      0,     10,          0},     // Parallel Information inquiry (Only 48V model)
@@ -119,7 +119,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
           {(uint8_t*)"QMUCHGCR__\r", 0,      0,         8,      0,     15,          0},     // Enquiry selectable value about max utility charging current
           {(uint8_t*)"QOPPT__\r",   0,       0,         5,      0,     16,          0},     // The device output source priority time order
           {(uint8_t*)"QCHPT__\r",   0,       0,         5,      0,     17,          0},     // The device charger source priority time order
-          {(uint8_t*)"QT__\r",      3600,    0,         2,      0,     18,          1},     // Time
+          {(uint8_t*)"QT__\r",      3600,    0,         2,      0,     18,          0},     // Time
           {(uint8_t*)"QBEQI__\r",   0,       0,         5,      0,     19,          0},     // Battery equalization status parameters
           {(uint8_t*)"QMN__\r",     0,       0,         3,      0,     20,          0},     // Query model name
           {(uint8_t*)"QGMN__\r",    0,       0,         4,      0,     21,          0},     // Query general model name
