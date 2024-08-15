@@ -111,17 +111,17 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
           {(uint8_t*)"QBEQI__\r",   0,       0,         5,      0,     19,          0},     // Battery equalization status parameters
           {(uint8_t*)"QMN__\r",     0,       0,         3,      0,     20,          0},     // Query model name
           {(uint8_t*)"QGMN__\r",    0,       0,         4,      0,     21,          0},     // Query general model name
-          {(uint8_t*)"QET__\r",     0,       0,         3,      0,     22,          0},     // Query total PV generated energy
-          {(uint8_t*)"QEYyyyy__\r", 0,       0,         7,      0,     23,          0},     // Query PV generated energy of year
-          {(uint8_t*)"QEMyyyymm__\r", 0,     0,         9,      0,     24,          0},     // Query PV generated energy of month
-          {(uint8_t*)"QEDyyyymmdd__\r", 0,   0,         11,     0,     25,          0},     // Query PV generated energy of day
-          {(uint8_t*)"QLT__\r",     0,       0,         3,      0,     26,          0},     // Query total output load energy
-          {(uint8_t*)"QLYyyyy__\r", 0,       0,         7,      0,     27,          0},     // Query output load energy of year
-          {(uint8_t*)"QLMyyyymm__\r", 0,     0,         9,      0,     28,          0},     // Query output load energy of month
-          {(uint8_t*)"QLDyyyymmdd__\r", 0,  0,          11,     0,     29,          0},     // Query output load energy of day
-          {(uint8_t*)"QBMS__\r",    0,      0,          4,      0,     30,          0},     // BMS message
-          {(uint8_t*)"PBMS__\r",    0,      0,          4,      0,     31,          0},     // BMS message
-          {(uint8_t*)"QLED__\r",    0,      0,          4,      0,     32,          0},     // LED status parameters
+          {(uint8_t*)"QET__\r",     3600,    0,         3,      0,     22,          0},     // Query total PV generated energy
+          {(uint8_t*)"QEYyyyy__\r", 3600,    0,         7,      0,     23,          0},     // Query PV generated energy of year
+          {(uint8_t*)"QEMyyyymm__\r", 3600,  0,         9,      0,     24,          0},     // Query PV generated energy of month
+          {(uint8_t*)"QEDyyyymmdd__\r", 3600,0,         11,     0,     25,          0},     // Query PV generated energy of day
+          {(uint8_t*)"QLT__\r",     3600,    0,         3,      0,     26,          0},     // Query total output load energy
+          {(uint8_t*)"QLYyyyy__\r", 3600,    0,         7,      0,     27,          0},     // Query output load energy of year
+          {(uint8_t*)"QLMyyyymm__\r", 3600,  0,         9,      0,     28,          0},     // Query output load energy of month
+          {(uint8_t*)"QLDyyyymmdd__\r",3600, 0,         11,     0,     29,          0},     // Query output load energy of day
+          {(uint8_t*)"QBMS__\r",    0,       0,         4,      0,     30,          0},     // BMS message
+          {(uint8_t*)"PBMS__\r",    0,       0,         4,      0,     31,          0},     // BMS message
+          {(uint8_t*)"QLED__\r",    0,       0,         4,      0,     32,          0},     // LED status parameters
      };
 };
 }
