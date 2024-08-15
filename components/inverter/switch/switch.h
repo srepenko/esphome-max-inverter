@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../inverter.h"
+#include "esphome/components/inverter/inverter.h"
 #include "esphome/components/switch/switch.h"
 #include "esphome/core/component.h"
 
