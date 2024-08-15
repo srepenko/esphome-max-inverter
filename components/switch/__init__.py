@@ -4,6 +4,7 @@ from esphome.components import switch
 from esphome.const import ICON_POWER
 from .. import CONF_INVERTER_ID, INVERTER_COMPONENT_SCHEMA, inverter_ns
 
+
 DEPENDENCIES = ["uart"]
 
 CONF_OUTPUT_SOURCE_PRIORITY_UTILITY = "output_source_priority_utility"
