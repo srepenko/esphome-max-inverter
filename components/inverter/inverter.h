@@ -219,6 +219,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     void dump_config() override;
 
     protected:
+        friend class InverterSelect;
         static const size_t READ_BUFFER_LENGTH = 200;  // maximum supported answer length
         static const size_t COMMAND_QUEUE_LENGTH = 10;
         static const size_t COMMAND_TIMEOUT = 2000;
