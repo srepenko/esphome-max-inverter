@@ -1,4 +1,4 @@
-#include "switch.h"
+#include "inverter_switch.h"
 #include "esphome/core/log.h"
 #include "esphome/core/application.h"
 
