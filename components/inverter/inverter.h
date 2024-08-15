@@ -101,15 +101,15 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         PollingCommand used_polling_commands_[15];
         struct PollingCommand MAX_commands[33] = {
         //                          interval last_run   length  errors  identifier  status
-          {(uint8_t*)"QPI__\r",     86400,   0,         3,      0,      0,          1},     // Device Protocol ID
+          {(uint8_t*)"QPI__\r",     86400,   0,         3,      0,      0,          0},     // Device Protocol ID
           {(uint8_t*)"QID__\r",     0,       0,         3,      0,      1,          0},     // The device serial number
           {(uint8_t*)"QSID__\r",    0,       0,         4,      0,      2,          0},     // The device serial number (the length is more than 14)
           {(uint8_t*)"QVFW__\r",    0,       0,         4,      0,      3,          0},     // Main CPU Firmware version
           {(uint8_t*)"QVFW3__\r",   0,       0,         5,      0,      4,          0},     // Another CPU (remote panel) Firmware version
           {(uint8_t*)"VERFW__\r",   0,       0,         4,      0,      5,          0},     // Bluetooth version
-          {(uint8_t*)"QPIRI__\r",   10,      0,         5,      0,      6,          1},     // Device Rating Information
-          {(uint8_t*)"QFLAG__\r",   5,       0,         5,      0,      7,          1},     // Device flag status
-          {(uint8_t*)"QPIGS__\r",   1,       0,         5,      0,      8,          1},     // Device general status parameters
+          {(uint8_t*)"QPIRI__\r",   10,      0,         5,      0,      6,          0},     // Device Rating Information
+          {(uint8_t*)"QFLAG__\r",   5,       0,         5,      0,      7,          0},     // Device flag status
+          {(uint8_t*)"QPIGS__\r",   1,       0,         5,      0,      8,          0},     // Device general status parameters
           {(uint8_t*)"QPIGS2__\r",  0,       0,         6,      0,      9,          0},     // Device general status parameters inquiry (Only 48V model)
           {(uint8_t*)"QPGSn__\r",   0,       0,         5,      0,     10,          0},     // Parallel Information inquiry (Only 48V model)
           {(uint8_t*)"QMOD__\r",    0,       0,         4,      0,     11,          0},     // Device Mode
