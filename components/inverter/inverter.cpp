@@ -289,7 +289,12 @@ void Inverter::loop() {
 
           } else if (cmd == "QPI") {
                ESP_LOGD(TAG, "Decode QPI");
-
+          } else if (cmd == "QET") {
+               ESP_LOGD(TAG, "Decode QPI");
+               sscanf(tmp, "(%f", &value_total_pv_generated_energy_)
+               if (this->total_pv_generated_energy_) {
+                    this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);
+               }
           } else if (cmd == "QT") {
                ESP_LOGD(TAG, "Decode QPI");
 
