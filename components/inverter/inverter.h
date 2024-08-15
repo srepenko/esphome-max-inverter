@@ -84,7 +84,6 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         };
 
         uint8_t last_polling_command_ = 0;
-        PollingCommand used_polling_commands_[15];
         struct PollingCommand MAX_commands[33] = {
         //                              interval last_run   length  errors  status
           {(uint8_t*)"QPI__\r",         86400,   0,         3,      0,      0},     // Device Protocol ID
