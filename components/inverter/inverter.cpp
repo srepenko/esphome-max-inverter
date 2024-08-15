@@ -193,9 +193,11 @@ void Inverter::loop() {
                     &value_switch_on_,                                                                //          29     // NOLINT
                     &value_dustproof_installed_                                                       //          30     // NOLINT
                );
+               /*
                if (this->last_qpigs_) {
                     this->last_qpigs_->publish_state(tmp);
                }
+               */
                if (this->warnings_present_) {
                     this->warnings_present_->publish_state(value_warnings_present_);
                }
