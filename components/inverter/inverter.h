@@ -21,7 +21,6 @@ struct PollingCommand {
 };
 
 
-
 #define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
         type *name##_{}; /* NOLINT */ \
