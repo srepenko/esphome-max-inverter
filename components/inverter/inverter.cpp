@@ -201,8 +201,7 @@ void Inverter::send_next_poll_() {
      this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length+3); 
      std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
      str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
-     ESP_LOGD(TAG, "Sending polling command : %s run interval %d", str.c_str(),
-          this->MAX_commands[this->last_polling_command_].interval);
+     ESP_LOGD(TAG, "Sending polling command : %s", str.c_str());
 }
 
 void Inverter::add_polling_command_(const char *command) {
