@@ -194,14 +194,14 @@ void Inverter::loop() {
                if (this->output_source_priority_select_) {
                     std::string value = esphome::to_string(value_output_source_priority_);
                     this->output_source_priority_select_->map_and_publish(value);
-               } */
+               } 
                // special for output source priority switches
                if (this->output_source_priority_utility_switch_) {
                     this->output_source_priority_utility_switch_->publish_state(value_output_source_priority_ == 0);
                }
                if (this->output_source_priority_solar_switch_) {
                     this->output_source_priority_solar_switch_->publish_state(value_output_source_priority_ == 1);
-               }
+               }*/
                if (this->output_source_priority_battery_switch_) {
                     this->output_source_priority_battery_switch_->publish_state(value_output_source_priority_ == 2);
                }
