@@ -18,7 +18,7 @@ class InverterSwitch : public switch_::Switch, public Component {
   void write_state(bool state) override;
   std::string on_command_;
   std::string off_command_;
-  Pipsolar *parent_;
+  Inverter *parent_;
 };
 
 }  // namespace pipsolar
