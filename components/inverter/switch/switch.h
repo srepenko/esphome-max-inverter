@@ -21,5 +21,5 @@ class InverterSwitch : public switch_::Switch, public Component {
   Inverter *parent_;
 };
 
-}  // namespace pipsolar
-}  // namespace esphome
+}
+}
