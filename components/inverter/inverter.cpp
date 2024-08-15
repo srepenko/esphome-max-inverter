@@ -176,10 +176,14 @@ void Inverter::send_next_poll_() {
      if (this->last_polling_command_ == 0) {
           if (this->last_poll_ != 0) {
                if (millis() - this->last_poll_ < this->update_interval_) { 
-                    //return;
+                    return;
+               } else {
+                    this->last_poll_ = millis();     
                };
+          } else {
+               this->last_poll_ = millis();
           }
-          this->last_poll_ = millis();
+          
      }
      this->last_polling_command_ = this->last_polling_command_ + 1;
      if (this->last_polling_command_ == (sizeof(MAX_commands)/sizeof(MAX_commands[0]))) {
