@@ -1,3 +1,4 @@
+#pragma once
 #include "esphome/components/binary_sensor/binary_sensor.h"
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/switch/switch.h"
@@ -12,6 +13,7 @@
 namespace esphome {
 namespace inverter {
 
+class InverterSelect;
 struct PollingCommand {
     uint8_t *command;
     uint32_t interval;
@@ -21,7 +23,7 @@ struct PollingCommand {
     bool state;
 };
 
-class InverterSelect;
+
 
 #define INVERTER_ENTITY_(type, name, polling_command) \
     protected: \
