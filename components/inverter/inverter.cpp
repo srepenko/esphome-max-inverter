@@ -196,16 +196,124 @@ void Inverter::loop() {
                if (this->last_qpigs_) {
                     this->last_qpigs_->publish_state(tmp);
                }
-               this->state_ = STATE_POLL_DECODED;
+               if (this->warnings_present_) {
+                    this->warnings_present_->publish_state(value_warnings_present_);
+               }
+               if (this->faults_present_) {
+                    this->faults_present_->publish_state(value_faults_present_);
+               }
+               if (this->warning_power_loss_) {
+                    this->warning_power_loss_->publish_state(value_warning_power_loss_);
+               }
+               if (this->fault_inverter_fault_) {
+                    this->fault_inverter_fault_->publish_state(value_fault_inverter_fault_);
+               }
+               if (this->fault_bus_over_) {
+                    this->fault_bus_over_->publish_state(value_fault_bus_over_);
+               }
+               if (this->fault_bus_under_) {
+                    this->fault_bus_under_->publish_state(value_fault_bus_under_);
+               }
+               if (this->fault_bus_soft_fail_) {
+                    this->fault_bus_soft_fail_->publish_state(value_fault_bus_soft_fail_);
+               }
+               if (this->warning_line_fail_) {
+                    this->warning_line_fail_->publish_state(value_warning_line_fail_);
+               }
+               if (this->fault_opvshort_) {
+                    this->fault_opvshort_->publish_state(value_fault_opvshort_);
+               }
+               if (this->fault_inverter_voltage_too_low_) {
+                    this->fault_inverter_voltage_too_low_->publish_state(value_fault_inverter_voltage_too_low_);
+               }
+               if (this->fault_inverter_voltage_too_high_) {
+                    this->fault_inverter_voltage_too_high_->publish_state(value_fault_inverter_voltage_too_high_);
+               }
+               if (this->warning_over_temperature_) {
+                    this->warning_over_temperature_->publish_state(value_warning_over_temperature_);
+               }
+               if (this->warning_fan_lock_) {
+                    this->warning_fan_lock_->publish_state(value_warning_fan_lock_);
+               }
+               if (this->warning_battery_voltage_high_) {
+                    this->warning_battery_voltage_high_->publish_state(value_warning_battery_voltage_high_);
+               }
+               if (this->warning_battery_low_alarm_) {
+                    this->warning_battery_low_alarm_->publish_state(value_warning_battery_low_alarm_);
+               }
+               if (this->warning_battery_under_shutdown_) {
+                    this->warning_battery_under_shutdown_->publish_state(value_warning_battery_under_shutdown_);
+               }
+               if (this->warning_battery_derating_) {
+                    this->warning_battery_derating_->publish_state(value_warning_battery_derating_);
+               }
+               if (this->warning_over_load_) {
+                    this->warning_over_load_->publish_state(value_warning_over_load_);
+               }
+               if (this->warning_eeprom_failed_) {
+                    this->warning_eeprom_failed_->publish_state(value_warning_eeprom_failed_);
+               }
+               if (this->fault_inverter_over_current_) {
+                    this->fault_inverter_over_current_->publish_state(value_fault_inverter_over_current_);
+               }
+               if (this->fault_inverter_soft_failed_) {
+                    this->fault_inverter_soft_failed_->publish_state(value_fault_inverter_soft_failed_);
+               }
+               if (this->fault_self_test_failed_) {
+                    this->fault_self_test_failed_->publish_state(value_fault_self_test_failed_);
+               }
+               if (this->fault_op_dc_voltage_over_) {
+                    this->fault_op_dc_voltage_over_->publish_state(value_fault_op_dc_voltage_over_);
+               }
+               if (this->fault_battery_open_) {
+                    this->fault_battery_open_->publish_state(value_fault_battery_open_);
+               }
+               if (this->fault_current_sensor_failed_) {
+                    this->fault_current_sensor_failed_->publish_state(value_fault_current_sensor_failed_);
+               }
+               if (this->fault_battery_short_) {
+                    this->fault_battery_short_->publish_state(value_fault_battery_short_);
+               }
+               if (this->warning_power_limit_) {
+                    this->warning_power_limit_->publish_state(value_warning_power_limit_);
+               }
+               if (this->warning_pv_voltage_high_) {
+                    this->warning_pv_voltage_high_->publish_state(value_warning_pv_voltage_high_);
+               }
+               if (this->fault_mppt_overload_) {
+                    this->fault_mppt_overload_->publish_state(value_fault_mppt_overload_);
+               }
+               if (this->warning_mppt_overload_) {
+                    this->warning_mppt_overload_->publish_state(value_warning_mppt_overload_);
+               }
+               if (this->warning_battery_too_low_to_charge_) {
+                    this->warning_battery_too_low_to_charge_->publish_state(value_warning_battery_too_low_to_charge_);
+               }
+               if (this->fault_dc_dc_over_current_) {
+                    this->fault_dc_dc_over_current_->publish_state(value_fault_dc_dc_over_current_);
+               }
+               if (this->fault_code_) {
+                    this->fault_code_->publish_state(value_fault_code_);
+               }
+               if (this->warnung_low_pv_energy_) {
+                    this->warnung_low_pv_energy_->publish_state(value_warnung_low_pv_energy_);
+               }
+               if (this->warning_high_ac_input_during_bus_soft_start_) {
+                    this->warning_high_ac_input_during_bus_soft_start_->publish_state(
+                    value_warning_high_ac_input_during_bus_soft_start_);
+               }
+               if (this->warning_battery_equalization_) {
+                    this->warning_battery_equalization_->publish_state(value_warning_battery_equalization_);
+               }
+
           } else if (cmd == "QPI") {
                ESP_LOGD(TAG, "Decode QPI");
-               this->state_ = STATE_POLL_DECODED;
+
           } else if (cmd == "QT") {
                ESP_LOGD(TAG, "Decode QPI");
-               this->state_ = STATE_POLL_DECODED;
-          } else {
-               this->state_ = STATE_IDLE;
+
           }
+          this->state_ = STATE_IDLE;
           return;
      }
      if (this->state_ == STATE_POLL) {
