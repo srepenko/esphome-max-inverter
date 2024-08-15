@@ -88,27 +88,27 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
         struct PollingCommand MAX_commands[33] = {
         //                              interval last_run   length  errors  status
           {(uint8_t*)"QPI__\r",         86400,   0,         3,      0,      0},     // Device Protocol ID
-          {(uint8_t*)"QID__\r",         0,       0,         3,      0,      0},     // The device serial number
-          {(uint8_t*)"QSID__\r",        0,       0,         4,      0,      0},     // The device serial number (the length is more than 14)
-          {(uint8_t*)"QVFW__\r",        0,       0,         4,      0,      0},     // Main CPU Firmware version
-          {(uint8_t*)"QVFW3__\r",       0,       0,         5,      0,      0},     // Another CPU (remote panel) Firmware version
-          {(uint8_t*)"VERFW__\r",       0,       0,         4,      0,      0},     // Bluetooth version
+          {(uint8_t*)"QID__\r",         86400,   0,         3,      0,      0},     // The device serial number
+          {(uint8_t*)"QSID__\r",        86400,   0,         4,      0,      0},     // The device serial number (the length is more than 14)
+          {(uint8_t*)"QVFW__\r",        86400,   0,         4,      0,      0},     // Main CPU Firmware version
+          {(uint8_t*)"QVFW3__\r",       86400,   0,         5,      0,      0},     // Another CPU (remote panel) Firmware version
+          {(uint8_t*)"VERFW__\r",       86400,   0,         4,      0,      0},     // Bluetooth version
           {(uint8_t*)"QPIRI__\r",       10,      0,         5,      0,      0},     // Device Rating Information
           {(uint8_t*)"QFLAG__\r",       5,       0,         5,      0,      0},     // Device flag status
           {(uint8_t*)"QPIGS__\r",       1,       0,         5,      0,      0},     // Device general status parameters
           {(uint8_t*)"QPIGS2__\r",      0,       0,         6,      0,      0},     // Device general status parameters inquiry (Only 48V model)
           {(uint8_t*)"QPGSn__\r",       0,       0,         5,      0,      0},     // Parallel Information inquiry (Only 48V model)
-          {(uint8_t*)"QMOD__\r",        0,       0,         4,      0,      0},     // Device Mode
-          {(uint8_t*)"QPIWS__\r",       0,       0,         5,      0,      0},     // Device Warning Status
-          {(uint8_t*)"QDI__\r",         0,       0,         3,      0,      0},     // The default setting value
-          {(uint8_t*)"QMCHGCR__\r",     0,       0,         7,      0,      0},     // Enquiry selectable value about max charging current
-          {(uint8_t*)"QMUCHGCR__\r",    0,       0,         8,      0,      0},     // Enquiry selectable value about max utility charging current
-          {(uint8_t*)"QOPPT__\r",       0,       0,         5,      0,      0},     // The device output source priority time order
-          {(uint8_t*)"QCHPT__\r",       0,       0,         5,      0,      0},     // The device charger source priority time order
+          {(uint8_t*)"QMOD__\r",        5,       0,         4,      0,      0},     // Device Mode
+          {(uint8_t*)"QPIWS__\r",       5,       0,         5,      0,      0},     // Device Warning Status
+          {(uint8_t*)"QDI__\r",         86400,   0,         3,      0,      0},     // The default setting value
+          {(uint8_t*)"QMCHGCR__\r",     10,      0,         7,      0,      0},     // Enquiry selectable value about max charging current
+          {(uint8_t*)"QMUCHGCR__\r",    10,      0,         8,      0,      0},     // Enquiry selectable value about max utility charging current
+          {(uint8_t*)"QOPPT__\r",       10,      0,         5,      0,      0},     // The device output source priority time order
+          {(uint8_t*)"QCHPT__\r",       10,      0,         5,      0,      0},     // The device charger source priority time order
           {(uint8_t*)"QT__\r",          3600,    0,         2,      0,      0},     // Time
-          {(uint8_t*)"QBEQI__\r",       0,       0,         5,      0,      0},     // Battery equalization status parameters
-          {(uint8_t*)"QMN__\r",         0,       0,         3,      0,      0},     // Model name
-          {(uint8_t*)"QGMN__\r",        0,       0,         4,      0,      0},     // General model name
+          {(uint8_t*)"QBEQI__\r",       60,      0,         5,      0,      0},     // Battery equalization status parameters
+          {(uint8_t*)"QMN__\r",         86400,   0,         3,      0,      0},     // Model name
+          {(uint8_t*)"QGMN__\r",        86400,   0,         4,      0,      0},     // General model name
           {(uint8_t*)"QET__\r",         3600,    0,         3,      0,      0},     // Total PV generated energy
           {(uint8_t*)"QEYyyyy__\r",     3600,    0,         7,      0,      0},     // PV generated energy of year
           {(uint8_t*)"QEMyyyymm__\r",   3600,    0,         9,      0,      0},     // PV generated energy of month
@@ -117,9 +117,9 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
           {(uint8_t*)"QLYyyyy__\r",     3600,    0,         7,      0,      0},     // Output load energy of year
           {(uint8_t*)"QLMyyyymm__\r",   3600,    0,         9,      0,      0},     // Output load energy of month
           {(uint8_t*)"QLDyyyymmdd__\r", 3600,    0,         11,     0,      0},     // Output load energy of day
-          {(uint8_t*)"QBMS__\r",        0,       0,         4,      0,      0},     // BMS message
-          {(uint8_t*)"PBMS__\r",        0,       0,         4,      0,      0},     // BMS message
-          {(uint8_t*)"QLED__\r",        0,       0,         4,      0,      0},     // LED status parameters
+          {(uint8_t*)"QBMS__\r",        10,      0,         4,      0,      0},     // BMS message
+          {(uint8_t*)"PBMS__\r",        10,      0,         4,      0,      0},     // BMS message
+          {(uint8_t*)"QLED__\r",        10,      0,         4,      0,      0},     // LED status parameters
      };
 };
 }
