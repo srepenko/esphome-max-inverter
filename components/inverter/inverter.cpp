@@ -213,7 +213,7 @@ void Inverter::loop() {
                }
                if (this->machine_type_) {
                     this->machine_type_->publish_state(value_machine_type_);
-               }*/
+               }
                if (this->topology_) {
                     this->topology_->publish_state(value_topology_);
                }
@@ -236,7 +236,7 @@ void Inverter::loop() {
                // special for power balance switch
                if (this->pv_power_balance_switch_) {
                     this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);
-               }
+               }*/
                this->state_ = STATE_IDLE;
           } else if (cmd == "QPIGS") {     
                ESP_LOGD(TAG, "Decode QPIGS");
