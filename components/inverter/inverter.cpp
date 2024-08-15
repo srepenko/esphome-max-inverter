@@ -198,114 +198,96 @@ void Inverter::loop() {
                     this->last_qpigs_->publish_state(tmp);
                }
                */
-               if (this->warnings_present_) {
-                    this->warnings_present_->publish_state(value_warnings_present_);
+               if (this->grid_voltage_) {
+                    this->grid_voltage_->publish_state(value_grid_voltage_);
                }
-               if (this->faults_present_) {
-                    this->faults_present_->publish_state(value_faults_present_);
+               if (this->grid_frequency_) {
+                    this->grid_frequency_->publish_state(value_grid_frequency_);
                }
-               if (this->warning_power_loss_) {
-                    this->warning_power_loss_->publish_state(value_warning_power_loss_);
+               if (this->ac_output_voltage_) {
+                    this->ac_output_voltage_->publish_state(value_ac_output_voltage_);
                }
-               if (this->fault_inverter_fault_) {
-                    this->fault_inverter_fault_->publish_state(value_fault_inverter_fault_);
+               if (this->ac_output_frequency_) {
+                    this->ac_output_frequency_->publish_state(value_ac_output_frequency_);
                }
-               if (this->fault_bus_over_) {
-                    this->fault_bus_over_->publish_state(value_fault_bus_over_);
+               if (this->ac_output_apparent_power_) {
+                    this->ac_output_apparent_power_->publish_state(value_ac_output_apparent_power_);
                }
-               if (this->fault_bus_under_) {
-                    this->fault_bus_under_->publish_state(value_fault_bus_under_);
+               if (this->ac_output_active_power_) {
+                    this->ac_output_active_power_->publish_state(value_ac_output_active_power_);
                }
-               if (this->fault_bus_soft_fail_) {
-                    this->fault_bus_soft_fail_->publish_state(value_fault_bus_soft_fail_);
+               if (this->output_load_percent_) {
+                    this->output_load_percent_->publish_state(value_output_load_percent_);
                }
-               if (this->warning_line_fail_) {
-                    this->warning_line_fail_->publish_state(value_warning_line_fail_);
+               if (this->bus_voltage_) {
+                    this->bus_voltage_->publish_state(value_bus_voltage_);
                }
-               if (this->fault_opvshort_) {
-                    this->fault_opvshort_->publish_state(value_fault_opvshort_);
+               if (this->battery_voltage_) {
+                    this->battery_voltage_->publish_state(value_battery_voltage_);
                }
-               if (this->fault_inverter_voltage_too_low_) {
-                    this->fault_inverter_voltage_too_low_->publish_state(value_fault_inverter_voltage_too_low_);
+               if (this->battery_charging_current_) {
+                    this->battery_charging_current_->publish_state(value_battery_charging_current_);
                }
-               if (this->fault_inverter_voltage_too_high_) {
-                    this->fault_inverter_voltage_too_high_->publish_state(value_fault_inverter_voltage_too_high_);
+               if (this->battery_capacity_percent_) {
+                    this->battery_capacity_percent_->publish_state(value_battery_capacity_percent_);
                }
-               if (this->warning_over_temperature_) {
-                    this->warning_over_temperature_->publish_state(value_warning_over_temperature_);
+               if (this->inverter_heat_sink_temperature_) {
+                    this->inverter_heat_sink_temperature_->publish_state(value_inverter_heat_sink_temperature_);
                }
-               if (this->warning_fan_lock_) {
-                    this->warning_fan_lock_->publish_state(value_warning_fan_lock_);
+               if (this->pv_input_current_for_battery_) {
+                    this->pv_input_current_for_battery_->publish_state(value_pv_input_current_for_battery_);
                }
-               if (this->warning_battery_voltage_high_) {
-                    this->warning_battery_voltage_high_->publish_state(value_warning_battery_voltage_high_);
+               if (this->pv_input_voltage_) {
+                    this->pv_input_voltage_->publish_state(value_pv_input_voltage_);
                }
-               if (this->warning_battery_low_alarm_) {
-                    this->warning_battery_low_alarm_->publish_state(value_warning_battery_low_alarm_);
+               if (this->battery_voltage_scc_) {
+                    this->battery_voltage_scc_->publish_state(value_battery_voltage_scc_);
                }
-               if (this->warning_battery_under_shutdown_) {
-                    this->warning_battery_under_shutdown_->publish_state(value_warning_battery_under_shutdown_);
+               if (this->battery_discharge_current_) {
+                    this->battery_discharge_current_->publish_state(value_battery_discharge_current_);
                }
-               if (this->warning_battery_derating_) {
-                    this->warning_battery_derating_->publish_state(value_warning_battery_derating_);
+               if (this->add_sbu_priority_version_) {
+                    this->add_sbu_priority_version_->publish_state(value_add_sbu_priority_version_);
                }
-               if (this->warning_over_load_) {
-                    this->warning_over_load_->publish_state(value_warning_over_load_);
+               if (this->configuration_status_) {
+                    this->configuration_status_->publish_state(value_configuration_status_);
                }
-               if (this->warning_eeprom_failed_) {
-                    this->warning_eeprom_failed_->publish_state(value_warning_eeprom_failed_);
+               if (this->scc_firmware_version_) {
+                    this->scc_firmware_version_->publish_state(value_scc_firmware_version_);
                }
-               if (this->fault_inverter_over_current_) {
-                    this->fault_inverter_over_current_->publish_state(value_fault_inverter_over_current_);
+               if (this->load_status_) {
+                    this->load_status_->publish_state(value_load_status_);
                }
-               if (this->fault_inverter_soft_failed_) {
-                    this->fault_inverter_soft_failed_->publish_state(value_fault_inverter_soft_failed_);
+               if (this->battery_voltage_to_steady_while_charging_) {
+                    this->battery_voltage_to_steady_while_charging_->publish_state(
+                    value_battery_voltage_to_steady_while_charging_);
                }
-               if (this->fault_self_test_failed_) {
-                    this->fault_self_test_failed_->publish_state(value_fault_self_test_failed_);
+               if (this->charging_status_) {
+                    this->charging_status_->publish_state(value_charging_status_);
                }
-               if (this->fault_op_dc_voltage_over_) {
-                    this->fault_op_dc_voltage_over_->publish_state(value_fault_op_dc_voltage_over_);
+               if (this->scc_charging_status_) {
+                    this->scc_charging_status_->publish_state(value_scc_charging_status_);
                }
-               if (this->fault_battery_open_) {
-                    this->fault_battery_open_->publish_state(value_fault_battery_open_);
+               if (this->ac_charging_status_) {
+                    this->ac_charging_status_->publish_state(value_ac_charging_status_);
                }
-               if (this->fault_current_sensor_failed_) {
-                    this->fault_current_sensor_failed_->publish_state(value_fault_current_sensor_failed_);
+               if (this->battery_voltage_offset_for_fans_on_) {
+                    this->battery_voltage_offset_for_fans_on_->publish_state(value_battery_voltage_offset_for_fans_on_ / 10.0f);
+               }  //.1 scale
+               if (this->eeprom_version_) {
+                    this->eeprom_version_->publish_state(value_eeprom_version_);
                }
-               if (this->fault_battery_short_) {
-                    this->fault_battery_short_->publish_state(value_fault_battery_short_);
+               if (this->pv_charging_power_) {
+                    this->pv_charging_power_->publish_state(value_pv_charging_power_);
                }
-               if (this->warning_power_limit_) {
-                    this->warning_power_limit_->publish_state(value_warning_power_limit_);
+               if (this->charging_to_floating_mode_) {
+                    this->charging_to_floating_mode_->publish_state(value_charging_to_floating_mode_);
                }
-               if (this->warning_pv_voltage_high_) {
-                    this->warning_pv_voltage_high_->publish_state(value_warning_pv_voltage_high_);
+               if (this->switch_on_) {
+                    this->switch_on_->publish_state(value_switch_on_);
                }
-               if (this->fault_mppt_overload_) {
-                    this->fault_mppt_overload_->publish_state(value_fault_mppt_overload_);
-               }
-               if (this->warning_mppt_overload_) {
-                    this->warning_mppt_overload_->publish_state(value_warning_mppt_overload_);
-               }
-               if (this->warning_battery_too_low_to_charge_) {
-                    this->warning_battery_too_low_to_charge_->publish_state(value_warning_battery_too_low_to_charge_);
-               }
-               if (this->fault_dc_dc_over_current_) {
-                    this->fault_dc_dc_over_current_->publish_state(value_fault_dc_dc_over_current_);
-               }
-               if (this->fault_code_) {
-                    this->fault_code_->publish_state(value_fault_code_);
-               }
-               if (this->warnung_low_pv_energy_) {
-                    this->warnung_low_pv_energy_->publish_state(value_warnung_low_pv_energy_);
-               }
-               if (this->warning_high_ac_input_during_bus_soft_start_) {
-                    this->warning_high_ac_input_during_bus_soft_start_->publish_state(
-                    value_warning_high_ac_input_during_bus_soft_start_);
-               }
-               if (this->warning_battery_equalization_) {
-                    this->warning_battery_equalization_->publish_state(value_warning_battery_equalization_);
+               if (this->dustproof_installed_) {
+                    this->dustproof_installed_->publish_state(value_dustproof_installed_);
                }
 
           } else if (cmd == "QPI") {
