@@ -116,7 +116,125 @@ void Inverter::loop() {
           //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
-               this->state_ = STATE_POLL_DECODED;
+               // 240.0 15.0 240.0 50.0 15.0 3600 3600 24.0 24.0 23.5 29.2 29.0 2 010 100 0 2 3 1 01 0 0 26.5 0 0 (Axpert VM IV 24v 3600w)
+               sscanf(tmp, "(%f %f %f %f %f %d %d %f %f %f %f %f %d %d %d %d %d %d %d %d %d %d %f %d %d",          // NOLINT
+                         &value_grid_rating_voltage_, &value_grid_rating_current_, &value_ac_output_rating_voltage_,  // NOLINT
+                         &value_ac_output_rating_frequency_, &value_ac_output_rating_current_,                        // NOLINT
+                         &value_ac_output_rating_apparent_power_, &value_ac_output_rating_active_power_,              // NOLINT
+                         &value_battery_rating_voltage_, &value_battery_recharge_voltage_,                            // NOLINT
+                         &value_battery_under_voltage_, &value_battery_bulk_voltage_, &value_battery_float_voltage_,  // NOLINT
+                         &value_battery_type_, &value_current_max_ac_charging_current_,                               // NOLINT
+                         &value_current_max_charging_current_, &value_input_voltage_range_,                           // NOLINT
+                         &value_output_source_priority_, &value_charger_source_priority_, &value_parallel_max_num_,   // NOLINT
+                         &value_machine_type_, &value_topology_, &value_output_mode_,                                 // NOLINT
+                         &value_battery_redischarge_voltage_, &value_pv_ok_condition_for_parallel_,                   // NOLINT
+                         &value_pv_power_balance_);                                                                   // NOLINT
+               if (this->last_qpiri_) {
+                    this->last_qpiri_->publish_state(tmp);
+               }
+               if (this->grid_rating_voltage_) {
+                    this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_);
+               }
+               if (this->grid_rating_current_) {
+                    this->grid_rating_current_->publish_state(value_grid_rating_current_);
+               }
+               if (this->ac_output_rating_voltage_) {
+                    this->ac_output_rating_voltage_->publish_state(value_ac_output_rating_voltage_);
+               }
+               if (this->ac_output_rating_frequency_) {
+                    this->ac_output_rating_frequency_->publish_state(value_ac_output_rating_frequency_);
+               }
+               if (this->ac_output_rating_current_) {
+                    this->ac_output_rating_current_->publish_state(value_ac_output_rating_current_);
+               }
+               if (this->ac_output_rating_apparent_power_) {
+                    this->ac_output_rating_apparent_power_->publish_state(value_ac_output_rating_apparent_power_);
+               }
+               if (this->ac_output_rating_active_power_) {
+                    this->ac_output_rating_active_power_->publish_state(value_ac_output_rating_active_power_);
+               }
+               if (this->battery_rating_voltage_) {
+                    this->battery_rating_voltage_->publish_state(value_battery_rating_voltage_);
+               }
+               if (this->battery_recharge_voltage_) {
+                    this->battery_recharge_voltage_->publish_state(value_battery_recharge_voltage_);
+               }
+               if (this->battery_under_voltage_) {
+                    this->battery_under_voltage_->publish_state(value_battery_under_voltage_);
+               }
+               if (this->battery_bulk_voltage_) {
+                    this->battery_bulk_voltage_->publish_state(value_battery_bulk_voltage_);
+               }
+               if (this->battery_float_voltage_) {
+                    this->battery_float_voltage_->publish_state(value_battery_float_voltage_);
+               }
+               if (this->battery_type_) {
+                    this->battery_type_->publish_state(value_battery_type_);
+               }
+               if (this->current_max_ac_charging_current_) {
+                    this->current_max_ac_charging_current_->publish_state(value_current_max_ac_charging_current_);
+               }
+               if (this->current_max_charging_current_) {
+                    this->current_max_charging_current_->publish_state(value_current_max_charging_current_);
+               }
+               if (this->input_voltage_range_) {
+                    this->input_voltage_range_->publish_state(value_input_voltage_range_);
+               }
+               // special for input voltage range switch
+               if (this->input_voltage_range_switch_) {
+                    this->input_voltage_range_switch_->publish_state(value_input_voltage_range_ == 1);
+               }
+               if (this->output_source_priority_) {
+                    this->output_source_priority_->publish_state(value_output_source_priority_);
+               }
+               // special for output source priority select
+               if (this->output_source_priority_select_) {
+                    std::string value = esphome::to_string(value_output_source_priority_);
+                    this->output_source_priority_select_->map_and_publish(value);
+               }
+               // special for output source priority switches
+               if (this->output_source_priority_utility_switch_) {
+                    this->output_source_priority_utility_switch_->publish_state(value_output_source_priority_ == 0);
+               }
+               if (this->output_source_priority_solar_switch_) {
+                    this->output_source_priority_solar_switch_->publish_state(value_output_source_priority_ == 1);
+               }
+               if (this->output_source_priority_battery_switch_) {
+                    this->output_source_priority_battery_switch_->publish_state(value_output_source_priority_ == 2);
+               }
+               if (this->charger_source_priority_) {
+                    this->charger_source_priority_->publish_state(value_charger_source_priority_);
+               }
+               if (this->parallel_max_num_) {
+                    this->parallel_max_num_->publish_state(value_parallel_max_num_);
+               }
+               if (this->machine_type_) {
+                    this->machine_type_->publish_state(value_machine_type_);
+               }
+               if (this->topology_) {
+                    this->topology_->publish_state(value_topology_);
+               }
+               if (this->output_mode_) {
+                    this->output_mode_->publish_state(value_output_mode_);
+               }
+               if (this->battery_redischarge_voltage_) {
+                    this->battery_redischarge_voltage_->publish_state(value_battery_redischarge_voltage_);
+               }
+               if (this->pv_ok_condition_for_parallel_) {
+                    this->pv_ok_condition_for_parallel_->publish_state(value_pv_ok_condition_for_parallel_);
+               }
+               // special for pv ok condition switch
+               if (this->pv_ok_condition_for_parallel_switch_) {
+                    this->pv_ok_condition_for_parallel_switch_->publish_state(value_pv_ok_condition_for_parallel_ == 1);
+               }
+               if (this->pv_power_balance_) {
+                    this->pv_power_balance_->publish_state(value_pv_power_balance_ == 1);
+               }
+               // special for power balance switch
+               if (this->pv_power_balance_switch_) {
+                    this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);
+               }
+               this->state_ = STATE_IDLE;
           } else if (cmd == "QPIGS") {     
                ESP_LOGD(TAG, "Decode QPIGS");
                // Response examples of the PIP 2424MSE1
