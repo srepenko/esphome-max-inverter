@@ -576,6 +576,10 @@ uint16_t Inverter::cal_crc_half_(uint8_t *msg, uint8_t len) {
      crc += b_crc_low;
      return (crc);
 }
+void Штмукеук::switch_command(const std::string &command) {
+  ESP_LOGD(TAG, "got command: %s", command.c_str());
+  queue_command_(command.c_str(), command.length());
+}
 
 }
 }

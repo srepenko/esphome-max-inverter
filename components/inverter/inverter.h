@@ -206,7 +206,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SELECT(output_source_priority_select, QPIRI)
     INVERTER_VALUED_SELECT(charging_discharging_control_select, QBATCD, std::string)
 */
-
+    void switch_command(const std::string &command);
     void setup() override;
     void loop() override;
     void update() override;
