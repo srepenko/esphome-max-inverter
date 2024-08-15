@@ -111,16 +111,24 @@ void Inverter::loop() {
      }
      if (this->state_ == STATE_POLL_CHECKED) {
           bool enabled = true;
-          std::string fc;
-          char tmp[READ_BUFFER_LENGTH];
-          sprintf(tmp, "%s", this->read_buffer_);          
+          //std::string fc;
+          //char tmp[READ_BUFFER_LENGTH];
+          //sprintf(tmp, "%s", this->read_buffer_);
+          //std::string ansver(this->read_buffer_);
           std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
           cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
                this->state_ = STATE_POLL_DECODED;
+          } else if (cmd == "QPIGS") {     
+               ESP_LOGD(TAG, "Decode QPIGS");
+               sscanf(this->read_buffer_, "(%f ", &value_grid_voltage_);
+               this->state_ = STATE_POLL_DECODED;
           } else if (cmd == "QPI") {
+               ESP_LOGD(TAG, "Decode QPI");
+               this->state_ = STATE_POLL_DECODED;
+          } else if (cmd == "QT") {
                ESP_LOGD(TAG, "Decode QPI");
                this->state_ = STATE_POLL_DECODED;
           } else {
