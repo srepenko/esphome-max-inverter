@@ -220,10 +220,11 @@ void Inverter::loop() {
           return;
      }
      if (this->state_ == STATE_POLL_COMPLETE) {
-          //ESP_LOGI(TAG, "Recive %d byte: %s", this->read_pos_, this->read_buffer_);
+          
           if (this->check_incoming_crc_()) {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
+                    ESP_LOGW(TAG, "Recive NAK");
                     this->state_ = STATE_IDLE;
                     return;
                }
@@ -262,7 +263,7 @@ void Inverter::loop() {
                // command timeout
                const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
                this->command_start_millis_ = millis();
-               ESP_LOGD(TAG, "timeout command from queue: %s", command);
+               ESP_LOGW(TAG, "timeout command from queue: %s", command);
                this->command_queue_[this->command_queue_position_] = std::string("");
                this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
                this->state_ = STATE_IDLE;
@@ -276,7 +277,7 @@ void Inverter::loop() {
                this->MAX_commands[this->last_polling_command_].last_run = 0;
                std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
                str = str.substr(0, this->MAX_commands[this->last_polling_command_].length); 
-               ESP_LOGD(TAG, "timeout command to poll: %s, last_run: %d", str.c_str(), this->MAX_commands[this->last_polling_command_].last_run);
+               ESP_LOGW(TAG, "timeout command to poll: %s, last_run: %d", str.c_str(), this->MAX_commands[this->last_polling_command_].last_run);
                this->state_ = STATE_IDLE;
           } else {
           }
