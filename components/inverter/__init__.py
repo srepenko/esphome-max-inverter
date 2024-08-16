@@ -1,12 +1,12 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import uart
-from esphome.components import time
 from esphome.const import CONF_ID
+from esphome.components import time
 
 DEPENDENCIES = ["uart"]
 CODEOWNERS = ["@srepenko"]
-AUTO_LOAD = ["binary_sensor", "text_sensor", "sensor", "switch", "output", "select", "time"]
+AUTO_LOAD = ["binary_sensor", "text_sensor", "sensor", "switch", "output", "select"]
 MULTI_CONF = True
 
 CONF_INVERTER_ID = "inverter_id"
