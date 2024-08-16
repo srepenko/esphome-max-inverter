@@ -299,7 +299,7 @@ void Inverter::loop() {
 void Inverter::update() {
 
      //auto time = id(sntp_time).now();
-     ESP_LOGI(TAG, "Time now: %d", RealTimeClock::now());
+     ESP_LOGI(TAG, "Time now: %d", ESPTime::from_epoch_local(this->timestamp_now()));
 }
 
 void Inverter::dump_config() {
