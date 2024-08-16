@@ -252,7 +252,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
             STATE_POLL_CHECKED = 5,
             STATE_POLL_DECODED = 6,
         };
-
+        time::RealTimeClock *time_;
         uint8_t last_polling_command_ = 0;
         struct PollingCommand MAX_commands[33] = {
         //                       interval last_run   length  errors  status
