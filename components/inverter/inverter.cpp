@@ -354,6 +354,7 @@ void Inverter::send_next_poll_() {
           }
           this->last_poll_ = millis();
      }
+     crc16 = cal_crc_half_(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length);
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
