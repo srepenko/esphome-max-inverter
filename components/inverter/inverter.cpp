@@ -299,7 +299,7 @@ void Inverter::loop() {
 void Inverter::update() {
 
      //auto time = this->time_->now();
-     ESP_LOGI(TAG, "Time now: %s", this->time_->now()->strftime("%Y-%m-%d %H:%M"));
+     //ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y-%m-%d %H:%M"));
 }
 
 void Inverter::dump_config() {
@@ -355,6 +355,17 @@ void Inverter::send_next_poll_() {
           this->last_poll_ = millis();
      }
      crc16 = cal_crc_half_(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length);
+     //QEY QEM QED QLY QLM QLD
+     if (this->MAX_commands[this->last_polling_command_].command == "QEY"){
+          auto time = this->time_->now();
+          ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y"));
+     } else if (this->MAX_commands[this->last_polling_command_].command == "QEM"){
+          auto time = this->time_->now();
+          ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y%m"));
+     } else if (this->MAX_commands[this->last_polling_command_].command == "QED"){
+          auto time = this->time_->now();
+          ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y%m%d"));
+     }
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
