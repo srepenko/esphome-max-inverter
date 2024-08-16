@@ -207,6 +207,7 @@ void Inverter::loop() {
           } else if (cmd == "QET") {
                ESP_LOGD(TAG, "Decode QPI");
                sscanf(tmp, "(%f", &value_total_pv_generated_energy_);
+               value_total_pv_generated_energy_ = value_total_pv_generated_energy_/1000;
                if (this->total_pv_generated_energy_) {
                     this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);
                }
@@ -214,6 +215,7 @@ void Inverter::loop() {
           } else if (cmd == "QLT") {
                ESP_LOGD(TAG, "Decode QPI");
                sscanf(tmp, "(%f", &value_total_output_load_energy_);
+               value_total_output_load_energy_ = value_total_output_load_energy_/1000;
                if (this->total_output_load_energy_) {
                     this->total_output_load_energy_->publish_state(value_total_output_load_energy_);
                }
