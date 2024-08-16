@@ -129,7 +129,7 @@ void Inverter::loop() {
                          &value_battery_redischarge_voltage_, &value_pv_ok_condition_for_parallel_,                   // NOLINT
                          &value_pv_power_balance_);                                                                   // NOLINT
 
-               this->state_ = STATE_IDLE;
+               //this->state_ = STATE_IDLE;
           } else if (cmd == "QPIGS") {     
                ESP_LOGD(TAG, "Decode QPIGS");
                sscanf(                                                                                                  // NOLINT
@@ -175,8 +175,7 @@ void Inverter::loop() {
                     this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);
                }
           } else if (cmd == "QT") {
-               ESP_LOGD(TAG, "Decode QPI");
-
+               ESP_LOGD(TAG, "Decode QT");
           }
           this->state_ = STATE_IDLE;
           return;
@@ -196,210 +195,211 @@ void Inverter::loop() {
 
 void Inverter::update() {
 //QPIRI
-               if (this->last_qpiri_) {
-                    this->last_qpiri_->publish_state(tmp);
-               }
-               */
-               if (this->grid_rating_voltage_) {
-                    this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_);
-               }
-               if (this->grid_rating_current_) {
-                    this->grid_rating_current_->publish_state(value_grid_rating_current_);
-               }
-               if (this->ac_output_rating_voltage_) {
-                    this->ac_output_rating_voltage_->publish_state(value_ac_output_rating_voltage_);
-               }
-               if (this->ac_output_rating_frequency_) {
-                    this->ac_output_rating_frequency_->publish_state(value_ac_output_rating_frequency_);
-               }
-               if (this->ac_output_rating_current_) {
-                    this->ac_output_rating_current_->publish_state(value_ac_output_rating_current_);
-               }
-               if (this->ac_output_rating_apparent_power_) {
-                    this->ac_output_rating_apparent_power_->publish_state(value_ac_output_rating_apparent_power_);
-               }
-               if (this->ac_output_rating_active_power_) {
-                    this->ac_output_rating_active_power_->publish_state(value_ac_output_rating_active_power_);
-               }
-               if (this->battery_rating_voltage_) {
-                    this->battery_rating_voltage_->publish_state(value_battery_rating_voltage_);
-               }
-               if (this->battery_recharge_voltage_) {
-                    this->battery_recharge_voltage_->publish_state(value_battery_recharge_voltage_);
-               }
-               if (this->battery_under_voltage_) {
-                    this->battery_under_voltage_->publish_state(value_battery_under_voltage_);
-               }
-               if (this->battery_bulk_voltage_) {
-                    this->battery_bulk_voltage_->publish_state(value_battery_bulk_voltage_);
-               }
-               if (this->battery_float_voltage_) {
-                    this->battery_float_voltage_->publish_state(value_battery_float_voltage_);
-               }
-               if (this->battery_type_) {
-                    this->battery_type_->publish_state(value_battery_type_);
-               }
-               if (this->current_max_ac_charging_current_) {
-                    this->current_max_ac_charging_current_->publish_state(value_current_max_ac_charging_current_);
-               }
-               if (this->current_max_charging_current_) {
-                    this->current_max_charging_current_->publish_state(value_current_max_charging_current_);
-               }
-               if (this->input_voltage_range_) {
-                    this->input_voltage_range_->publish_state(value_input_voltage_range_);
-               }
-               // special for input voltage range switch
-               if (this->input_voltage_range_switch_) {
-                    this->input_voltage_range_switch_->publish_state(value_input_voltage_range_ == 1);
-               }
-               if (this->output_source_priority_) {
-                    this->output_source_priority_->publish_state(value_output_source_priority_);
-               }
-               // special for output source priority select
-               /*
-               if (this->output_source_priority_select_) {
-                    std::string value = esphome::to_string(value_output_source_priority_);
-                    this->output_source_priority_select_->map_and_publish(value);
-               } 
-               // special for output source priority switches
-               if (this->output_source_priority_utility_switch_) {
-                    this->output_source_priority_utility_switch_->publish_state(value_output_source_priority_ == 0);
-               }
-               if (this->output_source_priority_solar_switch_) {
-                    this->output_source_priority_solar_switch_->publish_state(value_output_source_priority_ == 1);
-               }
-               if (this->output_source_priority_battery_switch_) {
-                    this->output_source_priority_battery_switch_->publish_state(value_output_source_priority_ == 2);
-               }
-               if (this->charger_source_priority_) {
-                    this->charger_source_priority_->publish_state(value_charger_source_priority_);
-               }
-               if (this->parallel_max_num_) {
-                    this->parallel_max_num_->publish_state(value_parallel_max_num_);
-               }
-               if (this->machine_type_) {
-                    this->machine_type_->publish_state(value_machine_type_);
-               }
-               if (this->topology_) {
-                    this->topology_->publish_state(value_topology_);
-               }
-               if (this->output_mode_) {
-                    this->output_mode_->publish_state(value_output_mode_);
-               }
-               if (this->battery_redischarge_voltage_) {
-                    this->battery_redischarge_voltage_->publish_state(value_battery_redischarge_voltage_);
-               }
-               if (this->pv_ok_condition_for_parallel_) {
-                    this->pv_ok_condition_for_parallel_->publish_state(value_pv_ok_condition_for_parallel_);
-               }
-               // special for pv ok condition switch
-               if (this->pv_ok_condition_for_parallel_switch_) {
-                    this->pv_ok_condition_for_parallel_switch_->publish_state(value_pv_ok_condition_for_parallel_ == 1);
-               }
-               if (this->pv_power_balance_) {
-                    this->pv_power_balance_->publish_state(value_pv_power_balance_ == 1);
-               }
-               // special for power balance switch
-               if (this->pv_power_balance_switch_) {
-                    this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);
-               }*/
+/*
+     if (this->last_qpiri_) {
+          this->last_qpiri_->publish_state(tmp);
+     }
+     */
+     if (this->grid_rating_voltage_) {
+          this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_);
+     }
+     if (this->grid_rating_current_) {
+          this->grid_rating_current_->publish_state(value_grid_rating_current_);
+     }
+     if (this->ac_output_rating_voltage_) {
+          this->ac_output_rating_voltage_->publish_state(value_ac_output_rating_voltage_);
+     }
+     if (this->ac_output_rating_frequency_) {
+          this->ac_output_rating_frequency_->publish_state(value_ac_output_rating_frequency_);
+     }
+     if (this->ac_output_rating_current_) {
+          this->ac_output_rating_current_->publish_state(value_ac_output_rating_current_);
+     }
+     if (this->ac_output_rating_apparent_power_) {
+          this->ac_output_rating_apparent_power_->publish_state(value_ac_output_rating_apparent_power_);
+     }
+     if (this->ac_output_rating_active_power_) {
+          this->ac_output_rating_active_power_->publish_state(value_ac_output_rating_active_power_);
+     }
+     if (this->battery_rating_voltage_) {
+          this->battery_rating_voltage_->publish_state(value_battery_rating_voltage_);
+     }
+     if (this->battery_recharge_voltage_) {
+          this->battery_recharge_voltage_->publish_state(value_battery_recharge_voltage_);
+     }
+     if (this->battery_under_voltage_) {
+          this->battery_under_voltage_->publish_state(value_battery_under_voltage_);
+     }
+     if (this->battery_bulk_voltage_) {
+          this->battery_bulk_voltage_->publish_state(value_battery_bulk_voltage_);
+     }
+     if (this->battery_float_voltage_) {
+          this->battery_float_voltage_->publish_state(value_battery_float_voltage_);
+     }
+     if (this->battery_type_) {
+          this->battery_type_->publish_state(value_battery_type_);
+     }
+     if (this->current_max_ac_charging_current_) {
+          this->current_max_ac_charging_current_->publish_state(value_current_max_ac_charging_current_);
+     }
+     if (this->current_max_charging_current_) {
+          this->current_max_charging_current_->publish_state(value_current_max_charging_current_);
+     }
+     if (this->input_voltage_range_) {
+          this->input_voltage_range_->publish_state(value_input_voltage_range_);
+     }
+     // special for input voltage range switch
+     if (this->input_voltage_range_switch_) {
+          this->input_voltage_range_switch_->publish_state(value_input_voltage_range_ == 1);
+     }
+     if (this->output_source_priority_) {
+          this->output_source_priority_->publish_state(value_output_source_priority_);
+     }
+     // special for output source priority select
+     /*
+     if (this->output_source_priority_select_) {
+          std::string value = esphome::to_string(value_output_source_priority_);
+          this->output_source_priority_select_->map_and_publish(value);
+     } 
+     // special for output source priority switches
+     if (this->output_source_priority_utility_switch_) {
+          this->output_source_priority_utility_switch_->publish_state(value_output_source_priority_ == 0);
+     }
+     if (this->output_source_priority_solar_switch_) {
+          this->output_source_priority_solar_switch_->publish_state(value_output_source_priority_ == 1);
+     }
+     if (this->output_source_priority_battery_switch_) {
+          this->output_source_priority_battery_switch_->publish_state(value_output_source_priority_ == 2);
+     }
+     if (this->charger_source_priority_) {
+          this->charger_source_priority_->publish_state(value_charger_source_priority_);
+     }
+     if (this->parallel_max_num_) {
+          this->parallel_max_num_->publish_state(value_parallel_max_num_);
+     }
+     if (this->machine_type_) {
+          this->machine_type_->publish_state(value_machine_type_);
+     }
+     if (this->topology_) {
+          this->topology_->publish_state(value_topology_);
+     }
+     if (this->output_mode_) {
+          this->output_mode_->publish_state(value_output_mode_);
+     }
+     if (this->battery_redischarge_voltage_) {
+          this->battery_redischarge_voltage_->publish_state(value_battery_redischarge_voltage_);
+     }
+     if (this->pv_ok_condition_for_parallel_) {
+          this->pv_ok_condition_for_parallel_->publish_state(value_pv_ok_condition_for_parallel_);
+     }
+     // special for pv ok condition switch
+     if (this->pv_ok_condition_for_parallel_switch_) {
+          this->pv_ok_condition_for_parallel_switch_->publish_state(value_pv_ok_condition_for_parallel_ == 1);
+     }
+     if (this->pv_power_balance_) {
+          this->pv_power_balance_->publish_state(value_pv_power_balance_ == 1);
+     }
+     // special for power balance switch
+     if (this->pv_power_balance_switch_) {
+          this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);
+     }*/
 //QPIGS
-                    /*
-               if (this->last_qpigs_) {
-                    this->last_qpigs_->publish_state(tmp);
-               }
-               */
-               if (this->grid_voltage_) {
-                    this->grid_voltage_->publish_state(value_grid_voltage_);
-               }
-               if (this->grid_frequency_) {
-                    this->grid_frequency_->publish_state(value_grid_frequency_);
-               }
-               if (this->ac_output_voltage_) {
-                    this->ac_output_voltage_->publish_state(value_ac_output_voltage_);
-               }
-               if (this->ac_output_frequency_) {
-                    this->ac_output_frequency_->publish_state(value_ac_output_frequency_);
-               }
-               if (this->ac_output_apparent_power_) {
-                    this->ac_output_apparent_power_->publish_state(value_ac_output_apparent_power_);
-               }
-               if (this->ac_output_active_power_) {
-                    this->ac_output_active_power_->publish_state(value_ac_output_active_power_);
-               }
-               if (this->output_load_percent_) {
-                    this->output_load_percent_->publish_state(value_output_load_percent_);
-               }
-               if (this->bus_voltage_) {
-                    this->bus_voltage_->publish_state(value_bus_voltage_);
-               }
-               if (this->battery_voltage_) {
-                    this->battery_voltage_->publish_state(value_battery_voltage_);
-               }
-               if (this->battery_charging_current_) {
-                    this->battery_charging_current_->publish_state(value_battery_charging_current_);
-               }
-               if (this->battery_capacity_percent_) {
-                    this->battery_capacity_percent_->publish_state(value_battery_capacity_percent_);
-               }
-               if (this->inverter_heat_sink_temperature_) {
-                    this->inverter_heat_sink_temperature_->publish_state(value_inverter_heat_sink_temperature_);
-               }
-               if (this->pv_input_current_for_battery_) {
-                    this->pv_input_current_for_battery_->publish_state(value_pv_input_current_for_battery_);
-               }
-               if (this->pv_input_voltage_) {
-                    this->pv_input_voltage_->publish_state(value_pv_input_voltage_);
-               }
-               if (this->battery_voltage_scc_) {
-                    this->battery_voltage_scc_->publish_state(value_battery_voltage_scc_);
-               }
-               if (this->battery_discharge_current_) {
-                    this->battery_discharge_current_->publish_state(value_battery_discharge_current_);
-               }
-               if (this->add_sbu_priority_version_) {
-                    this->add_sbu_priority_version_->publish_state(value_add_sbu_priority_version_);
-               }
-               if (this->configuration_status_) {
-                    this->configuration_status_->publish_state(value_configuration_status_);
-               }
-               if (this->scc_firmware_version_) {
-                    this->scc_firmware_version_->publish_state(value_scc_firmware_version_);
-               }
-               if (this->load_status_) {
-                    this->load_status_->publish_state(value_load_status_);
-               }
-               if (this->battery_voltage_to_steady_while_charging_) {
-                    this->battery_voltage_to_steady_while_charging_->publish_state(
-                    value_battery_voltage_to_steady_while_charging_);
-               }
-               if (this->charging_status_) {
-                    this->charging_status_->publish_state(value_charging_status_);
-               }
-               if (this->scc_charging_status_) {
-                    this->scc_charging_status_->publish_state(value_scc_charging_status_);
-               }
-               if (this->ac_charging_status_) {
-                    this->ac_charging_status_->publish_state(value_ac_charging_status_);
-               }
-               if (this->battery_voltage_offset_for_fans_on_) {
-                    this->battery_voltage_offset_for_fans_on_->publish_state(value_battery_voltage_offset_for_fans_on_ / 10.0f);
-               }  //.1 scale
-               if (this->eeprom_version_) {
-                    this->eeprom_version_->publish_state(value_eeprom_version_);
-               }
-               if (this->pv_charging_power_) {
-                    this->pv_charging_power_->publish_state(value_pv_charging_power_);
-               }
-               if (this->charging_to_floating_mode_) {
-                    this->charging_to_floating_mode_->publish_state(value_charging_to_floating_mode_);
-               }
-               if (this->switch_on_) {
-                    this->switch_on_->publish_state(value_switch_on_);
-               }
-               if (this->dustproof_installed_) {
-                    this->dustproof_installed_->publish_state(value_dustproof_installed_);
-               }
+          /*
+     if (this->last_qpigs_) {
+          this->last_qpigs_->publish_state(tmp);
+     }
+     */
+     if (this->grid_voltage_) {
+          this->grid_voltage_->publish_state(value_grid_voltage_);
+     }
+     if (this->grid_frequency_) {
+          this->grid_frequency_->publish_state(value_grid_frequency_);
+     }
+     if (this->ac_output_voltage_) {
+          this->ac_output_voltage_->publish_state(value_ac_output_voltage_);
+     }
+     if (this->ac_output_frequency_) {
+          this->ac_output_frequency_->publish_state(value_ac_output_frequency_);
+     }
+     if (this->ac_output_apparent_power_) {
+          this->ac_output_apparent_power_->publish_state(value_ac_output_apparent_power_);
+     }
+     if (this->ac_output_active_power_) {
+          this->ac_output_active_power_->publish_state(value_ac_output_active_power_);
+     }
+     if (this->output_load_percent_) {
+          this->output_load_percent_->publish_state(value_output_load_percent_);
+     }
+     if (this->bus_voltage_) {
+          this->bus_voltage_->publish_state(value_bus_voltage_);
+     }
+     if (this->battery_voltage_) {
+          this->battery_voltage_->publish_state(value_battery_voltage_);
+     }
+     if (this->battery_charging_current_) {
+          this->battery_charging_current_->publish_state(value_battery_charging_current_);
+     }
+     if (this->battery_capacity_percent_) {
+          this->battery_capacity_percent_->publish_state(value_battery_capacity_percent_);
+     }
+     if (this->inverter_heat_sink_temperature_) {
+          this->inverter_heat_sink_temperature_->publish_state(value_inverter_heat_sink_temperature_);
+     }
+     if (this->pv_input_current_for_battery_) {
+          this->pv_input_current_for_battery_->publish_state(value_pv_input_current_for_battery_);
+     }
+     if (this->pv_input_voltage_) {
+          this->pv_input_voltage_->publish_state(value_pv_input_voltage_);
+     }
+     if (this->battery_voltage_scc_) {
+          this->battery_voltage_scc_->publish_state(value_battery_voltage_scc_);
+     }
+     if (this->battery_discharge_current_) {
+          this->battery_discharge_current_->publish_state(value_battery_discharge_current_);
+     }
+     if (this->add_sbu_priority_version_) {
+          this->add_sbu_priority_version_->publish_state(value_add_sbu_priority_version_);
+     }
+     if (this->configuration_status_) {
+          this->configuration_status_->publish_state(value_configuration_status_);
+     }
+     if (this->scc_firmware_version_) {
+          this->scc_firmware_version_->publish_state(value_scc_firmware_version_);
+     }
+     if (this->load_status_) {
+          this->load_status_->publish_state(value_load_status_);
+     }
+     if (this->battery_voltage_to_steady_while_charging_) {
+          this->battery_voltage_to_steady_while_charging_->publish_state(
+          value_battery_voltage_to_steady_while_charging_);
+     }
+     if (this->charging_status_) {
+          this->charging_status_->publish_state(value_charging_status_);
+     }
+     if (this->scc_charging_status_) {
+          this->scc_charging_status_->publish_state(value_scc_charging_status_);
+     }
+     if (this->ac_charging_status_) {
+          this->ac_charging_status_->publish_state(value_ac_charging_status_);
+     }
+     if (this->battery_voltage_offset_for_fans_on_) {
+          this->battery_voltage_offset_for_fans_on_->publish_state(value_battery_voltage_offset_for_fans_on_ / 10.0f);
+     }  //.1 scale
+     if (this->eeprom_version_) {
+          this->eeprom_version_->publish_state(value_eeprom_version_);
+     }
+     if (this->pv_charging_power_) {
+          this->pv_charging_power_->publish_state(value_pv_charging_power_);
+     }
+     if (this->charging_to_floating_mode_) {
+          this->charging_to_floating_mode_->publish_state(value_charging_to_floating_mode_);
+     }
+     if (this->switch_on_) {
+          this->switch_on_->publish_state(value_switch_on_);
+     }
+     if (this->dustproof_installed_) {
+          this->dustproof_installed_->publish_state(value_dustproof_installed_);
+     }
 
 }
 
