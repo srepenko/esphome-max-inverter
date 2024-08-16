@@ -368,13 +368,14 @@ void Inverter::send_next_poll_() {
           cmd += time.strftime("%Y%m%d");
           len += 8;
      }
-     crc16 = cal_crc_half_(cmd.c_str(), len);
+     uint8_t *command = cmd.c_str();
+     crc16 = cal_crc_half_(command, len);
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
-     this->write_array((const char *)cmd.c_str(), len); 
+     this->write_array(command, len); 
      this->write(((uint8_t)((crc16) >> 8)));   // highbyte
      this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
      this->write(0x0D);
