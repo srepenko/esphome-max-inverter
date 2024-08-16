@@ -63,7 +63,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SENSOR(battery_charging_current, QPIGS, int)
     INVERTER_SENSOR(battery_capacity_percent, QPIGS, int)
     INVERTER_SENSOR(inverter_heat_sink_temperature, QPIGS, int)
-    INVERTER_SENSOR(pv_input_current_for_battery, QPIGS, float)
+    INVERTER_SENSOR(pv_input_current_, QPIGS, float)
     INVERTER_SENSOR(pv_input_voltage, QPIGS, float)
     INVERTER_SENSOR(battery_voltage_scc, QPIGS, float)
     INVERTER_SENSOR(battery_discharge_current, QPIGS, int)

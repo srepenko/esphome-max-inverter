@@ -118,7 +118,7 @@ void Inverter::loop() {
                if (this->battery_charging_current_) {this->battery_charging_current_->publish_state(value_battery_charging_current_);}
                if (this->battery_capacity_percent_) {this->battery_capacity_percent_->publish_state(value_battery_capacity_percent_);}
                if (this->inverter_heat_sink_temperature_) {this->inverter_heat_sink_temperature_->publish_state(value_inverter_heat_sink_temperature_);}
-               if (this->pv_input_current_for_battery_) {this->pv_input_current_for_battery_->publish_state(value_pv_input_current_for_battery_);}
+               if (this->pv_input_current_) {this->pv_input_current_->publish_state(value_pv_input_current__);}
                if (this->pv_input_voltage_) {this->pv_input_voltage_->publish_state(value_pv_input_voltage_);}
                if (this->battery_voltage_scc_) {this->battery_voltage_scc_->publish_state(value_battery_voltage_scc_);}
                if (this->battery_discharge_current_) {this->battery_discharge_current_->publish_state(value_battery_discharge_current_);}
@@ -180,7 +180,7 @@ void Inverter::loop() {
                     &value_battery_charging_current_,                                                 //          10     // NOLINT
                     &value_battery_capacity_percent_,                                                 //          11     // NOLINT
                     &value_inverter_heat_sink_temperature_,                                           //          12     // NOLINT
-                    &value_pv_input_current_for_battery_,                                             //          13     // NOLINT
+                    &value_pv_input_current_,                                             //          13     // NOLINT
                     &value_pv_input_voltage_,                                                         //          14     // NOLINT
                     &value_battery_voltage_scc_,                                                      //          15     // NOLINT
                     &value_battery_discharge_current_,                                                //          16     // NOLINT
