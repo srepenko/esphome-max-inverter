@@ -149,7 +149,7 @@ void Inverter::loop() {
           //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
-               sscanf(tmp, "(%f %f %f %f %f %d %d %f %f %f %f %f %d %d %d %d %d %d %d %d %d %d %f %d %d",          // NOLINT
+               sscanf(tmp, "(%f %f %f %f %f %d %d %f %f %f %f %f %d %d %d %d %d %d %d %d %d %d %f %d %d",             // NOLINT
                          &value_grid_rating_voltage_, &value_grid_rating_current_, &value_ac_output_rating_voltage_,  // NOLINT
                          &value_ac_output_rating_frequency_, &value_ac_output_rating_current_,                        // NOLINT
                          &value_ac_output_rating_apparent_power_, &value_ac_output_rating_active_power_,              // NOLINT
@@ -166,7 +166,8 @@ void Inverter::loop() {
           } else if (cmd == "QPIGS") {     
                ESP_LOGD(TAG, "Decode QPIGS");
                sscanf(                                                                                                  // NOLINT
-                    tmp,                                                                                                 // NOLINT
+                    tmp,                     
+                    //(230.6 50.0 230.6 50.0 0484 0435 012 421 28.40 000 099 0040 00.0 060.3 00.00 00000 00010110 00 00 00000 111 0 00 0000
                     "(%f %f %f %f %d %d %d %d %f %d %d %d %f %f %f %d %1d%1d%1d%1d%1d%1d%1d%1d %d %d %d %1d%1d%1d",      // NOLINT
                     &value_grid_voltage_,                                                             //           1     // NOLINT
                     &value_grid_frequency_,                                                           //           2     // NOLINT
@@ -180,7 +181,7 @@ void Inverter::loop() {
                     &value_battery_charging_current_,                                                 //          10     // NOLINT
                     &value_battery_capacity_percent_,                                                 //          11     // NOLINT
                     &value_inverter_heat_sink_temperature_,                                           //          12     // NOLINT
-                    &value_pv_input_current_,                                             //          13     // NOLINT
+                    &value_pv_input_current_,                                                         //          13     // NOLINT
                     &value_pv_input_voltage_,                                                         //          14     // NOLINT
                     &value_battery_voltage_scc_,                                                      //          15     // NOLINT
                     &value_battery_discharge_current_,                                                //          16     // NOLINT
@@ -210,6 +211,14 @@ void Inverter::loop() {
                     this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);
                }
                this->state_ = STATE_IDLE;
+          } else if (cmd == "QLT") {
+               ESP_LOGD(TAG, "Decode QPI");
+               sscanf(tmp, "(%f", &value_total_output_load_energy_);
+               if (this->total_output_load_energy_) {
+                    this->total_output_load_energy_->publish_state(value_total_output_load_energy_);
+               }
+               this->state_ = STATE_IDLE;
+ 
           } else if (cmd == "QT") {
                ESP_LOGD(TAG, "Decode QT");
                this->state_ = STATE_IDLE;
