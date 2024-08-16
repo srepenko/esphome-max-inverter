@@ -355,14 +355,15 @@ void Inverter::send_next_poll_() {
           this->last_poll_ = millis();
      }
      crc16 = cal_crc_half_(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length);
+     std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
      //QEY QEM QED QLY QLM QLD
-     if (this->MAX_commands[this->last_polling_command_].command == "QEY"){
+     if (cmd == "QEY"){
           auto time = this->time_->now();
           ESP_LOGI(TAG, "%s%s", this->MAX_commands[this->last_polling_command_].command,time.strftime("%Y"));
-     } else if (this->MAX_commands[this->last_polling_command_].command == "QEM"){
+     } else if (cmd == "QEM"){
           auto time = this->time_->now();
           ESP_LOGI(TAG, "%s%s", this->MAX_commands[this->last_polling_command_].command,time.strftime("%Y%m"));
-     } else if (this->MAX_commands[this->last_polling_command_].command == "QED"){
+     } else if (cmd == "QED"){
           auto time = this->time_->now();
           ESP_LOGI(TAG, "%s%s", this->MAX_commands[this->last_polling_command_].command,time.strftime("%Y%m%d"));
      }
