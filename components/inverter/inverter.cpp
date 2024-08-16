@@ -167,7 +167,7 @@ void Inverter::loop() {
                     this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);
                }*/
           }
-          if (cmd == "QPIGS1") {
+          if (cmd == "QPIGS") {
           //QPIGS
           /*
                if (this->last_qpigs_) {
