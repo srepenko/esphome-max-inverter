@@ -6,7 +6,7 @@ from esphome.const import CONF_ID
 
 DEPENDENCIES = ["uart"]
 CODEOWNERS = ["@srepenko"]
-AUTO_LOAD = ["binary_sensor", "text_sensor", "sensor", "switch", "output", "select"]
+AUTO_LOAD = ["binary_sensor", "text_sensor", "sensor", "switch", "output", "select", "time"]
 MULTI_CONF = True
 
 CONF_INVERTER_ID = "inverter_id"
