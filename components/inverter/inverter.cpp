@@ -356,7 +356,7 @@ void Inverter::send_next_poll_() {
      }
      //QEY QEM QED QLY QLM QLD 
      std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
-     size_t len = this->MAX_commands[this->last_polling_command_].length;
+     uint8_t len = this->MAX_commands[this->last_polling_command_].length;
      auto time = this->time_->now();
      if (cmd == "QEY"){
           cmd += time.strftime("%Y");
@@ -368,7 +368,7 @@ void Inverter::send_next_poll_() {
           cmd += time.strftime("%Y%m%d");
           len += 8;
      }
-     crc16 = cal_crc_half_(cmd, len);
+     crc16 = cal_crc_half_(cmd.c_str(), len);
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
