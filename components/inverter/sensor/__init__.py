@@ -19,6 +19,7 @@ from esphome.const import (
 )
 
 from .. import CONF_INVERTER_ID, INVERTER_COMPONENT_SCHEMA
+from time import ID
 
 DEPENDENCIES = ["uart"]
 
