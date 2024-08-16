@@ -344,7 +344,7 @@ void Inverter::send_next_poll_() {
      }
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
-     this->MAX_commands[this->last_polling_command_].last_run = this->command_start_millis_;
+     this->MAX_commands[this->last_polling_command_].last_run = millis();
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
      this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length+3); 
