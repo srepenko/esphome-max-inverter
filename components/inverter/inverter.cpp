@@ -360,13 +360,13 @@ void Inverter::send_next_poll_() {
      auto time = this->time_->now();
      if (cmd == "QEY"){
           cmd += time.strftime("%Y");
-          le += 4;
+          len += 4;
      } else if (cmd == "QEM"){
           cmd += time.strftime("%Y%m");
-          le += 6;
+          len += 6;
      } else if (cmd == "QED"){
           cmd += time.strftime("%Y%m%d");
-          le += 8;
+          len += 8;
      }
      crc16 = cal_crc_half_(cmd, len);
      this->state_ = STATE_POLL;
