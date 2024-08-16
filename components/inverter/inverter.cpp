@@ -206,12 +206,24 @@ void Inverter::loop() {
                ESP_LOGD(TAG, "Decode QPI");
                this->state_ = STATE_IDLE;
           } else if (cmd == "QET") {
-               ESP_LOGD(TAG, "Decode QPI");
                sscanf(tmp, "(%f", &value_total_pv_generated_energy_);
                value_total_pv_generated_energy_ = value_total_pv_generated_energy_/1000;
-               if (this->total_pv_generated_energy_) {
-                    this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);
-               }
+               if (this->total_pv_generated_energy_) {this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);}
+               this->state_ = STATE_IDLE;
+          } else if (cmd == "QEY") {
+               sscanf(tmp, "(%f", &value_year_pv_generated_energy_);
+               value_year_pv_generated_energy_ = value_year_pv_generated_energy_/1000;
+               if (this->year_pv_generated_energy_) {this->year_pv_generated_energy_->publish_state(value_year_pv_generated_energy_);}
+               this->state_ = STATE_IDLE;
+          } else if (cmd == "QEM") {
+               sscanf(tmp, "(%f", &value_month_pv_generated_energy_);
+               value_month_pv_generated_energy_ = value_month_pv_generated_energy_/1000;
+               if (this->month_pv_generated_energy_) {this->month_pv_generated_energy_->publish_state(value_month_pv_generated_energy_);}
+               this->state_ = STATE_IDLE;
+          } else if (cmd == "QED") {
+               sscanf(tmp, "(%f", &value_day_pv_generated_energy_);
+               value_day_pv_generated_energy_ = value_day_pv_generated_energy_/1000;
+               if (this->day_pv_generated_energy_) {this->day_pv_generated_energy_->publish_state(value_day_pv_generated_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QLT") {
                ESP_LOGD(TAG, "Decode QPI");
@@ -221,7 +233,6 @@ void Inverter::loop() {
                     this->total_output_load_energy_->publish_state(value_total_output_load_energy_);
                }
                this->state_ = STATE_IDLE;
- 
           } else if (cmd == "QT") {
                ESP_LOGD(TAG, "Decode QT");
                this->state_ = STATE_IDLE;
