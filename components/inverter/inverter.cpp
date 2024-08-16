@@ -356,7 +356,7 @@ void Inverter::send_next_poll_() {
      }
      //QEY QEM QED QLY QLM QLD 
      std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
-     uint8_t len = this->MAX_commands[this->last_polling_command_].length;
+     size_t len = this->MAX_commands[this->last_polling_command_].length;
      auto time = this->time_->now();
      if (cmd == "QEY"){
           cmd += time.strftime("%Y");
