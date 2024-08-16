@@ -274,10 +274,10 @@ void Inverter::loop() {
      if (this->state_ == STATE_POLL) {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
-               this->MAX_commands[this->last_polling_command_].last_run = 0;
                std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
                str = str.substr(0, this->MAX_commands[this->last_polling_command_].length); 
                ESP_LOGW(TAG, "timeout command to poll: %s, last_run: %d", str.c_str(), this->MAX_commands[this->last_polling_command_].last_run);
+               this->MAX_commands[this->last_polling_command_].last_run = 0;
                this->state_ = STATE_IDLE;
           } else {
           }
