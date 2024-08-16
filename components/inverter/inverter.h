@@ -249,8 +249,6 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
             STATE_COMMAND_COMPLETE = 4,
             STATE_POLL_CHECKED = 5,
             STATE_POLL_DECODED = 6,
-            STATE_POLL_DECODED_QPIRI = 7,
-            STATE_POLL_DECODED_QPIGS = 8,
         };
 
         uint8_t last_polling_command_ = 0;
