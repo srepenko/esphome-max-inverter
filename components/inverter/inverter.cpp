@@ -56,7 +56,7 @@ void Inverter::loop() {
           std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
           cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
-          if (cmd == "QPIRI") {
+          if (cmd == "QPIRI1") {
                //QPIRI
                /*
                if (this->last_qpiri_) {
@@ -167,7 +167,7 @@ void Inverter::loop() {
                     this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);
                }*/
           }
-          if (cmd == "QPIGS") {
+          if (cmd == "QPIGS1") {
           //QPIGS
           /*
                if (this->last_qpigs_) {
