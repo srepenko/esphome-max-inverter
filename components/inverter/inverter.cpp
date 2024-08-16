@@ -298,7 +298,7 @@ void Inverter::loop() {
 
 void Inverter::update() {
 
-     auto time = id(sntp_time).now();
+     auto time = this->time_.now();
      ESP_LOGI(TAG, "Time now: %d", time);
 }
 
