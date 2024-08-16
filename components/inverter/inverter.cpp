@@ -362,10 +362,7 @@ void Inverter::send_next_poll_() {
      this->write(((uint8_t)((crc16) >> 8)));   // highbyte
      this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
      this->write(0x0D);
-
-     std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
-     str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
-     ESP_LOGD(TAG, "Sending polling command : %s", str.c_str());
+     ESP_LOGD(TAG, "Sending polling command : %s", (const char *)this->MAX_commands[this->last_polling_command_].command);
 }
 
 void Inverter::add_polling_command_(const char *command) {
