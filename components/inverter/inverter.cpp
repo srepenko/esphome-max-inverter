@@ -358,13 +358,13 @@ void Inverter::send_next_poll_() {
      //QEY QEM QED QLY QLM QLD
      if (this->MAX_commands[this->last_polling_command_].command == "QEY"){
           auto time = this->time_->now();
-          ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y"));
+          ESP_LOGI(TAG, "%s%s", this->MAX_commands[this->last_polling_command_].command,time.strftime("%Y"));
      } else if (this->MAX_commands[this->last_polling_command_].command == "QEM"){
           auto time = this->time_->now();
-          ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y%m"));
+          ESP_LOGI(TAG, "%s%s", this->MAX_commands[this->last_polling_command_].command,time.strftime("%Y%m"));
      } else if (this->MAX_commands[this->last_polling_command_].command == "QED"){
           auto time = this->time_->now();
-          ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y%m%d"));
+          ESP_LOGI(TAG, "%s%s", this->MAX_commands[this->last_polling_command_].command,time.strftime("%Y%m%d"));
      }
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
