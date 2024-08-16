@@ -358,7 +358,11 @@ void Inverter::send_next_poll_() {
      this->MAX_commands[this->last_polling_command_].last_run = millis();
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
-     this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length+3); 
+     this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length); 
+     this->write(((uint8_t)((crc16) >> 8)));   // highbyte
+     this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
+     this->write(0x0D);
+
      std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
      str = str.substr(0, MAX_commands[this->last_polling_command_].length); 
      ESP_LOGD(TAG, "Sending polling command : %s", str.c_str());
