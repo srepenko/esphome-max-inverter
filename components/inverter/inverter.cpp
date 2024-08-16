@@ -103,7 +103,7 @@ void Inverter::loop() {
           if (this->last_qpigs_) {
                this->last_qpigs_->publish_state(tmp);
           }
-          */
+          
           if (this->grid_voltage_) {this->grid_voltage_->publish_state(value_grid_voltage_);}
           if (this->grid_frequency_) {this->grid_frequency_->publish_state(value_grid_frequency_);}
           if (this->ac_output_voltage_) {this->ac_output_voltage_->publish_state(value_ac_output_voltage_);}
@@ -134,6 +134,7 @@ void Inverter::loop() {
           if (this->charging_to_floating_mode_) {this->charging_to_floating_mode_->publish_state(value_charging_to_floating_mode_);}
           if (this->switch_on_) {this->switch_on_->publish_state(value_switch_on_);}
           if (this->dustproof_installed_) {this->dustproof_installed_->publish_state(value_dustproof_installed_);}
+          */
           this->state_ = STATE_IDLE;
      }
      if (this->state_ == STATE_POLL_CHECKED) {
