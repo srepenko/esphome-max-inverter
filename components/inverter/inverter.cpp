@@ -356,28 +356,30 @@ void Inverter::send_next_poll_() {
      }
      //QEY QEM QED QLY QLM QLD 
      std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
+     uint8_t len = this->MAX_commands[this->last_polling_command_].length;
      auto time = this->time_->now();
      if (cmd == "QEY"){
           cmd += time.strftime("%Y");
+          le += 4;
      } else if (cmd == "QEM"){
           cmd += time.strftime("%Y%m");
+          le += 6;
      } else if (cmd == "QED"){
-          
           cmd += time.strftime("%Y%m%d");
+          le += 8;
      }
-
-     crc16 = cal_crc_half_(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length);     
+     crc16 = cal_crc_half_(cmd, len);
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
      
-     this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length); 
+     this->write_array(cmd, len); 
      this->write(((uint8_t)((crc16) >> 8)));   // highbyte
      this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
      this->write(0x0D);
-     ESP_LOGD(TAG, "Sending polling command : %s", (const char *)this->MAX_commands[this->last_polling_command_].command);
+     ESP_LOGD(TAG, "Sending polling command : %s", cmd);
 }
 
 void Inverter::add_polling_command_(const char *command) {
