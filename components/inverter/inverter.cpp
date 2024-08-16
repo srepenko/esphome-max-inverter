@@ -162,7 +162,7 @@ void Inverter::loop() {
                          &value_battery_redischarge_voltage_, &value_pv_ok_condition_for_parallel_,                   // NOLINT
                          &value_pv_power_balance_);                                                                   // NOLINT
 
-               this->state_ = STATE_POLL_DECODED_QPIRI;
+               this->state_ = STATE_POLL_DECODED;
           } else if (cmd == "QPIGS") {     
                ESP_LOGD(TAG, "Decode QPIGS");
                sscanf(                                                                                                  // NOLINT
@@ -199,7 +199,7 @@ void Inverter::loop() {
                     &value_switch_on_,                                                                //          29     // NOLINT
                     &value_dustproof_installed_                                                       //          30     // NOLINT
                );
-               this->state_ = STATE_POLL_DECODED_QPIGS;
+               this->state_ = STATE_POLL_DECODED;
           } else if (cmd == "QPI") {
                ESP_LOGD(TAG, "Decode QPI");
                this->state_ = STATE_IDLE;
