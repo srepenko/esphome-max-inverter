@@ -298,7 +298,7 @@ void Inverter::loop() {
 
 void Inverter::update() {
 
-     auto time = strftime(this->time_->now());
+     auto time = strftime(this->time_->now().timestamp);
      //ESP_LOGI(TAG, "Time now: %02d-%02d-%02d %02d:%02d:%02d", time.year, time.month, time.day_of_month, time.hour, time.minute, time.second);
      ESP_LOGI(TAG, "Time now: %s", time);
 }
