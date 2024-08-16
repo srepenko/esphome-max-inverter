@@ -354,26 +354,26 @@ void Inverter::send_next_poll_() {
           }
           this->last_poll_ = millis();
      }
-     crc16 = cal_crc_half_(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length);
+     //QEY QEM QED QLY QLM QLD 
      std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
-     
+     auto time = this->time_->now();
+     if (cmd == "QEY"){
+          cmd += time.strftime("%Y");
+     } else if (cmd == "QEM"){
+          cmd += time.strftime("%Y%m");
+     } else if (cmd == "QED"){
+          
+          cmd += time.strftime("%Y%m%d");
+     }
+
+     crc16 = cal_crc_half_(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length);     
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
      this->empty_uart_buffer_();
      this->read_pos_ = 0;
-     //QEY QEM QED QLY QLM QLD 
+     
      this->write_array(this->MAX_commands[this->last_polling_command_].command, this->MAX_commands[this->last_polling_command_].length); 
-     if (cmd == "QEY"){
-          auto time = this->time_->now();
-          this->write_array(time.strftime("%Y"), 4);
-     } else if (cmd == "QEM"){
-          auto time = this->time_->now();
-          this->write_array(time.strftime("%Y%m"), 6);
-     } else if (cmd == "QED"){
-          auto time = this->time_->now();
-          this->write_array(time.strftime("%Y%m%d"), 8);
-     }
      this->write(((uint8_t)((crc16) >> 8)));   // highbyte
      this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
      this->write(0x0D);
