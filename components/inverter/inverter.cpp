@@ -368,7 +368,7 @@ void Inverter::send_next_poll_() {
           cmd += time.strftime("%Y%m%d");
           len += 8;
      }
-     crc16 = cal_crc_half_(cmd.c_str, len);
+     crc16 = cal_crc_half_(cmd.c_str(), len);
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
      this->MAX_commands[this->last_polling_command_].last_run = millis();
