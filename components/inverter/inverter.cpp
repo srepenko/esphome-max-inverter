@@ -368,7 +368,7 @@ void Inverter::send_next_poll_() {
           cmd += time.strftime("%Y%m%d");
           len += 8;
      }
-     char* command = new char[cmd.length() + 1];;
+     uint8_t* command = new uint8_t[cmd.length() + 1];;
      strcpy(command, cmd.c_str());
      crc16 = cal_crc_half_(command, len);
      this->state_ = STATE_POLL;
