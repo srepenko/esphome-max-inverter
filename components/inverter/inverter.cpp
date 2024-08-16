@@ -55,57 +55,6 @@ void Inverter::loop() {
           std::string mode;
           this->state_ = STATE_IDLE;
      }
-     if (this->state_ == STATE_POLL_COMPLETE) {
-          //ESP_LOGI(TAG, "Recive %d byte: %s", this->read_pos_, this->read_buffer_);
-          if (this->check_incoming_crc_()) {
-               if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
-               this->read_buffer_[3] == 'K') {
-                    this->state_ = STATE_IDLE;
-                    return;
-               }
-               // crc ok
-               this->state_ = STATE_POLL_CHECKED;
-               return;
-          } else {
-               this->state_ = STATE_IDLE;
-          }
-     }
-     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
-          while (this->available()) {
-               uint8_t byte;
-               this->read_byte(&byte);
-               if (this->read_pos_ == READ_BUFFER_LENGTH) {
-                         this->read_pos_ = 0;
-                         this->empty_uart_buffer_();
-               }
-               this->read_buffer_[this->read_pos_] = byte;
-               this->read_pos_++;
-               if (byte == 0x0D) {
-               // end of answer
-                    this->read_buffer_[this->read_pos_] = 0;
-                    this->empty_uart_buffer_();
-                    if (this->state_ == STATE_POLL) {
-                         this->state_ = STATE_POLL_COMPLETE;
-                    }
-                    if (this->state_ == STATE_COMMAND) {
-                         this->state_ = STATE_COMMAND_COMPLETE;
-                    }
-               }
-          }  // available
-     }
-     if (this->state_ == STATE_COMMAND) {
-          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
-               // command timeout
-               const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
-               this->command_start_millis_ = millis();
-               ESP_LOGD(TAG, "timeout command from queue: %s", command);
-               this->command_queue_[this->command_queue_position_] = std::string("");
-               this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
-               this->state_ = STATE_IDLE;
-               return;
-          } else {
-          }
-     }
      if (this->state_ == STATE_POLL_CHECKED) {
           bool enabled = true;
           //std::string fc;
@@ -179,6 +128,57 @@ void Inverter::loop() {
           }
           this->state_ = STATE_IDLE;
           return;
+     }
+     if (this->state_ == STATE_POLL_COMPLETE) {
+          //ESP_LOGI(TAG, "Recive %d byte: %s", this->read_pos_, this->read_buffer_);
+          if (this->check_incoming_crc_()) {
+               if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
+               this->read_buffer_[3] == 'K') {
+                    this->state_ = STATE_IDLE;
+                    return;
+               }
+               // crc ok
+               this->state_ = STATE_POLL_CHECKED;
+               return;
+          } else {
+               this->state_ = STATE_IDLE;
+          }
+     }
+     if (this->state_ == STATE_COMMAND || this->state_ == STATE_POLL) {
+          while (this->available()) {
+               uint8_t byte;
+               this->read_byte(&byte);
+               if (this->read_pos_ == READ_BUFFER_LENGTH) {
+                         this->read_pos_ = 0;
+                         this->empty_uart_buffer_();
+               }
+               this->read_buffer_[this->read_pos_] = byte;
+               this->read_pos_++;
+               if (byte == 0x0D) {
+               // end of answer
+                    this->read_buffer_[this->read_pos_] = 0;
+                    this->empty_uart_buffer_();
+                    if (this->state_ == STATE_POLL) {
+                         this->state_ = STATE_POLL_COMPLETE;
+                    }
+                    if (this->state_ == STATE_COMMAND) {
+                         this->state_ = STATE_COMMAND_COMPLETE;
+                    }
+               }
+          }  // available
+     }
+     if (this->state_ == STATE_COMMAND) {
+          if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
+               // command timeout
+               const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
+               this->command_start_millis_ = millis();
+               ESP_LOGD(TAG, "timeout command from queue: %s", command);
+               this->command_queue_[this->command_queue_position_] = std::string("");
+               this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
+               this->state_ = STATE_IDLE;
+               return;
+          } else {
+          }
      }
      if (this->state_ == STATE_POLL) {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
