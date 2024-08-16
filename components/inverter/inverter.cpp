@@ -299,7 +299,7 @@ void Inverter::loop() {
 void Inverter::update() {
 
      auto time = this->time_->now();
-     ESP_LOGI(TAG, "Time now: %d", time);
+     ESP_LOGI(TAG, "Time now: %02d-%02d-%02d %02d:%02d:%02d", time.year, time.month, time.day_of_month, time.hour, time.minute, time.second);
 }
 
 void Inverter::dump_config() {
