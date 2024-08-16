@@ -302,7 +302,7 @@ void Inverter::update() {
      char strftime_buf[64];
      time.strftime(strftime_buf, sizeof(strftime_buf), "%Y-%m-%d %H:%M");
      //ESP_LOGI(TAG, "Time now: %02d-%02d-%02d %02d:%02d:%02d", time.year, time.month, time.day_of_month, time.hour, time.minute, time.second);
-     ESP_LOGI(TAG, "Time now: %s", strftime_buf);
+     ESP_LOGI(TAG, "Time now: %s", time.strftime("%Y-%m-%d %H:%M"));
 }
 
 void Inverter::dump_config() {
