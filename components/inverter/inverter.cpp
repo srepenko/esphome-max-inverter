@@ -56,7 +56,7 @@ void Inverter::loop() {
           std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
           cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
-          if (cmd == "QPIRI1") {
+          if (cmd == "QPIRI") {
                //QPIRI
                /*
                if (this->last_qpiri_) {
