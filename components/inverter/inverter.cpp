@@ -10,13 +10,14 @@ namespace inverter {
 
 void Inverter::setup() {
      this->state_ = STATE_IDLE;
+     /*
      for (auto &used_polling_command : this->MAX_commands) { 
           uint16_t crc16 = cal_crc_half_(used_polling_command.command, used_polling_command.length);
           used_polling_command.command[used_polling_command.length] = ((uint8_t)((crc16) >> 8));
           used_polling_command.command[used_polling_command.length+1] = ((uint8_t)((crc16) &0xff));
           ESP_LOGD(TAG, "Commands: %s", used_polling_command.command);
      } 
-
+     */
 //     uint16_t crc16 = cal_crc_half_(byte_command, length-3);
 //     byte_command[lenght-3] = ((uint8_t)((crc16) >> 8));
 //     byte_command[lenght-2] = ((uint8_t)((crc16) &0xff));
@@ -53,7 +54,7 @@ void Inverter::loop() {
      }
      if (this->state_ == STATE_POLL_DECODED) {
           std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
-          cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
+          //cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           if (cmd == "QPIRI") {
                //QPIRI
                /*
@@ -145,7 +146,7 @@ void Inverter::loop() {
           char tmp[READ_BUFFER_LENGTH];
           sprintf(tmp, "%s", this->read_buffer_);
           std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
-          cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
+          //cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           //ESP_LOGD(TAG, "Decode %s - millis: %d", cmd, millis()-this->command_start_millis_);
           if (cmd == "QPIRI") {
                ESP_LOGD(TAG, "Decode QPIRI");
