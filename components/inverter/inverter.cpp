@@ -137,12 +137,14 @@ void Inverter::loop() {
                if (this->bus_voltage_) {this->bus_voltage_->publish_state(value_bus_voltage_);}
                if (this->battery_voltage_) {this->battery_voltage_->publish_state(value_battery_voltage_);}
                if (this->battery_charging_current_) {this->battery_charging_current_->publish_state(value_battery_charging_current_);}
+               if (this->battery_charge_power_) {this->battery_charge_power_->publish_state(value_battery_charge_current_*value_battery_voltage_);}
                if (this->battery_capacity_percent_) {this->battery_capacity_percent_->publish_state(value_battery_capacity_percent_);}
                if (this->inverter_heat_sink_temperature_) {this->inverter_heat_sink_temperature_->publish_state(value_inverter_heat_sink_temperature_);}
                if (this->pv_input_current_) {this->pv_input_current_->publish_state(value_pv_input_current_);}
                if (this->pv_input_voltage_) {this->pv_input_voltage_->publish_state(value_pv_input_voltage_);}
                if (this->battery_voltage_scc_) {this->battery_voltage_scc_->publish_state(value_battery_voltage_scc_);}
                if (this->battery_discharge_current_) {this->battery_discharge_current_->publish_state(value_battery_discharge_current_);}
+               if (this->battery_discharge_power_) {this->battery_discharge_power_->publish_state(value_battery_discharge_current_*value_battery_voltage_);}
                if (this->add_sbu_priority_version_) {this->add_sbu_priority_version_->publish_state(value_add_sbu_priority_version_);}
                if (this->configuration_status_) {this->configuration_status_->publish_state(value_configuration_status_);}
                if (this->scc_firmware_version_) {this->scc_firmware_version_->publish_state(value_scc_firmware_version_);}

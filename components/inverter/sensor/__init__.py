@@ -60,12 +60,14 @@ CONF_AC_OUTPUT_APPARENT_POWER = "ac_output_apparent_power"
 CONF_AC_OUTPUT_ACTIVE_POWER = "ac_output_active_power"
 CONF_OUTPUT_LOAD_PERCENT = "output_load_percent"
 CONF_BATTERY_CHARGING_CURRENT = "battery_charging_current"
+CONF_BATTERY_CHARGING_POWER = "battery_charging_power"
 CONF_BATTERY_CAPACITY_PERCENT = "battery_capacity_percent"
 CONF_INVERTER_HEAT_SINK_TEMPERATURE = "inverter_heat_sink_temperature"
 CONF_PV_INPUT_CURRENT = "pv_input_current"
 CONF_PV_INPUT_VOLTAGE = "pv_input_voltage"
 CONF_BATTERY_VOLTAGE_SCC = "battery_voltage_scc"
 CONF_BATTERY_DISCHARGE_CURRENT = "battery_discharge_current"
+CONF_BATTERY_DISCHARGE_POWER = "battery_discharge_power"
 CONF_ADD_SBU_PRIORITY_VERSION = "add_sbu_priority_version"
 CONF_CONFIGURATION_STATUS = "configuration_status"
 CONF_SCC_FIRMWARE_VERSION = "scc_firmware_version"
@@ -248,6 +250,11 @@ TYPES = {
         accuracy_decimals=1,
         device_class=DEVICE_CLASS_CURRENT,
     ),
+    CONF_BATTERY_CHARGING_POWER: sensor.sensor_schema(
+        unit_of_measurement=UNIT_WATT,
+        accuracy_decimals=1,
+        device_class=DEVICE_CLASS_POWER,
+    ),
     CONF_BATTERY_CAPACITY_PERCENT: sensor.sensor_schema(
         unit_of_measurement=UNIT_PERCENT,
         accuracy_decimals=1,
@@ -276,6 +283,11 @@ TYPES = {
         unit_of_measurement=UNIT_AMPERE,
         accuracy_decimals=1,
         device_class=DEVICE_CLASS_CURRENT,
+    ),
+    CONF_BATTERY_DISCHARGE_POWER: sensor.sensor_schema(
+        unit_of_measurement=UNIT_WATT,
+        accuracy_decimals=1,
+        device_class=DEVICE_CLASS_POWER,
     ),
     CONF_BATTERY_VOLTAGE_OFFSET_FOR_FANS_ON: sensor.sensor_schema(
         unit_of_measurement=UNIT_VOLT,
