@@ -279,8 +279,8 @@ void Inverter::loop() {
           if (this->check_incoming_crc_()) {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
-                    const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
-                    ESP_LOGW(TAG, "Recive NAK  - %s", command);
+                    std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
+                    ESP_LOGW(TAG, "Recive NAK  - %s", str);
                     this->state_ = STATE_IDLE;
                     return;
                }
