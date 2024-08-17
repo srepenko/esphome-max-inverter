@@ -50,6 +50,9 @@ struct PollingCommand {
   INVERTER_VALUED_ENTITY_(inverter::InverterSelect, name, polling_command, value_type)
 #define INVERTER_BINARY_SENSOR(name, polling_command, value_type) \
     INVERTER_VALUED_ENTITY_(binary_sensor::BinarySensor, name, polling_command, value_type)
+#define INVERTER_VALUED_TEXT_SENSOR(name, polling_command, value_type) \
+  INVERTER_VALUED_ENTITY_(text_sensor::TextSensor, name, polling_command, value_type)
+#define INVERTER_TEXT_SENSOR(name, polling_command) INVERTER_ENTITY_(text_sensor::TextSensor, name, polling_command)
 
 class Inverter : public uart::UARTDevice, public PollingComponent {
     // QPIGS values
