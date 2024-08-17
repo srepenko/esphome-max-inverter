@@ -196,7 +196,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_BINARY_SENSOR(discharge_onoff, QBATCD, bool)
     INVERTER_BINARY_SENSOR(discharge_with_standby_onoff, QBATCD, bool)
     INVERTER_BINARY_SENSOR(charge_onoff, QBATCD, bool)
-
+*/
     INVERTER_TEXT_SENSOR(last_qpigs, QPIGS)
     INVERTER_TEXT_SENSOR(last_qpiri, QPIRI)
     INVERTER_TEXT_SENSOR(last_qmod, QMOD)
@@ -206,7 +206,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_TEXT_SENSOR(last_qpi, QPI)
     INVERTER_TEXT_SENSOR(last_qmn, QMN)
     INVERTER_TEXT_SENSOR(last_qbatcd, QBATCD)
-*/
+
     INVERTER_SWITCH(output_source_priority_utility_switch, QPIRI)
     INVERTER_SWITCH(output_source_priority_solar_switch, QPIRI)
     INVERTER_SWITCH(output_source_priority_battery_switch, QPIRI)
