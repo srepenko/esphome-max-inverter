@@ -294,7 +294,6 @@ TYPES = {
         device_class=DEVICE_CLASS_POWER,
     ),
     CONF_TOTAL_PV_GENERATED_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -303,7 +302,6 @@ TYPES = {
         icon= 'mdi:meter-electric',
     ),
     CONF_YEAR_PV_GENERATED_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -312,7 +310,6 @@ TYPES = {
         icon= 'mdi:meter-electric',
     ),
     CONF_MONTH_PV_GENERATED_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -321,7 +318,6 @@ TYPES = {
         icon= 'mdi:meter-electric',
     ),
     CONF_DAY_PV_GENERATED_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -330,7 +326,6 @@ TYPES = {
         icon= 'mdi:meter-electric',
     ),
     CONF_TOTAL_OUTPUT_LOAD_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -339,7 +334,6 @@ TYPES = {
         icon= 'mdi:meter-electric',
     ),
     CONF_YEAR_OUTPUT_LOAD_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -348,7 +342,6 @@ TYPES = {
         icon= 'mdi:meter-electric',
     ),
     CONF_MONTH_OUTPUT_LOAD_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
@@ -358,7 +351,6 @@ TYPES = {
     ),
 
     CONF_DAY_OUTPUT_LOAD_ENERGY: sensor.sensor_schema(
-        friendly_name= 'Total PV generated energy',
         unit_of_measurement= 'kWh',
         accuracy_decimals= '2',
         state_class= 'total_increasing',
