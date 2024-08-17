@@ -280,7 +280,7 @@ void Inverter::loop() {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
                     std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
-                    ESP_LOGW(TAG, "Recive NAK  - %s", str);
+                    ESP_LOGW(TAG, "Recive NAK  - %s", str.c_str());
                     this->state_ = STATE_IDLE;
                     return;
                }
