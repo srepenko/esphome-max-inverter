@@ -79,7 +79,7 @@ void Inverter::loop() {
           //cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           if (cmd == "QPIRI") {
                //QPIRI
-               if (this->last_qpiri_) {this->last_qpiri_->publish_state(tmp);}               
+               //if (this->last_qpiri_) {this->last_qpiri_->publish_state(tmp);}               
                if (this->grid_rating_voltage_) {this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_);}
                if (this->grid_rating_current_) {this->grid_rating_current_->publish_state(value_grid_rating_current_);}
                if (this->ac_output_rating_voltage_) {this->ac_output_rating_voltage_->publish_state(value_ac_output_rating_voltage_);}
@@ -100,7 +100,7 @@ void Inverter::loop() {
                if (this->input_voltage_range_switch_) {this->input_voltage_range_switch_->publish_state(value_input_voltage_range_ == 1);}
                if (this->output_source_priority_) {this->output_source_priority_->publish_state(value_output_source_priority_);}
                // special for output source priority select
-               /*
+               
                if (this->output_source_priority_select_) {std::string value = esphome::to_string(value_output_source_priority_);this->output_source_priority_select_->map_and_publish(value);} 
                // special for output source priority switches
                if (this->output_source_priority_utility_switch_) {this->output_source_priority_utility_switch_->publish_state(value_output_source_priority_ == 0);}
@@ -118,7 +118,7 @@ void Inverter::loop() {
                if (this->pv_power_balance_) {this->pv_power_balance_->publish_state(value_pv_power_balance_ == 1);}
                // special for power balance switch
                if (this->pv_power_balance_switch_) {this->pv_power_balance_switch_->publish_state(value_pv_power_balance_ == 1);}
-               */
+               
           }
           if (cmd == "QPIGS") {
                //QPIGS
