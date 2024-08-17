@@ -3,7 +3,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/switch/switch.h"
 #include "esphome/components/select/select.h"
-#include "../select/select.h"
+#include "./select/select.h"
 #include "esphome/components/text_sensor/text_sensor.h"
 #include "esphome/components/uart/uart.h"
 #include "esphome/core/automation.h"
@@ -132,10 +132,10 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_SENSOR(day_output_load_energy, QLD, float)
 
     // QMOD values
-    INVERTER_VALUED_TEXT_SENSOR(device_mode, QMOD, char)
+//    INVERTER_VALUED_TEXT_SENSOR(device_mode, QMOD, char)
 
     // QPI values
-    INVERTER_VALUED_TEXT_SENSOR(device_protocol_id, QPI, char*)
+//    INVERTER_VALUED_TEXT_SENSOR(device_protocol_id, QPI, char*)
 /*
     // QT values
     INVERTER_SENSOR(device_time, QT, int)
