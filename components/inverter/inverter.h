@@ -142,7 +142,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
 /*
     // QT values
     INVERTER_SENSOR(device_time, QT, int)
-
+*/
     // QFLAG values
     INVERTER_BINARY_SENSOR(silence_buzzer_open_buzzer, QFLAG, int)
     INVERTER_BINARY_SENSOR(overload_bypass_function, QFLAG, int)
@@ -196,7 +196,7 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_BINARY_SENSOR(discharge_onoff, QBATCD, bool)
     INVERTER_BINARY_SENSOR(discharge_with_standby_onoff, QBATCD, bool)
     INVERTER_BINARY_SENSOR(charge_onoff, QBATCD, bool)
-*/
+
     INVERTER_TEXT_SENSOR(last_qpigs, QPIGS)
     INVERTER_TEXT_SENSOR(last_qpiri, QPIRI)
     INVERTER_TEXT_SENSOR(last_qmod, QMOD)
