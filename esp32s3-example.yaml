@@ -1,82 +1,294 @@
+# Warning:
+# If you configure a lot of the possible sensors etc. it could be that you run
+# out of memory (on esp8266). If you configure nearly all sensors etc. you run
+# in a stack-size issue. In this case you have to increase stack size!
+
 substitutions:
-  name: max-inverter
-  device_description: "Monitor and control a hybrid inverter via MAX communication protocol"
+  name: solarinverter
+  inv_id: solar_inverter
+  device_description: "Hybrid inverter via MAX communication"
   external_components_source: github://srepenko/esphome-max-inverter@main
 
 esphome:
-  name: esp32s3-template
+  name: ${name}
+  comment: ${device_description}
+  min_version: 2024.6.0
   platformio_options:
+    board_build.f_flash: 40000000L
     board_build.flash_mode: dio
-  on_boot:
-    - light.turn_on:
-        id: my_light
-        effect: addressable_random_twinkle
-
+    board_build.flash_size: 4MB
 
 esp32:
-  board: esp32-s3-devkitc-1
-  variant: esp32s3
+  variant: ESP32C3
+  board: esp32-c3-devkitm-1
   framework:
-    type: esp-idf
-    version: recommended
-    sdkconfig_options:
-      CONFIG_ESP32_S3_BOX_BOARD: "y"
-     
-psram:
-  mode: octal
-  speed: 80MHz
+    type: arduino
+    
 
-#ota:
-#  - platform: esphome
-#    password: "e72603f06381a45911d8386b7c5e08b8"
-#  on_begin:
-#    then:
-#      - switch.turn_off: ble_client_switch0
-#      - logger.log: "BLE connection suspended for OTA update"
+ota:
+  - platform: esphome
+    password: "feffa6f26bd841e23a1a4507442729bf"
 
 logger:
-  level: DEBUG
+  level: INFO
 
 wifi:
-  ssid: "KTM"#!secret wifi_ssid
-  password: "qawsedrf"#!secret wifi_password
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
   
+# Enable Home Assistant API
 api:
+  encryption:
+    key: "aZo6/nozYhUMb8/Tc6XnDMCScqMhZ10nAzl2NkECgwU="
 
 web_server:
 
-light:
-  - platform: esp32_rmt_led_strip
-    id: my_light  
-    rgb_order: RGB
-    pin: GPIO48
-    num_leds: 1
-    rmt_channel: 0
-    chipset: ws2812
-    name: "My Light"
-    effects:
-      - pulse:
-          transition_length: 550ms
-          update_interval: 550ms
-      - random:
-          name: Random Effect With Custom Values
-          transition_length: 5s
-          update_interval: 7s
-      - addressable_random_twinkle:
-          name: Random Twinkle Effect With Custom Values
-          twinkle_probability: 5%
-          progress_interval: 32ms
-      - addressable_fireworks:
-          name: Fireworks Effect With Custom Values
-          update_interval: 32ms
-          spark_probability: 10%
-          use_random_color: false
-          fade_out_rate: 120
-      - addressable_twinkle:
-          name: Twinkle Effect With Custom Values
-          twinkle_probability: 5%
-          progress_interval: 4ms
-      - addressable_scan:
-          name: Scan Effect With Custom Values
-          move_interval: 100ms
-          scan_width: 1
+external_components:
+  - source: ${external_components_source}
+    refresh: 0s
+
+uart:
+  id: uart_0
+  baud_rate: 2400
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+
+time:
+  - platform: sntp
+    id: sntp_time
+    on_time_sync:
+      then:
+        - logger.log: "Synchronized system clock"
+        
+inverter:
+  uart_id: uart_0
+  id: ${inv_id}
+
+sensor:
+  - platform: inverter
+    inverter_id: ${inv_id}
+    # QPIRI
+#    grid_rating_voltage:
+#      name: "${name} grid_rating_voltage"
+#    grid_rating_current:
+#      name: "${name} grid_rating_current"
+#    ac_output_rating_voltage:
+#      name: "${name} ac_output_rating_voltage"
+#    ac_output_rating_frequency:
+#      name: "${name} ac_output_rating_frequency"
+#    ac_output_rating_current:
+#      name: "${name} ac_output_rating_current"
+#    ac_output_rating_apparent_power:
+#      name: "${name} ac_output_rating_apparent_power"
+#    ac_output_rating_active_power:
+#      name: "${name} ac_output_rating_active_power"
+#    battery_rating_voltage:
+#      name: "${name} battery_rating_voltage"
+#    battery_recharge_voltage:
+#      name: "${name} battery_recharge_voltage"
+#    battery_under_voltage:
+#      name: "${name} battery_under_voltage"
+#    battery_bulk_voltage:
+#      name: "${name} battery_bulk_voltage"
+#    battery_float_voltage:
+#      name: "${name} battery_float_voltage"
+#    battery_type:
+#      name: "${name} battery_type"
+#    current_max_ac_charging_current:
+#      name: "${name} current_max_ac_charging_current"
+#    current_max_charging_current:
+#      name: "${name} current_max_charging_current"
+#    input_voltage_range:
+#      name: "${name} input_voltage_range"
+#    output_source_priority:
+#      name: "${name} output_source_priority"
+#    charger_source_priority:
+#      name: "${name} charger_source_priority"
+#    parallel_max_num:
+#      name: "${name} parallel_max_num"
+#    machine_type:
+#      name: "${name} machine_type"
+#    topology:
+#      name: "${name} topology"
+#    output_mode:
+#      name: "${name} output_mode"
+#    battery_redischarge_voltage:
+#      name: "${name} battery_redischarge_voltage"
+#    pv_ok_condition_for_parallel:
+#      name: "${name} pv_ok_condition_for_parallel"
+#    pv_power_balance:
+#      name: "${name} pv_power_balance"
+
+    #QET
+    total_pv_generated_energy:
+      name: "${name} total_pv_generated_energy"
+    #QEY
+    #year_pv_generated_energy:
+    #  name: "${name} year_pv_generated_energy"
+    #QEM
+    #month_pv_generated_energy:
+    #  name: "${name} month_pv_generated_energy"
+    #QED
+    day_pv_generated_energy:
+      name: "${name} day_pv_generated_energy"
+    #QLT
+    total_output_load_energy:
+      name: "${name} total_output_load_energy"
+    #QLY
+    #total_output_load_energy:
+    #  name: "${name} year_output_load_energy"
+    #QLM
+    #total_output_load_energy:
+    #  name: "${name} month_output_load_energy"
+    #QLD
+    day_output_load_energy:
+      name: "${name} day_output_load_energy"
+      
+    # QPIGS
+    grid_voltage:
+      name: "${name} grid_voltage"
+    grid_frequency:
+      name: "${name} grid_frequency"
+    ac_output_voltage:
+      name: "${name} ac_output_voltage"
+    ac_output_frequency:
+      name: "${name} ac_output_frequency"
+    ac_output_apparent_power:
+      name: "${name} ac_output_apparent_power"
+    ac_output_active_power:
+      name: "${name} ac_output_active_power"
+    output_load_percent:
+      name: "${name} output_load_percent"
+    bus_voltage:
+      name: "${name} bus_voltage"
+    battery_voltage:
+      name: "${name} battery_voltage"
+    battery_charging_current:
+      name: "${name} battery_charging_current"
+    battery_charging_power:
+      name: "${name} battery_charging_power"
+    battery_capacity_percent:
+      name: "${name} battery_capacity_percent"
+    inverter_heat_sink_temperature:
+      name: "${name} inverter_heat_sink_temperature"
+    pv_input_current:
+      name: "${name} pv_input_current"
+    pv_input_voltage:
+      name: "${name} pv_input_voltage"
+    battery_voltage_scc:
+      name: "${name} battery_voltage_scc"
+    battery_discharge_current:
+      name: "${name} battery_discharge_current"
+    battery_discharge_power:
+      name: "${name} battery_discharge_power"
+    battery_voltage_offset_for_fans_on:
+      name: "${name} battery_voltage_offset_for_fans_on"
+#    eeprom_version:
+#      name: "${name} eeprom_version"
+    pv_charging_power:
+      name: "${name} pv_charging_power"
+
+binary_sensor:
+- platform: inverter
+  inverter_id: ${inv_id}
+#  add_sbu_priority_version:
+#    name: "${name} add_sbu_priority_version"
+#  configuration_status:
+#    name: "${name} configuration_status"
+#    scc_firmware_version:
+#      name: "${name} scc_firmware_version"
+#  load_status:
+#    name: "${name} load_status"
+#  battery_voltage_to_steady_while_charging:
+#    name: "${name} battery_voltage_to_steady_while_charging"
+#  charging_status:
+#    name: "${name} charging_status"
+#  scc_charging_status:
+#    name: "${name} scc_charging_status"
+#  ac_charging_status:
+#    name: "${name} ac_charging_status"
+#  charging_to_floating_mode:
+#    name: "${name} charging_to_floating_mode"
+#  switch_on:
+#    name: "${name} switch_on"
+#  dustproof_installed:
+#      name: "${name} dustproof_installed"
+#  silence_buzzer_open_buzzer:
+#    name: "${name} silence_buzzer_open_buzzer"
+#  overload_bypass_function:
+#    name: "${name} overload_bypass_function"
+#  lcd_escape_to_default:
+#    name: "${name} lcd_escape_to_default"
+#  overload_restart_function:
+#    name: "${name} overload_restart_function"
+#  over_temperature_restart_function:
+#    name: "${name} over_temperature_restart_function"
+#  backlight_on:
+#      name: "${name} backlight_on"
+
+
+switch:
+  - platform: inverter
+    inverter_id: ${inv_id}
+    output_source_priority_utility:
+      name: "${name} output_source_priority_utility"
+    output_source_priority_solar:
+      name: "${name} output_source_priority_solar"
+    output_source_priority_battery:
+      name: "${name} output_source_priority_battery"
+    input_voltage_range:
+      name: "${name} input_voltage_range"
+    pv_ok_condition_for_parallel:
+      name: "${name} pv_ok_condition_for_parallel"
+    pv_power_balance:
+      name: "${name} pv_power_balance"
+
+#output:
+#  - platform: inverter
+#    inverter_id: ${inv_id}
+#    battery_recharge_voltage:
+#      id: "${name} battery_recharge_voltage_out"
+
+#  - platform: inverter
+#    inverter_id: ${inv_id}
+#    battery_bulk_voltage:
+#      id: "${name} battery_bulk_voltage_out"
+
+
+select:
+  - platform: inverter
+    inverter_id: ${inv_id}
+    output_source_priority:
+      name: "${name} output source priority"
+      optionsmap:
+        "Utility first": "POP00"
+        "Solar only": "POP01"
+        "Solar Battery Utility": "POP02"
+      statusmap:
+        "0": "Utility first"
+        "1": "Solar only"
+        "2": "Solar Battery Utility"
+      
+#  - platform: inverter
+#    inverter_id: ${inv_id}
+#    charging_discharging_control:
+#      # See MAX_Communication_Protocol_20200526.pdf page 18
+#      name: "${name} charging discharging control"
+#      optionsmap:
+#        "Enabled charger/Enabled discharger": "PBATCD111"
+#        "Enabled charger/Disabled discharger and shut down unit completely when insufficient PV or Grid is present.": "PBATCD011"
+#        "Enabled charger/Disabled discharger but keep unit stay at standby mode.": "PBATCD101"
+#        "Disabled charger/Enabled discharger": "PBATCD110"
+#        "Disabled charger/Disabled discharger and shut down unit completely when no PV or Grid is present.": "PBATCD010"
+#        "Disabled charger/Disabled discharger but keep unit stay at standby mode.": "PBATCD100"
+#        "Not available/Not available": "PBATCD001"
+#        "Cleaned the enable/disable charger flags and return to previous charger status.": "PBATCD000"
+#      statusmap:
+#        "111": "Enabled charger/Enabled discharger"
+#        "011": "Enabled charger/Disabled discharger and shut down unit completely when insufficient PV or Grid is present."
+#        "101": "Enabled charger/Disabled discharger but keep unit stay at standby mode."
+#        "110": "Disabled charger/Enabled discharger"
+#        "010": "Disabled charger/Disabled discharger and shut down unit completely when no PV or Grid is present."
+#        "100": "Disabled charger/Disabled discharger but keep unit stay at standby mode."
+#        "001": "Not available/Not available"
+#        "000": "Cleaned the enable/disable charger flags and return to previous charger status."
