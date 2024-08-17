@@ -341,7 +341,15 @@ TYPES = {
         accuracy_decimals=2,
         state_class= 'total_increasing',
         device_class= 'energy',
+        expire_after= '7200',
     ),
+#      unit_of_measurement= 'kWh',
+#        accuracy_decimals= '2',
+#        state_class= 'total_increasing',
+#        device_class= 'energy',
+#        expire_after= '7200',
+#        icon= 'mdi:meter-electric',
+
 }
 
 CONFIG_SCHEMA = INVERTER_COMPONENT_SCHEMA.extend(
