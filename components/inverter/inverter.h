@@ -280,14 +280,14 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
           {(uint8_t*)"QBEQI",    60,      0,         5,      0,      0},     // Battery equalization status parameters
           {(uint8_t*)"QMN",      86400,   0,         3,      0,      0},     // Model name
           {(uint8_t*)"QGMN",     86400,   0,         4,      0,      0},     // General model name
-          {(uint8_t*)"QET",      3600,    0,         3,      0,      0},     // Total PV generated energy
-          {(uint8_t*)"QEY",      3600,    0,         3,      0,      0},     // PV generated energy of year
-          {(uint8_t*)"QEM",      3600,    0,         3,      0,      0},     // PV generated energy of month
-          {(uint8_t*)"QED",      3,    0,         3,      0,      0},     // PV generated energy of day
-          {(uint8_t*)"QLT",      3600,    0,         3,      0,      0},     // Total output load energy
-          {(uint8_t*)"QLY",      3600,    0,         3,      0,      0},     // Output load energy of year
-          {(uint8_t*)"QLM",      3600,    0,         3,      0,      0},     // Output load energy of month
-          {(uint8_t*)"QLD",      36,    0,         3,     0,      0},     // Output load energy of day
+          {(uint8_t*)"QET",      600,     0,         3,      0,      0},     // Total PV generated energy
+          {(uint8_t*)"QEY",      600,     0,         3,      0,      0},     // PV generated energy of year
+          {(uint8_t*)"QEM",      600,     0,         3,      0,      0},     // PV generated energy of month
+          {(uint8_t*)"QED",      600,     0,         3,      0,      0},     // PV generated energy of day
+          {(uint8_t*)"QLT",      600,     0,         3,      0,      0},     // Total output load energy
+          {(uint8_t*)"QLY",      600,     0,         3,      0,      0},     // Output load energy of year
+          {(uint8_t*)"QLM",      600,     0,         3,      0,      0},     // Output load energy of month
+          {(uint8_t*)"QLD",      600,     0,         3,     0,      0},     // Output load energy of day
           {(uint8_t*)"QBMS",     10,      0,         4,      0,      0},     // BMS message
           {(uint8_t*)"PBMS",     10,      0,         4,      0,      0},     // BMS message
           {(uint8_t*)"QLED",     10,      0,         4,      0,      0},     // LED status parameters
