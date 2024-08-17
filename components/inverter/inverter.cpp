@@ -407,7 +407,7 @@ void Inverter::send_next_poll_() {
      } else if (cmd == "QEM" && cmd == "QLM"){
           cmd.append(time.strftime("%Y%m"));
           len += 6;
-     } else if (cmd == "QED" && cmd == "QLD"){
+     } else if (cmd == "QED"){
           cmd.append(time.strftime("%Y%m%d"));
           len += 8;
      }
