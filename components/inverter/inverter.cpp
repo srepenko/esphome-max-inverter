@@ -423,7 +423,7 @@ void Inverter::send_next_poll_() {
      this->write(((uint8_t)((crc16) >> 8)));   // highbyte
      this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
      this->write(0x0D);
-     ESP_LOGD(TAG, "Sending polling command : %s %s", command, time.year);
+     ESP_LOGD(TAG, "Sending polling command : %s %d", command, time.year);
 }
 
 void Inverter::add_polling_command_(const char *command) {
