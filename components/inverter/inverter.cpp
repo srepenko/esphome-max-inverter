@@ -280,7 +280,7 @@ void Inverter::loop() {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
                     const char *command = (char *)this->command_queue_[this->command_queue_position_].c_str();
-                    ESP_LOGW(TAG, "Recive NAK %s", command);
+                    ESP_LOGW(TAG, "Recive NAK  - %s", command);
                     this->state_ = STATE_IDLE;
                     return;
                }
@@ -411,9 +411,6 @@ void Inverter::send_next_poll_() {
           cmd.append(time.strftime("%Y%m%d"));
           len += 8;
      }
-     //char* command = new char[cmd.length() + 1];;
-     //strcpy(command, cmd.c_str());
-     //cmd.append(time.strftime("%Y%m%d"));
      crc16 = cal_crc_half_((uint8_t*)cmd.c_str(), len);
      this->state_ = STATE_POLL;
      this->command_start_millis_ = millis();
