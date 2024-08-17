@@ -401,13 +401,13 @@ void Inverter::send_next_poll_() {
      std::string cmd((const char *)this->MAX_commands[this->last_polling_command_].command);
      uint8_t len = this->MAX_commands[this->last_polling_command_].length;
      auto time = this->time_->now();
-     if (cmd == "QEY" && cmd == "QLY"){
+     if (cmd == "QEY" && cmd || "QLY"){
           cmd.append(time.strftime("%Y"));
           len += 4;
-     } else if (cmd == "QEM" && cmd == "QLM"){
+     } else if (cmd == "QEM" || cmd == "QLM"){
           cmd.append(time.strftime("%Y%m"));
           len += 6;
-     } else if (cmd == "QED"){
+     } else if (cmd == "QED" || cmd == "QLD"){
           cmd.append(time.strftime("%Y%m%d"));
           len += 8;
      }
