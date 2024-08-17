@@ -226,42 +226,42 @@ void Inverter::loop() {
                ESP_LOGD(TAG, "Decode QPI");
                this->state_ = STATE_IDLE;
           } else if (cmd == "QET") {
-               sscanf(tmp, "(%d", &value_total_pv_generated_energy_);
+               sscanf(tmp, "(%f", &value_total_pv_generated_energy_);
                value_total_pv_generated_energy_ = value_total_pv_generated_energy_/1000;
                if (this->total_pv_generated_energy_) {this->total_pv_generated_energy_->publish_state(value_total_pv_generated_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QEY") {
-               sscanf(tmp, "(%d", &value_year_pv_generated_energy_);
+               sscanf(tmp, "(%f", &value_year_pv_generated_energy_);
                value_year_pv_generated_energy_ = value_year_pv_generated_energy_/1000;
                if (this->year_pv_generated_energy_) {this->year_pv_generated_energy_->publish_state(value_year_pv_generated_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QEM") {
-               sscanf(tmp, "(%d", &value_month_pv_generated_energy_);
+               sscanf(tmp, "(%f", &value_month_pv_generated_energy_);
                value_month_pv_generated_energy_ = value_month_pv_generated_energy_/1000;
                if (this->month_pv_generated_energy_) {this->month_pv_generated_energy_->publish_state(value_month_pv_generated_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QED") {
-               sscanf(tmp, "(%d", &value_day_pv_generated_energy_);
+               sscanf(tmp, "(%f", &value_day_pv_generated_energy_);
                value_day_pv_generated_energy_ = value_day_pv_generated_energy_/1000;
                if (this->day_pv_generated_energy_) {this->day_pv_generated_energy_->publish_state(value_day_pv_generated_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QLT") {
-               sscanf(tmp, "(%d", &value_total_output_load_energy_);
+               sscanf(tmp, "(%f", &value_total_output_load_energy_);
                value_total_output_load_energy_ = value_total_output_load_energy_/1000;
                if (this->total_output_load_energy_) {this->total_output_load_energy_->publish_state(value_total_output_load_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QLY") {
-               sscanf(tmp, "(%d", &value_year_output_load_energy_);
+               sscanf(tmp, "(%f", &value_year_output_load_energy_);
                value_year_output_load_energy_ = value_year_output_load_energy_/1000;
                if (this->year_output_load_energy_) {this->year_output_load_energy_->publish_state(value_year_output_load_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QLM") {
-               sscanf(tmp, "(%d", &value_month_output_load_energy_);
+               sscanf(tmp, "(%f", &value_month_output_load_energy_);
                value_month_output_load_energy_ = value_month_output_load_energy_/1000;
                if (this->month_output_load_energy_) {this->month_output_load_energy_->publish_state(value_month_output_load_energy_);}
                this->state_ = STATE_IDLE;
           } else if (cmd == "QLD") {
-               sscanf(tmp, "(%d", &value_day_output_load_energy_);
+               sscanf(tmp, "(%f", &value_day_output_load_energy_);
                value_day_output_load_energy_ = value_day_output_load_energy_/1000;
                if (this->day_output_load_energy_) {this->day_output_load_energy_->publish_state(value_day_output_load_energy_);}
                this->state_ = STATE_IDLE;
