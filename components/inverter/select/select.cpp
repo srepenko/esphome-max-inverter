@@ -25,6 +25,7 @@ void InverterSelect::control(const std::string &value) {
 
   if (this->optimistic_)
     this->publish_state(value);
+    this->active_index(this->mapping_[value]);
 }
 
 void InverterSelect::map_and_publish(std::string &value) {
