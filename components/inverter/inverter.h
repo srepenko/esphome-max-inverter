@@ -206,11 +206,11 @@ class Inverter : public uart::UARTDevice, public PollingComponent {
     INVERTER_TEXT_SENSOR(last_qpi, QPI)
     INVERTER_TEXT_SENSOR(last_qmn, QMN)
     INVERTER_TEXT_SENSOR(last_qbatcd, QBATCD)
-
+*/
     INVERTER_SWITCH(output_source_priority_utility_switch, QPIRI)
     INVERTER_SWITCH(output_source_priority_solar_switch, QPIRI)
     INVERTER_SWITCH(output_source_priority_battery_switch, QPIRI)
-*/
+
     INVERTER_SWITCH(input_voltage_range_switch, QPIRI)
 /*
     INVERTER_SWITCH(pv_ok_condition_for_parallel_switch, QPIRI)
