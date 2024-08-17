@@ -402,13 +402,13 @@ void Inverter::send_next_poll_() {
      uint8_t len = this->MAX_commands[this->last_polling_command_].length;
      auto time = this->time_->now();
      if (cmd == "QEY" && cmd == "QLY"){
-          cmd += time.strftime("%Y");
+          cmd.append(time.strftime("%Y"));
           len += 4;
      } else if (cmd == "QEM" && cmd == "QLM"){
-          cmd += time.strftime("%Y%m");
+          cmd.append(time.strftime("%Y%m"));
           len += 6;
      } else if (cmd == "QED" && cmd == "QLD"){
-          cmd += time.strftime("%Y%m%d");
+          cmd.append(time.strftime("%Y%m%d"));
           len += 8;
      }
      char* command = new char[cmd.length() + 1];;
