@@ -79,9 +79,7 @@ void Inverter::loop() {
           //cmd = cmd.substr(0, MAX_commands[this->last_polling_command_].length); 
           if (cmd == "QPIRI") {
                //QPIRI
-               /*
-               if (this->last_qpiri_) {this->last_qpiri_->publish_state(tmp);}
-               */
+               if (this->last_qpiri_) {this->last_qpiri_->publish_state(tmp);}               
                if (this->grid_rating_voltage_) {this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_);}
                if (this->grid_rating_current_) {this->grid_rating_current_->publish_state(value_grid_rating_current_);}
                if (this->ac_output_rating_voltage_) {this->ac_output_rating_voltage_->publish_state(value_ac_output_rating_voltage_);}
