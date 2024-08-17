@@ -279,7 +279,8 @@ void Inverter::loop() {
           if (this->check_incoming_crc_()) {
                if (this->read_buffer_[0] == '(' && this->read_buffer_[1] == 'N' && this->read_buffer_[2] == 'A' &&
                this->read_buffer_[3] == 'K') {
-                    ESP_LOGW(TAG, "Recive NAK");
+                    std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
+                    ESP_LOGW(TAG, "Recive NAK %s", str);
                     this->state_ = STATE_IDLE;
                     return;
                }
@@ -330,8 +331,7 @@ void Inverter::loop() {
           if (millis() - this->command_start_millis_ > esphome::inverter::Inverter::COMMAND_TIMEOUT) {
                // command timeout
                std::string str((const char *)this->MAX_commands[this->last_polling_command_].command);
-               str = str.substr(0, this->MAX_commands[this->last_polling_command_].length); 
-               ESP_LOGW(TAG, "timeout command to poll: %s, last_run: %d", str.c_str(), this->MAX_commands[this->last_polling_command_].last_run);
+               ESP_LOGW(TAG, "timeout command to poll: %s", str);
                this->MAX_commands[this->last_polling_command_].last_run = 0;
                this->state_ = STATE_IDLE;
           } else {
