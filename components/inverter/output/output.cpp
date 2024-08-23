@@ -7,7 +7,7 @@ namespace inverter {
 
 static const char *const TAG = "inverter.output";
 
-void PipsolarOutput::write_state(float state) {
+void InverterOutput::write_state(float state) {
   char tmp[10];
   sprintf(tmp, this->set_command_.c_str(), state);
 
